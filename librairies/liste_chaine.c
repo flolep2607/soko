@@ -1,11 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-
-typedef struct Node{
-    void *data;
+#ifndef STRUCT_NODE
+typedef struct Node {
+    void  *data;
     struct Node * next;
 } node_t;
+#define STRUCT_NODE
+#endif
 
 // void compare(node_t * head,char* liste,int length){
 //     node_t * current = head;
@@ -62,7 +64,7 @@ void update(node_t * head, void *new_data,unsigned int index){
     }
     current->data=new_data;
 }
-void get(node_t * head, unsigned int index){
+void* get(node_t * head, unsigned int index){
     node_t * current = head;
     for(unsigned int i=0;i<index;i++){
         current = current->next;
