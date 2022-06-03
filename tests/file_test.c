@@ -28,9 +28,9 @@ bool test_read(int liste[SIZE]){
     int i=0;
     while (level->next != NULL)
     {
-        if((* case_t)(level->data)->bloc!=liste[i]) return false;
+        if(((case_t *)level->data)->bloc!=liste[i]) return false;
         i++;
         level = level->next;
     }
-    return i==SIZE
+    return i==SIZE;
 }
