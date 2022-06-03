@@ -1,59 +1,48 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-typedef struct Case_
-{
-    char bloc; // 0->air 1->wall 2->box 3->body
-    bool cible;
-} case_t;
 
-typedef struct node {
-    void  *data;
-    struct node * next;
+typedef struct Node{
+    void *data;
+    struct Node * next;
 } node_t;
 
-void print_list(node_t * head) {
-    node_t * current = head;
-    while (current != NULL) {
-        printf("%)d\n", current->val);
-        current = current->next;
+// void compare(node_t * head,char* liste,int length){
+//     node_t * current = head;
+//     while (current != NULL) {
+//         if(current->data->bloc)
+//         printf("%)d\n", );
+//         current = current->next;
+//     }
+// }
+void push(node_t** head_ref, void *new_data, size_t data_size) 
+{
+    node_t* new_node = (node_t*)malloc(sizeof(node_t)); 
+    new_node->data  = malloc(data_size); 
+    new_node->next = (*head_ref);
+    int i; 
+    for (i=0; i<data_size; i++) {
+        *(char *)(new_node->data + i) = *(char *)(new_data + i); 
     }
+    (*head_ref)    = new_node; 
 }
 
-void push(node_t * head, int val) {
-    node_t * current = head;
-    while (current->next != NULL) {
-        current = current->next;
-    }
-    current->next = (node_t *) malloc(sizeof(node_t));
-    current->next->val = val;
-    current->next->next = NULL;
-}
-
-void push(node_t ** head, int val) {
-    node_t * new_node;
-    new_node = (node_t *) malloc(sizeof(node_t));
-    new_node->val = val;
-    new_node->next = *head;
-    *head = new_node;
-}
-
-int pop(node_t ** head) {
-    int retval = -1;
+void* pop(node_t ** head) {
+    void* retval = NULL;
     node_t * next_node = NULL;
     if (*head == NULL) {
-        return -1;
+        return NULL;
     }
     next_node = (*head)->next;
-    retval = (*head)->val;
+    retval = (*head)->data;
     free(*head);
     *head = next_node;
     return retval;
 }
-int remove_last(node_t * head) {
-    int retval = 0;
+void* remove_last(node_t * head) {
+    void* retval = NULL;
     if (head->next == NULL) {
-        retval = head->val;
+        retval = head->data;
         free(head);
         return retval;
     }
@@ -61,32 +50,22 @@ int remove_last(node_t * head) {
     while (current->next->next != NULL) {
         current = current->next;
     }
-    retval = current->next->val;
+    retval = current->next->data;
     free(current->next);
     current->next = NULL;
     return retval;
-
 }
-int remove_by_index(node_t ** head, int n) {
-    int i = 0;
-    int retval = -1;
-    node_t * current = *head;
-    node_t * temp_node = NULL;
-    if (n == 0) {
-        return pop(head);
-    }
-    for (i = 0; i < n-1; i++) {
-        if (current->next == NULL) {
-            return -1;
-        }
+void update(node_t * head, void *new_data,unsigned int index){
+    node_t * current = head;
+    for(unsigned int i=0;i<index;i++){
         current = current->next;
     }
-    if (current->next == NULL) {
-        return -1;
+    current->data=new_data;
+}
+void get(node_t * head, unsigned int index){
+    node_t * current = head;
+    for(unsigned int i=0;i<index;i++){
+        current = current->next;
     }
-    temp_node = current->next;
-    retval = temp_node->val;
-    current->next = temp_node->next;
-    free(temp_node);
-    return retval;
+    return current->data;
 }
