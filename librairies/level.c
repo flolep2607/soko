@@ -20,6 +20,11 @@ typedef struct Level
     unsigned int hauteur;
 } level_t;
 
+typedef struct Levels
+{
+    node_t level;
+} levels_t;
+
 case_t* create_case (int bloc, bool cible){
     case_t* case_=(case_t *) malloc(sizeof(case_t));
     case_->bloc = bloc;

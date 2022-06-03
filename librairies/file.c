@@ -1,13 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "liste_chaine.c"
-#include "level.c"
+#ifndef LISTE_CHAINE
+#include "../librairies/liste_chaine.c"
+#define LISTE_CHAINE
+#endif
+#ifndef LEVEL_C
+#include "../librairies/level.c"
+#define LEVEL_C
+#endif
 
-void size()
-{
-}
-
-void affiche_lvl(node_t *head, unsigned int largeur)
+void affiche_lvl(node_t *head, unsigned int largeur_)
 {
     node_t *current = head;
     unsigned int i = 0;
@@ -15,7 +17,7 @@ void affiche_lvl(node_t *head, unsigned int largeur)
     {
         current = current->next;
         printf(current->data);
-        if (i != 0 && i % largeur == 0)
+        if (i != 0 && i % largeur_ == 0)
         {
             printf("\n");
         }
@@ -24,21 +26,9 @@ void affiche_lvl(node_t *head, unsigned int largeur)
     printf("\n");
 }
 
-void read(void)
+node_t *read_map(FILE *flux_entree, unsigned int largeur_max)
 {
-    FILE *flux_entree = fopen("./data/levels_test2.lvl", "r");
-    if (flux_entree == NULL)
-    {
-        printf("Cannot open file\n");
-        exit(-1);
-    }
-    int hauteur = 0;
-    int longueur_max = 0;
     node_t *level = (node_t *)calloc(1, sizeof(node_t));
-    int position_before_map = ftell(flux_entree);
-    int largeur_max = largeur(flux_entree);
-    //? READ MAP
-    fseek(flux_entree, position_before_map, SEEK_SET);
     char character;
     while (!feof(flux_entree) && character != ';')
     {
@@ -76,25 +66,26 @@ void read(void)
             i++;
         }
         //? fill with void empty space
-        while (i<largeur_max)
+        while (i < largeur_max)
         {
             push(&level, create_case(0, false), sizeof(case_t));
             i++;
         }
-        
+
         character = fgetc(flux_entree);
         if (character == '\r')
         {
             character = fgetc(flux_entree);
         }
     }
+    return level;
 }
 
 int largeur(FILE *flux_entree)
 {
     int largeur_max = 0;
     int a = 0;
-    char caract = NULL;
+    char caract = 0;
     while (!feof(flux_entree) && caract != ';')
     {
         caract = fgetc(flux_entree);
@@ -120,9 +111,19 @@ int largeur(FILE *flux_entree)
     return largeur_max;
 }
 
-int main(void)
+node_t *read_file(void)
 {
-    read();
-
-    return 1;
+    FILE *flux_entree = fopen("./data/levels_test2.lvl", "r");
+    if (flux_entree == NULL)
+    {
+        printf("Cannot open file\n");
+        exit(-1);
+    }
+    int hauteur = 0;
+    int longueur_max = 0;
+    node_t *level = (node_t *)calloc(1, sizeof(node_t));
+    int position_before_map = ftell(flux_entree);
+    int largeur_max = largeur(flux_entree);
+    //? READ MAP
+    fseek(flux_entree, position_before_map, SEEK_SET);
 }

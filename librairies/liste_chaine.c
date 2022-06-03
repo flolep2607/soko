@@ -9,14 +9,6 @@ typedef struct Node {
 #define STRUCT_NODE
 #endif
 
-// void compare(node_t * head,char* liste,int length){
-//     node_t * current = head;
-//     while (current != NULL) {
-//         if(current->data->bloc)
-//         printf("%)d\n", );
-//         current = current->next;
-//     }
-// }
 void push(node_t** head_ref, void *new_data, size_t data_size) 
 {
     node_t* new_node = (node_t*)malloc(sizeof(node_t)); 

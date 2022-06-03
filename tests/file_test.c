@@ -4,32 +4,33 @@
 #ifndef LISTE_CHAINE
 #include "../librairies/liste_chaine.c"
 #define LISTE_CHAINE
+#endif 
+#ifndef LEVEL_C
+#include "../librairies/level.c"
+#define LEVEL_C
 #endif
+#define SIZE 25
 
-
-int main(liste2 []= {int 1,1,1,,1,1,0,3,0,1,1,2,1,1,1,1,0,0,0,1,1,1,1,1,1};
-liste3 []= {    // int liste2[]= {1,1,1,1,1,1,0,3,0,1,1,2,1,1,1,1,0,0,0,1,1,1,1,1,1};
+int main(void)
+{
+    int liste1[SIZE]= {1,1,1,1,1,1,0,0,0,1,1,0,3,0,1,1,0,0,0,1,1,1,1,1,1};
+    // int liste2[]= {1,1,1,1,1,1,0,3,0,1,1,2,1,1,1,1,0,0,0,1,1,1,1,1,1};
     // int liste3[]= {1,1,1,1,1,1,2,0,0,1,1,1,1,2,1,1,3,0,0,1,1,1,1,1,1};
-ool
+    if( test_read(*liste1)){
+        printf("GOOD\n");
+    }
+    return
+}
 
-    
-    for (i=0; i<data_size; i++) {
-        *(char *)(new_node-boola + i)read(char *)
-    int liste_read[];
-    int length = 0;(    node_t* level = read();
-n    while (level->next != NULL)
+bool test_read(int liste[SIZE]){
+    int length = 0;
+    node_t* level = read_map();
+    int i=0;
+    while (level->next != NULL)
     {
-        int liste_read[] += level->data;
-        length += 1;
-        level = level->next 
+        if((* case_t)(level->data)->bloc!=liste[i]) return false;
+        i++;
+        level = level->next;
     }
-     for (i=0 ; i<lenth; i++)
-    {
-        if(liste-read[i] != liste1)
-        {
-            return false;
-        }
-    
-    return true
-    
-    }
+    return i==SIZE
+}
