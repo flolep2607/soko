@@ -4,26 +4,13 @@ typedef struct Case
     bool cible;
 } case_t;
 
-// typedef struct Map {
-//     case_t data;
-//     struct Map * next;
-// } map_t;
-
 typedef struct Coups {
     unsigned char direction;
     bool pousse;
     struct Coups * next;
 } coups_t;
 
-// typedef struct Level
-// {
-//     map_t Map;
-//     coups_t coups;
-//     bool resolue;
-//     int numero_lvl;
-//     unsigned int largeur;
-//     unsigned int hauteur;
-// } level_t;
+
 
 // typedef struct Levels {
 //     level_t level;
@@ -46,6 +33,15 @@ typedef struct {
   gll_node_t *last;
 } gll_t;
 
+typedef struct Level
+{
+    gll_t* map;
+    gll_t* coups; //? faire une pile simple pour prendre moins de place et moins complexe
+    bool resolue;
+    int numero_lvl;
+    unsigned int largeur;
+    unsigned int hauteur;
+} level_t;
 
 /*  create new list */
 gll_t *gll_init();
@@ -58,8 +54,8 @@ void *gll_last(gll_t *);
 /*  add functions */
 int gll_add(gll_t *, void *, int);
 void *gll_set(gll_t *, void *, int);
-int gll_push(gll_t *, void *);
-int gll_pushBack(gll_t *, void *);
+void gll_push(gll_t *, void *);
+void gll_pushBack(gll_t *, void *);
 
 /*  remove functions */
 void *gll_remove(gll_t *, int);

@@ -3,7 +3,7 @@ SOURCE	= librairies/io.c
 HEADER	= 
 OUT	= compiled/io
 CC	 = gcc
-FLAGS	 = -Wall -g -fsanitize=address -std=c99
+FLAGS	 = -Wall -g -fsanitize=address,undefined -std=c99
 LFLAGS	 =
 
 all: $(OBJS)

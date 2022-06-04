@@ -26,59 +26,66 @@
 //     printf("\n");
 // }
 
+
 gll_t *read_map(FILE *flux_entree, unsigned int largeur_max)
 {
     gll_t *map = gll_init();
     char character;
-    while (!feof(flux_entree) && character != ';')
+    while (!feof(flux_entree) && !ferror(flux_entree) )
     {
-        character = fgetc(flux_entree);
         //? lit la ligne
-        unsigned int i = 1;
-        while (character != '\n')
+        unsigned int i = 0;
+        while (!feof(flux_entree) && !ferror(flux_entree) && character != ';')
         {
-            if (character == '\r'){character = fgetc(flux_entree);}
-            printf("%c",character);
+            character = fgetc(flux_entree);
+            if(i==0 && character==';'){
+                fseek(flux_entree,-1,SEEK_CUR);
+                return map;
+            }else if (character=='\n'){
+                break;
+            }else if(character==EOF){
+                return map;
+            }
+            // printf("%c",character);
             switch (character)
             {
             case '#':
-                gll_push(map, create_case(1, false));
+                gll_pushBack(map, create_case(1, false));
                 break;
             case ' ':
-                gll_push(map, create_case(0, false));
+                gll_pushBack(map, create_case(0, false));
                 break;
             case '$':
-                gll_push(map, create_case(2, false));
+                gll_pushBack(map, create_case(2, false));
                 break;
             case '@':
-                gll_push(map, create_case(3, false));
+                gll_pushBack(map, create_case(3, false));
                 break;
             case '.':
-                gll_push(map, create_case(0, true));
+                gll_pushBack(map, create_case(0, true));
                 break;
             case '*':
-                gll_push(map, create_case(2, true));
+                gll_pushBack(map, create_case(2, true));
                 break;
             case '\r':
                 i--;
                 break;
             default:
+                printf("|%c|%d|",character,character);
                 printf("Fichier corrompu\n");
                 exit(-1);
                 break;
             }
-            character = fgetc(flux_entree);
             i++;
         }
         //? fill with void empty space
-        while (i <= largeur_max)
+        while (i < largeur_max)
         {
-            printf(".");
-            gll_push(map, create_case(0, false));
+            // printf(".");
+            gll_pushBack(map, create_case(0, false));
             i++;
         }
-        printf("\n");
-        character = fgetc(flux_entree);
+        // printf("\n");
     }
     return map;
 }
@@ -115,18 +122,64 @@ unsigned int largeur(FILE *flux_entree)
     return largeur_max;
 }
 
-gll_t *read_file(void)
+bool remove_useless(FILE * flux_entree){
+    if(fgetc(flux_entree)==';'){
+        while(fgetc(flux_entree)!='\n'){}
+        if(fgetc(flux_entree)!='\r'){
+            fseek(flux_entree,-1,SEEK_CUR);
+        }
+        return true;
+    }else{
+        fseek(flux_entree,-1,SEEK_CUR);
+        return false;
+    }
+}
+int read_one_level(FILE * flux_entree,level_t* level){
+    int level_number=-1;
+    while(!feof(flux_entree) && fscanf(flux_entree,";LEVEL %d",&level_number)==0){
+        fgetc(flux_entree);
+    }
+    printf("Level number:%d\n",level_number);
+    while(!feof(flux_entree) && fgetc(flux_entree)!='\n'){}
+    if(fgetc(flux_entree)!='\r'){
+        fseek(flux_entree,-1,SEEK_CUR);
+    }
+    //? enlever les commentaires et autre trucs inutiles
+    while (remove_useless(flux_entree)){}
+    //? READ MAP
+    if(level_number==-1){
+        return 0;
+    }
+    level->numero_lvl=level_number;
+    int largeur_max = largeur(flux_entree);
+    level->largeur=largeur_max;
+    level->map=read_map(flux_entree,largeur_max);
+    if(level->map->size<=0){
+        printf("[ERROR] map size null");
+        exit(-1);
+    }
+    level->hauteur=level->map->size/largeur_max;
+    return 1;
+}
+
+gll_t *read_file(const char * file_name)
 {
-    FILE *flux_entree = fopen("./data/levels_test2.lvl", "r");
-    if (flux_entree == NULL)
-    {
+    FILE *flux_entree;
+    flux_entree = fopen(file_name, "r");
+    if (flux_entree == NULL){
         printf("Cannot open file\n");
         exit(-1);
     }
-    int hauteur = 0;
-    int longueur_max = 0;
-    int largeur_max = largeur(flux_entree);
-    //? READ MAP
-    read_map(flux_entree,largeur_max);
-    return NULL;
+    printf("open file\n");
+    gll_t * levels=gll_init();
+    while(1){
+        level_t* level = level_init();
+        if(read_one_level(flux_entree,level)==1){
+            gll_pushBack(levels,level);
+        }else{
+            destroy_level(level);
+            break;
+        }
+    }
+    return levels;
 }

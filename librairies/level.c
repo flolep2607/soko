@@ -94,13 +94,12 @@ void *gll_last(gll_t *list)
  */
 static gll_node_t *gll_findNode(gll_t *list, int pos) 
 {
-  if(pos > list->size)
-    return NULL;  
-
+  if(pos > list->size){
+    return NULL; 
+  }
   gll_node_t *currNode;
   int currPos;
   int reverse; 
-   
   /* decide where to start iterating from (font or back of the list) */
   if(pos > ((list->size-1) / 2)) {
     reverse  = 1;
@@ -113,9 +112,9 @@ static gll_node_t *gll_findNode(gll_t *list, int pos)
   }  
   
   while(currNode != NULL) {
-    if(currPos == pos)
+    if(currPos == pos){
       break;
-
+    }
     currNode = (reverse ? (currNode->prev) : (currNode->next));
     currPos  = (reverse ? (currPos-1) : (currPos+1));
   }
@@ -194,7 +193,7 @@ void *gll_set(gll_t *list, void *data, int pos)
  * in:        pointer to data
  * returns:   0 on success, -1 on failure
  */
-int gll_push(gll_t *list, void *data) 
+void gll_push(gll_t *list, void *data) 
 {
   gll_node_t *newNode = gll_initNode(data); 
   /* if list is empty */
@@ -207,7 +206,6 @@ int gll_push(gll_t *list, void *data)
   }
   list->first = newNode;
   list->size++;
-  return 1;
 }
 
 /*
@@ -216,7 +214,7 @@ int gll_push(gll_t *list, void *data)
  * in:        pointer to data
  * returns:   0 on success, -1 on failure
  */
-int gll_pushBack(gll_t *list, void *data) 
+void gll_pushBack(gll_t *list, void *data) 
 {
   /* initialize new node */
   gll_node_t *newNode = gll_initNode(data);
@@ -230,7 +228,6 @@ int gll_pushBack(gll_t *list, void *data)
   }
   list->last = newNode;
   list->size++;
-  return 1;
 }
 
 /*
@@ -377,4 +374,38 @@ void gll_destroy(gll_t *list)
     currNode = nextNode;  
   }
   free(list);
-} 
+}
+
+level_t *level_init() 
+{
+  level_t *level = (level_t *) malloc(sizeof(level_t));
+  level->resolue = false;
+  level->numero_lvl = 0;
+  level->largeur = 0;
+  level->hauteur = 0;
+  level->map=NULL;
+  level->coups=NULL;
+  return level;
+}
+
+void destroy_level(level_t* level){
+  if(level->map!=NULL){
+    gll_destroy(level->map);
+  }
+  if(level->coups!=NULL){
+    gll_destroy(level->coups);
+  }
+  free(level);
+}
+void destroy_levels(gll_t *levels){
+  gll_node_t *currNode = levels->first;
+  gll_node_t *nextNode;
+  
+  while(currNode != NULL) {
+    nextNode = currNode->next;
+    destroy_level(currNode->data);
+    free(currNode);
+    currNode = nextNode;  
+  }
+  free(levels);
+}
