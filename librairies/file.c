@@ -189,7 +189,7 @@ gll_t *read_file(const char * file_name)
 numerolvlencours
 largeur(uint)|hauteur(uint)|[map(uchar,bool)]|[coup(uchar,bool)]|numerolvl(uint)|resolu(bool)
 */
-bool save_game(gll_t* levels,unsigned int current_level,const char file_name){
+bool save_game(gll_t* levels,unsigned int current_level,const char *file_name){
     FILE *flux_sortie;
     flux_sortie = fopen(file_name, "wb");
     if (flux_sortie == NULL){
@@ -199,7 +199,7 @@ bool save_game(gll_t* levels,unsigned int current_level,const char file_name){
     fprintf(flux_sortie,"%d\n",current_level);
     gll_node_t *currNode = levels->first;
     while(currNode != NULL) {
-        level_t* level=((level_t*)currNode->data);
+        level_t* level=(level_t*)currNode->data;
         
         fprintf(flux_sortie,"%hhu",level->largeur);
         fputc('|',flux_sortie);
@@ -208,7 +208,7 @@ bool save_game(gll_t* levels,unsigned int current_level,const char file_name){
         //! Save MAP
         gll_node_t *currNode_temp = (level->map)->first;
         while(currNode_temp != NULL) {
-            case_t* cell=((case_t*)currNode_temp->data);
+            case_t* cell=(case_t*)currNode_temp->data;
             fprintf(flux_sortie,"%hhu%i",cell->bloc,cell->cible);
             currNode_temp = currNode_temp->next;
         }
@@ -216,7 +216,7 @@ bool save_game(gll_t* levels,unsigned int current_level,const char file_name){
         //! Save COUPS
         currNode_temp = (level->coups)->first;
         while(currNode_temp != NULL) {
-            coups_t* coup=((case_t*)currNode_temp->data);
+            coups_t* coup=(coups_t*)currNode_temp->data;
             fprintf(flux_sortie,"%hhu%i",coup->direction,coup->pousse);
             currNode_temp = currNode_temp->next;
         }

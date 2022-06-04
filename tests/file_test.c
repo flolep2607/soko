@@ -1,10 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
-// #ifndef LISTE_CHAINE
-// #include "../librairies/liste_chaine.c"
-// #define LISTE_CHAINE
-// #endif 
 #ifndef FILE_C
 #include "../librairies/file.c"
 #define FILE_C
@@ -44,7 +40,7 @@ bool test_read(int* liste,unsigned int size){
 }
 bool test_read_file(int* liste,unsigned int size){
     gll_t* levels = read_file("data/levels_offficiel.lvl");
-    if(levels->size==NULL){
+    if(&(levels->size)==NULL){
         printf("sizemap:NULL");
     }else{
         printf("sizemap:%d\n",((level_t*)levels->first->data)->map->size);

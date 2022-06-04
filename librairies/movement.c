@@ -1,7 +1,14 @@
 #pragma once
 #include <stdbool.h>
 #include <stdlib.h>
+#ifndef LEVEL_C
 #include "level.c"
+#define LEVEL_C
+#endif
+#ifndef FILE_C
+#include "../librairies/file.c"
+#define FILE_C
+#endif
 //? directions
 #define HAUT 1
 #define BAS 2
@@ -9,8 +16,8 @@
 #define GAUCHE 4
 #define xy2x(X, Y,LONG)  (X + Y * LONG)
 void x2xy(unsigned int X,unsigned int LONG, unsigned int *x, unsigned int *y){
-    x=X%LONG;
-    y=X/LONG;
+    *x=X%LONG;
+    *y=X/LONG;
 }
 
 unsigned int find_human(gll_t *map){
@@ -23,14 +30,19 @@ unsigned int find_human(gll_t *map){
         currNode = currNode->next;
         index++;
     }
-    return NULL;
+    printf("[ERROR] No human\n");
+    exit(-1);
 }
 
 bool is_on_map(level_t* level,unsigned int x, unsigned int y){
-    if(level->hauteur>y>0){
-        if(level->largeur>x>0){
-            return true;
-        }
+    if(level->hauteur>y && y>0 && level->largeur>x && x>0){
+        return true;
+    }    
+    return false;
+}
+bool is_on_map2(unsigned largeur,unsigned int hauteur,unsigned int x, unsigned int y){
+    if(hauteur>y && y>0 && largeur>x && x>0){
+        return true;
     }    
     return false;
 }
@@ -81,8 +93,8 @@ void move_object(gll_t* map,unsigned int pos1,unsigned int pos2,unsigned char ob
 }
 
 bool move_human(level_t *level,char direction,unsigned int *x,unsigned int *y){
-    unsigned int x_after=&x;
-    unsigned int y_after=&y;
+    unsigned int x_after=*x;
+    unsigned int y_after=*y;
     move_direction(direction,& x_after,& y_after);
     unsigned int pos=xy2x(x_after,y_after,level->largeur);
     case_t* cell=(case_t*)gll_get(level->map,pos);
