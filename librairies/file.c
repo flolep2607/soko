@@ -139,7 +139,7 @@ int read_one_level(FILE * flux_entree,level_t* level){
     while(!feof(flux_entree) && fscanf(flux_entree,";LEVEL %d",&level_number)==0){
         fgetc(flux_entree);
     }
-    printf("Level number:%d\n",level_number);
+    // printf("Level number:%d\n",level_number);
     while(!feof(flux_entree) && fgetc(flux_entree)!='\n'){}
     if(fgetc(flux_entree)!='\r'){
         fseek(flux_entree,-1,SEEK_CUR);

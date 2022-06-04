@@ -6,8 +6,8 @@
 
 #define HAUT 1
 #define BAS 2
-// DROITE
-// GAUCHE
+#define DROITE 3
+#define GAUCHE 4
 #define MAXSIZE 10 
 
 int configureTerminal()

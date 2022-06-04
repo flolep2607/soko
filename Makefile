@@ -13,6 +13,8 @@ test:
 	clear
 	$(CC) $(FLAGS) tests/file_test.c -o compiled/file_test.o
 	./compiled/file_test.o
+	$(CC) $(FLAGS) tests/movement_test.c -o compiled/movement_test.o
+	./compiled/movement_test.o
 
 
 compiled/io.o: librairies/io.c

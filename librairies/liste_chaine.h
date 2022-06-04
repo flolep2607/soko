@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#define xy2x(X, Y,LONG)  (X + Y * LONG)
 
 #ifndef Node
 typedef struct Node {
