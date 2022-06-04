@@ -1,24 +1,45 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#ifndef STRUCT_NODE
-typedef struct Node {
-    void  *data;
-    struct Node * next;
-} node_t;
-#define STRUCT_NODE
+#ifndef LEVEL_C
+#include "level.c"
+#define LEVEL_C
 #endif
 
-void push(node_t** head_ref, void *new_data, size_t data_size) 
+// void push(node_t** head_ref, void *new_data, size_t data_size) 
+// {
+//     node_t* new_node = (node_t*)malloc(sizeof(node_t)); 
+//     new_node->data  = malloc(data_size); 
+//     new_node->next = (*head_ref);
+//     int i; 
+//     for (i=0; i<data_size; i++) {
+//         *(char *)(new_node->data + i) = *(char *)(new_data + i); 
+//     }
+//     (*head_ref)    = new_node; 
+// }
+void push(node_t** head_ref, void *new_data, size_t data_size)
 {
-    node_t* new_node = (node_t*)malloc(sizeof(node_t)); 
-    new_node->data  = malloc(data_size); 
+    node_t* new_node = (node_t*)malloc(sizeof(node_t));
+    new_node->data = new_data;
     new_node->next = (*head_ref);
-    int i; 
-    for (i=0; i<data_size; i++) {
-        *(char *)(new_node->data + i) = *(char *)(new_data + i); 
-    }
-    (*head_ref)    = new_node; 
+    (*head_ref)    = new_node;
+}
+void push_queue(node_t** head_ref, void *new_data, size_t data_size)
+{
+    node_t* new_node = (node_t*)malloc(sizeof(node_t));
+    node_t* last_node = (node_t*)malloc(sizeof(node_t));
+	if (new_node == NULL || head_ref == NULL || last_node == NULL) {
+		fprintf(stderr, "Chained list empty");
+		exit(EXIT_FAILURE);
+	}
+	last_node = *head_ref;
+	while (last_node->next != NULL) {
+		last_node = last_node->next;
+	}
+	new_node->data = new_data;
+	new_node->next = NULL;
+	last_node->next = new_node;
+	//free(lastNode); //we should free the memory space but it's bug
 }
 
 void* pop(node_t ** head) {
@@ -62,4 +83,11 @@ void* get(node_t * head, unsigned int index){
         current = current->next;
     }
     return current->data;
+}
+void print(node_t *head) {
+    node_t *current_node = head;
+   	while ( current_node != NULL) {
+        printf("%d ", ((case_t *)current_node->data)->bloc);
+        current_node = current_node->next;
+    }
 }
