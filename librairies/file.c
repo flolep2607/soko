@@ -181,5 +181,53 @@ gll_t *read_file(const char * file_name)
             break;
         }
     }
+    fclose(flux_entree);
     return levels;
+}
+
+/*
+numerolvlencours
+largeur(uint)|hauteur(uint)|[map(uchar,bool)]|[coup(uchar,bool)]|numerolvl(uint)|resolu(bool)
+*/
+bool save_game(gll_t* levels,unsigned int current_level,const char file_name){
+    FILE *flux_sortie;
+    flux_sortie = fopen(file_name, "wb");
+    if (flux_sortie == NULL){
+        printf("Cannot open save_file\n");
+        exit(-1);
+    }
+    fprintf(flux_sortie,"%d\n",current_level);
+    gll_node_t *currNode = levels->first;
+    while(currNode != NULL) {
+        level_t* level=((level_t*)currNode->data);
+        
+        fprintf(flux_sortie,"%hhu",level->largeur);
+        fputc('|',flux_sortie);
+        fprintf(flux_sortie,"%hhu",level->hauteur);
+        fputc('|',flux_sortie);
+        //! Save MAP
+        gll_node_t *currNode_temp = (level->map)->first;
+        while(currNode_temp != NULL) {
+            case_t* cell=((case_t*)currNode_temp->data);
+            fprintf(flux_sortie,"%hhu%i",cell->bloc,cell->cible);
+            currNode_temp = currNode_temp->next;
+        }
+        fputc('|',flux_sortie);
+        //! Save COUPS
+        currNode_temp = (level->coups)->first;
+        while(currNode_temp != NULL) {
+            coups_t* coup=((case_t*)currNode_temp->data);
+            fprintf(flux_sortie,"%hhu%i",coup->direction,coup->pousse);
+            currNode_temp = currNode_temp->next;
+        }
+        fputc('|',flux_sortie);
+        fprintf(flux_sortie,"%hhu",level->numero_lvl);
+        fputc('|',flux_sortie);
+        fprintf(flux_sortie,"%i",level->resolue);
+
+        currNode = currNode->next;
+        fputc('\n',flux_sortie);
+    }
+    fclose(flux_sortie);
+    return true;
 }

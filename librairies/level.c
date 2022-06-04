@@ -5,14 +5,14 @@
 //     unsigned char bloc; // 0->air 1->wall 2->box 3->body
 //     bool cible;
 // } case_t;
-case_t* create_case (int bloc, bool cible){
+case_t* create_case (unsigned char bloc, bool cible){
     case_t* case_=(case_t *) malloc(sizeof(case_t));
     case_->bloc = bloc;
     case_->cible = cible;
     return case_;
 }
 
-static gll_node_t *gll_findNode(gll_t *, int);
+static gll_node_t *gll_findNode(gll_t *, unsigned int);
 static gll_node_t *gll_initNode(void *);
 
 /*  
@@ -49,7 +49,7 @@ static gll_node_t *gll_initNode(void *data)
  * in:        position
  * returns:   void pointer to data / NULL on failure
  */
-void *gll_get(gll_t *list, int pos) 
+void *gll_get(gll_t *list, unsigned int pos) 
 {
   gll_node_t *node = gll_findNode(list, pos);
   if(node != NULL){
@@ -92,14 +92,14 @@ void *gll_last(gll_t *list)
  * in:        position
  * returns:   pointer to Node / NULL on failure
  */
-static gll_node_t *gll_findNode(gll_t *list, int pos) 
+static gll_node_t *gll_findNode(gll_t *list,unsigned int pos) 
 {
   if(pos > list->size){
     return NULL; 
   }
   gll_node_t *currNode;
-  int currPos;
-  int reverse; 
+  unsigned int currPos;
+  unsigned int reverse; 
   /* decide where to start iterating from (font or back of the list) */
   if(pos > ((list->size-1) / 2)) {
     reverse  = 1;
@@ -128,7 +128,7 @@ static gll_node_t *gll_findNode(gll_t *list, int pos)
  * in:        position
  * returns:   0 on success, -1 on failure
  */
-int gll_add(gll_t *list, void *data, int pos) 
+unsigned int gll_add(gll_t *list, void *data, unsigned int pos) 
 {
   if(pos > list->size){
     return -1;
@@ -141,14 +141,11 @@ int gll_add(gll_t *list, void *data, int pos)
   if(list->size == 0) {
     list->first = newNode;
     list->last = newNode;
-
     list->size++;
     return 1;
   }
-  
   /* if list is not empty */
   currNode = gll_findNode(list, pos);
-
   /* adding at the front or in the middle */
   if(currNode != NULL) {
     newNode->prev = currNode->prev;
@@ -176,7 +173,7 @@ int gll_add(gll_t *list, void *data, int pos)
  * in:        position in list
  * returns:   data previously stored at pos
  */
-void *gll_set(gll_t *list, void *data, int pos) 
+void *gll_set(gll_t *list, void *data, unsigned int pos) 
 {
   gll_node_t *currNode = gll_findNode(list, pos);
   if(currNode == NULL){
@@ -236,7 +233,7 @@ void gll_pushBack(gll_t *list, void *data)
  * in:        pointer to data
  * returns:   0 on success, -1 on failure
  */
-void *gll_remove(gll_t *list, int pos) 
+void *gll_remove(gll_t *list, unsigned int pos) 
 {
   gll_node_t *currNode = gll_findNode(list, pos);
   void *data = NULL;

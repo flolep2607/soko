@@ -38,27 +38,29 @@ typedef struct Level
     gll_t* map;
     gll_t* coups; //? faire une pile simple pour prendre moins de place et moins complexe
     bool resolue;
-    int numero_lvl;
+    unsigned int numero_lvl;
     unsigned int largeur;
     unsigned int hauteur;
+    unsigned int x;
+    unsigned int y;
 } level_t;
 
 /*  create new list */
 gll_t *gll_init();
 
 /*  get/find functions */
-void *gll_get(gll_t *, int);
+void *gll_get(gll_t *, unsigned int);
 void *gll_first(gll_t *);
 void *gll_last(gll_t *);
 
 /*  add functions */
-int gll_add(gll_t *, void *, int);
-void *gll_set(gll_t *, void *, int);
+unsigned int gll_add(gll_t *, void *, unsigned int);
+void *gll_set(gll_t *, void *, unsigned int);
 void gll_push(gll_t *, void *);
 void gll_pushBack(gll_t *, void *);
 
 /*  remove functions */
-void *gll_remove(gll_t *, int);
+void *gll_remove(gll_t *, unsigned int);
 void *gll_pop(gll_t *);
 void *gll_popBack(gll_t *);
 
