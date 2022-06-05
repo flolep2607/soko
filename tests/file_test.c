@@ -39,7 +39,7 @@ bool test_read(int* liste,unsigned int size){
     return i==size;
 }
 bool test_read_file(int* liste,unsigned int size){
-    gll_t* levels = read_file("data/levels_offficiel.lvl");
+    gll_t* levels = read_file("data/levels_offficiel.lvl");//
     if(&(levels->size)==NULL){
         printf("sizemap:NULL");
     }else{

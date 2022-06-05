@@ -44,6 +44,14 @@ gll_t *read_map(FILE *flux_entree, unsigned int largeur_max)
             }else if (character=='\n'){
                 break;
             }else if(character==EOF){
+                if(i!=0){
+                    while (i < largeur_max)
+                    {
+                        // printf(".");
+                        gll_pushBack(map, create_case(0, false));
+                        i++;
+                    }
+                }
                 return map;
             }
             // printf("%c",character);
@@ -216,7 +224,7 @@ bool save_game(gll_t* levels,unsigned int current_level,const char *file_name){
         //! Save COUPS
         currNode_temp = (level->coups)->first;
         while(currNode_temp != NULL) {
-            coups_t* coup=(coups_t*)currNode_temp->data;
+            coup_t* coup=(coup_t*)currNode_temp->data;
             fprintf(flux_sortie,"%hhu%i",coup->direction,coup->pousse);
             currNode_temp = currNode_temp->next;
         }

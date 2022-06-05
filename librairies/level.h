@@ -1,16 +1,22 @@
+//? case  => case_t
+//? map   => gll_t
+//? coup  => coup_t
+//? coups => gll_t
+//? level => level_t
+//? levels=> gll_t
+
 typedef struct Case
 {
-    unsigned char bloc; // 0->air 1->wall 2->box 3->body
-    bool cible;
+  unsigned char bloc; // 0->air 1->wall 2->box 3->body
+  bool cible;
 } case_t;
 
-typedef struct Coups {
-    unsigned char direction;
-    bool pousse;
-    struct Coups * next;
-} coups_t;
-
-
+typedef struct Coups
+{
+  unsigned char direction;
+  bool pousse;
+  struct Coups *next;
+} coup_t;
 
 // typedef struct Levels {
 //     level_t level;
@@ -18,7 +24,8 @@ typedef struct Coups {
 //     struct Levels * previous;
 // } levels_t;
 
-typedef struct node_t {
+typedef struct node_t
+{
   void *data;
   struct node_t *prev;
   struct node_t *next;
@@ -27,7 +34,8 @@ typedef struct node_t {
 /*
  * Generic Linked List Type: gll_t
  */
-typedef struct {
+typedef struct
+{
   int size;
   gll_node_t *first;
   gll_node_t *last;
@@ -35,14 +43,15 @@ typedef struct {
 
 typedef struct Level
 {
-    gll_t* map;
-    gll_t* coups; //? faire une pile simple pour prendre moins de place et moins complexe
-    bool resolue;
-    unsigned int numero_lvl;
-    unsigned int largeur;
-    unsigned int hauteur;
-    unsigned int x;
-    unsigned int y;
+  gll_t *map;
+  gll_t *coups; //? faire une pile simple pour prendre moins de place et moins complexe
+  bool resolue;
+  unsigned int numero_lvl;
+  unsigned int largeur;
+  unsigned int hauteur;
+  unsigned int index;
+  unsigned int x;
+  unsigned int y;
 } level_t;
 
 /*  create new list */

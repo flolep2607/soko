@@ -15,17 +15,26 @@
 #define DROITE 3
 #define GAUCHE 4
 #define xy2x(X, Y,LONG)  (X + Y * LONG)
+#define x2x(X, LONG)  (X%LONG)
+#define x2y(X, LONG)  (X/LONG)
+
 void x2xy(unsigned int X,unsigned int LONG, unsigned int *x, unsigned int *y){
     *x=X%LONG;
     *y=X/LONG;
 }
 
-unsigned int find_human(gll_t *map){
+// unsigned int 
+void find_human(level_t *level){
     unsigned int index=0;
-    gll_node_t *currNode = map->first;
+    gll_node_t *currNode = level->map->first;
     while(currNode != NULL) {
         if(((case_t*)currNode->data)->bloc==3){
-            return index;
+            x2xy(index,level->largeur,&(level->x),&(level->y));
+            level->index=index;
+            level->x=x2x(index,level->largeur);
+            level->y=x2y(index,level->largeur);
+            return;
+            // return index;
         }
         currNode = currNode->next;
         index++;
@@ -35,13 +44,14 @@ unsigned int find_human(gll_t *map){
 }
 
 bool is_on_map(level_t* level,unsigned int x, unsigned int y){
-    if(level->hauteur>y && y>0 && level->largeur>x && x>0){
+    if(level->hauteur>y && y>=0 && level->largeur>x && x>=0){
         return true;
     }    
     return false;
 }
+
 bool is_on_map2(unsigned largeur,unsigned int hauteur,unsigned int x, unsigned int y){
-    if(hauteur>y && y>0 && largeur>x && x>0){
+    if(hauteur>y && y>=0 && largeur>x && x>=0){
         return true;
     }    
     return false;
@@ -68,7 +78,6 @@ void move_direction(char direction,unsigned int *x_after,unsigned int *y_after){
     }
 }
 
-
 bool is_finish(gll_t *map) //! peut etre opti en mettant une pile de cible
 { 
     gll_node_t *currNode = map->first;
@@ -92,9 +101,9 @@ void move_object(gll_t* map,unsigned int pos1,unsigned int pos2,unsigned char ob
     ((case_t *)gll_get(map,pos2))->bloc=object_value;
 }
 
-bool move_human(level_t *level,char direction,unsigned int *x,unsigned int *y){
-    unsigned int x_after=*x;
-    unsigned int y_after=*y;
+bool move_human(level_t *level,char direction){
+    unsigned int x_after=level->x;
+    unsigned int y_after=level->y;
     move_direction(direction,& x_after,& y_after);
     unsigned int pos=xy2x(x_after,y_after,level->largeur);
     case_t* cell=(case_t*)gll_get(level->map,pos);
@@ -102,21 +111,25 @@ bool move_human(level_t *level,char direction,unsigned int *x,unsigned int *y){
         switch (cell->bloc)
             {
                 case 0:// air=> peut bouger no problemo
-                    move_object(level->map,xy2x(*x,*y,level->largeur),pos,2);
-                    *x=x_after;
-                    *y=y_after;
+                    //; Move human
+                    move_object(level->map,xy2x(level->x,level->y,level->largeur),pos,3);
+                    level->x=x_after;
+                    level->y=y_after;
                     return true;
                     break;
                 case 2:
                     //? check behind box
-                    move_direction(direction,& x_after,& y_after);
-                    unsigned int next_pos=xy2x(x_after,y_after,level->largeur);
-                    case_t* next_cell=(case_t*)gll_get(level->map,xy2x(x_after,y_after,level->largeur));
+                    unsigned int x_after2=level->x;
+                    unsigned int y_after2=level->y;
+                    move_direction(direction,& x_after2,& y_after2);
+                    case_t* next_cell=(case_t*)gll_get(level->map,xy2x(x_after2,y_after2,level->largeur));
                     if (next_cell->bloc==0){
-                        move_object(level->map,pos,next_pos,2);
-                        move_object(level->map,xy2x(*x,*y,level->largeur),pos,2);
-                        *x=x_after;
-                        *y=y_after;
+                        //; Move box
+                        move_object(level->map,pos,xy2x(x_after2,y_after2,level->largeur),2);
+                        //; Move human
+                        move_object(level->map,xy2x(level->x,level->y,level->largeur),pos,3);
+                        level->x=x_after;
+                        level->y=y_after;
                         //! move box
                         return true;
                     }
