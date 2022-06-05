@@ -6,7 +6,7 @@
 #define LEVEL_C
 #endif
 #ifndef FILE_C
-#include "../librairies/file.c"
+#include "file.c"
 #define FILE_C
 #endif
 //? directions

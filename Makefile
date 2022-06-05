@@ -3,10 +3,12 @@ SOURCE	= librairies/io.c
 HEADER	= 
 OUT	= compiled/io
 CC	 = gcc
-FLAGS	 = -Wall -Wextra -Werror -g3 -std=c99 -m32
-SDL_FLAGS	 = -I/usr/include/SDL2 -D_REENTRANT -lSDL2 -lm -ldl -lasound -lm -ldl -lpthread -lpulse-simple -pthread -lpulse -pthread -lX11 -lXext -lXcursor -lXinerama -lXi -lXfixes -lXrandr -lXss -lXxf86vm -lwayland-egl -lwayland-client -lwayland-cursor -lxkbcommon -lpthread -lrt
+FLAGS	 = -Wall -Wextra -g3 -std=c99 
+LDFLAGS = -I./include/SDL2/ -I./include/SDL2_image-2.0.5/ -I./include/SDL2/ -D_REENTRANT -lSDL2 -lSDL2_image -lSDL_mixer
+# -I./include -lSDL2-2.0
+#   $(shell sdl2-config --cflags --libs)
 # -fsanitize=address,undefined 
-# $(sdl2-config --cflags --libs)
+# --leak-check=full
 all: $(OBJS)
 	$(CC) -g $(OBJS) -o io $(LFLAGS)
 
@@ -17,11 +19,22 @@ test:
 	$(CC) $(FLAGS) tests/movement_test.c -o compiled/movement_test.o
 	./compiled/movement_test.o
 
+affich_mask:
+	clear
+	$(CC) $(FLAGS)  librairies/game.c -o compiled/game.o $(LDFLAGS)
+	valgrind --leak-check=full --show-leak-kinds=all --gen-suppressions=all --log-file=test.log ./compiled/game.o
+	grep -E '^( |\{|\})' test.log >> supressions.txt
+
+affich_leak:
+	clear
+	$(CC) $(FLAGS) librairies/game.c -o compiled/game.o $(LDFLAGS)
+	valgrind --leak-check=full --suppressions=supressions.txt ./compiled/game.o
+
 affich:
 	clear
-	$(CC) $(SDL_FLAGS) $(FLAGS) librairies/affichage.c -o compiled/affichage.o 
-	./compiled/affichage.o
-	valgrind --leak-check=full --gen-suppressions=all --log-file=test.log 
+	$(CC) $(FLAGS) -fsanitize=address,undefined  librairies/game.c -o compiled/game.o $(LDFLAGS)
+	./compiled/game.o
+
 
 
 compiled/io.o: librairies/io.c

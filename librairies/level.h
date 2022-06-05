@@ -5,9 +5,14 @@
 //? coups => gll_t
 //? level => level_t
 //? levels=> gll_t
+#define NUMBER_TEXTURES 5
+#define SIZE_TEXTURE_W 16
+#define SIZE_TEXTURE_H 16
+
 typedef struct runtime_s {
-  SDL_Window *win;
-  SDL_Renderer *renderer;
+  SDL_Window* win;
+  SDL_Renderer* renderer;
+  SDL_Texture* textures[NUMBER_TEXTURES];
 } runtime_t;
 
 typedef struct Case

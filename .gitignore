@@ -1,3 +1,6 @@
+include/SDL2/*
+include/SDL2_image-2.0.5/*
+include/SDL2_mixer-2.0.4/*
 # Prerequisites
 *.d
 
