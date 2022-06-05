@@ -1,0 +1,5 @@
+[submodule "include/SDL2_mixer"]
+	path = include/SDL2_mixer
+	url = https://github.com/davidsiaw/SDL2_mixer
+[submodule "include/SDL2_image"]
+	path = include/SDL2_image
