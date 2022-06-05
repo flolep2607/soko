@@ -4,7 +4,7 @@ HEADER	=
 OUT	= compiled/io
 CC	 = gcc
 FLAGS	 = -Wall -Wextra -g3 -std=c99 
-LDFLAGS = -I./include/SDL2/ -I./include/SDL2_image-2.0.5/ -I./include/SDL2_mixer/ -D_REENTRANT -lSDL2 -lSDL2_image -lSDL2_mixer
+LDFLAGS = -I./include/SDL/ -I./include/SDL_image/ -I./include/SDL_mixer/ -D_REENTRANT -lSDL2 -lSDL2_image -lSDL2_mixer
 # -I./include -lSDL2-2.0
 #   $(shell sdl2-config --cflags --libs)
 # -fsanitize=address,undefined 
