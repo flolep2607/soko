@@ -1,9 +1,14 @@
+#include <SDL2/SDL.h>
 //? case  => case_t
 //? map   => gll_t
 //? coup  => coup_t
 //? coups => gll_t
 //? level => level_t
 //? levels=> gll_t
+typedef struct runtime_s {
+  SDL_Window *win;
+  SDL_Renderer *renderer;
+} runtime_t;
 
 typedef struct Case
 {
@@ -36,7 +41,7 @@ typedef struct node_t
  */
 typedef struct
 {
-  int size;
+  unsigned int size;
   gll_node_t *first;
   gll_node_t *last;
 } gll_t;

@@ -1,30 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
-// #ifndef LISTE_CHAINE
-// #include "../librairies/liste_chaine.c"
-// #define LISTE_CHAINE
-// #endif
 #ifndef LEVEL_C
 #include "../librairies/level.c"
 #define LEVEL_C
 #endif
 
-// void affiche_lvl(gll_t *head, unsigned int largeur_)
-// {
-//     gll_t *current = head;
-//     unsigned int i = 0;
-//     while (current->next != NULL)
-//     {
-//         current = current->next;
-//         printf(current->data);
-//         if (i != 0 && i % largeur_ == 0)
-//         {
-//             printf("\n");
-//         }
-//         i++;
-//     }
-//     printf("\n");
-// }
 
 
 gll_t *read_map(FILE *flux_entree, unsigned int largeur_max)
@@ -100,9 +80,9 @@ gll_t *read_map(FILE *flux_entree, unsigned int largeur_max)
 
 unsigned int largeur(FILE *flux_entree)
 {
-    int position_before_map = ftell(flux_entree);
+    unsigned long position_before_map = ftell(flux_entree);
     unsigned int largeur_max = 0;
-    int a = 0;
+    unsigned int a = 0;
     char caract = 0;
     while (!feof(flux_entree) && caract != ';')
     {

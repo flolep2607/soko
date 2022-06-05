@@ -44,14 +44,14 @@ void find_human(level_t *level){
 }
 
 bool is_on_map(level_t* level,unsigned int x, unsigned int y){
-    if(level->hauteur>y && y>=0 && level->largeur>x && x>=0){
+    if(level->hauteur>y && level->largeur>x){//? unsigned donc inutile && y>=0 && x>=0 
         return true;
     }    
     return false;
 }
 
 bool is_on_map2(unsigned largeur,unsigned int hauteur,unsigned int x, unsigned int y){
-    if(hauteur>y && y>=0 && largeur>x && x>=0){
+    if(hauteur>y && largeur>x){//? unsigned donc inutile && y>=0 && x>=0 
         return true;
     }    
     return false;
