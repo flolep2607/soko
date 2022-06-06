@@ -1,4 +1,6 @@
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_mixer.h>
+#include <stdbool.h>
 //? case  => case_t
 //? map   => gll_t
 //? coup  => coup_t
@@ -13,6 +15,7 @@ typedef struct runtime_s {
   SDL_Window* win;
   SDL_Renderer* renderer;
   SDL_Texture* textures[NUMBER_TEXTURES];
+  Mix_Music *musique;
 } runtime_t;
 
 typedef struct Case
@@ -25,7 +28,6 @@ typedef struct Coups
 {
   unsigned char direction;
   bool pousse;
-  struct Coups *next;
 } coup_t;
 
 // typedef struct Levels {
@@ -55,7 +57,7 @@ typedef struct Level
 {
   gll_t *map;
   gll_t *coups; //? faire une pile simple pour prendre moins de place et moins complexe
-  bool resolue;
+  bool solved;
   unsigned int numero_lvl;
   unsigned int largeur;
   unsigned int hauteur;
@@ -66,6 +68,8 @@ typedef struct Level
 
 /*  create new list */
 gll_t *gll_init();
+level_t *level_init();
+case_t* create_case(unsigned char bloc, bool cible);
 
 /*  get/find functions */
 void *gll_get(gll_t *, unsigned int);
@@ -90,3 +94,5 @@ void gll_eachReverse(gll_t *, void (*f)(void *));
 /*  destructive functions */
 void gll_clear(gll_t *);
 void gll_destroy(gll_t *);
+void destroy_level(level_t* level);
+void destroy_levels(gll_t *levels);

@@ -1,29 +1,13 @@
-#pragma once
-#include <stdbool.h>
-#include <stdlib.h>
-#ifndef LEVEL_C
-#include "level.c"
-#define LEVEL_C
+#ifndef MOVEMENT_H
+#include "movement.h"
+#define MOVEMENT_H
 #endif
-#ifndef FILE_C
-#include "file.c"
-#define FILE_C
-#endif
-//? directions
-#define HAUT 1
-#define BAS 2
-#define DROITE 3
-#define GAUCHE 4
-#define xy2x(X, Y,LONG)  (X + Y * LONG)
-#define x2x(X, LONG)  (X%LONG)
-#define x2y(X, LONG)  (X/LONG)
+
 
 void x2xy(unsigned int X,unsigned int LONG, unsigned int *x, unsigned int *y){
     *x=X%LONG;
     *y=X/LONG;
 }
-
-// unsigned int 
 void find_human(level_t *level){
     unsigned int index=0;
     gll_node_t *currNode = level->map->first;
@@ -101,7 +85,44 @@ void move_object(gll_t* map,unsigned int pos1,unsigned int pos2,unsigned char ob
     ((case_t *)gll_get(map,pos2))->bloc=object_value;
 }
 
-bool move_human(level_t *level,char direction){
+bool go_back(level_t *level){
+    coup_t* coup=(coup_t*)gll_pop(level->coups);
+    if(coup==NULL){
+        return false;
+    }
+    unsigned int old_index=level->index;
+    unsigned int old_index_box=old_index;
+    switch (coup->direction)
+    {
+        case HAUT:
+            coup->direction=BAS;
+            old_index_box-=level->largeur;
+            break;
+        case BAS:
+            coup->direction=HAUT;
+            old_index_box+=level->largeur;
+            break;
+        case GAUCHE:
+            coup->direction=DROITE;
+            old_index_box--;
+            break;
+        case DROITE:
+            coup->direction=GAUCHE;
+            old_index_box++;
+            break;
+        
+        default:
+            break;
+    }
+    if(!move_human(level,coup->direction,false)){
+        return false;
+    }
+    if(coup->pousse){
+        move_object(level->map,old_index_box,old_index,2);
+    }
+    return true;
+}
+bool move_human(level_t *level,char direction,bool save){
     unsigned int x_after=level->x;
     unsigned int y_after=level->y;
     move_direction(direction,& x_after,& y_after);
@@ -112,24 +133,42 @@ bool move_human(level_t *level,char direction){
             {
                 case 0:// air=> peut bouger no problemo
                     //; Move human
-                    move_object(level->map,xy2x(level->x,level->y,level->largeur),pos,3);
+                    printf("nothing in front I can move\n");
+                    move_object(level->map,level->index,pos,3);
                     level->x=x_after;
                     level->y=y_after;
+                    level->index=xy2x(level->x,level->y,level->largeur);
+                    if(save){
+                        coup_t* coup=(coup_t*)malloc(sizeof(coup_t));
+                        coup->direction=direction;
+                        coup->pousse=false;
+                        gll_push(level->coups,coup);
+                    }
                     return true;
                     break;
                 case 2:
                     //? check behind box
-                    unsigned int x_after2=level->x;
-                    unsigned int y_after2=level->y;
+                    printf("box in front\n");
+                    unsigned int x_after2=x_after;
+                    unsigned int y_after2=y_after;
                     move_direction(direction,& x_after2,& y_after2);
                     case_t* next_cell=(case_t*)gll_get(level->map,xy2x(x_after2,y_after2,level->largeur));
+                    printf("%d-%d->%d-%d=%d\n",x_after,y_after,x_after2,y_after2,next_cell->bloc);
                     if (next_cell->bloc==0){
+                        printf("box in front but I can move\n");
                         //; Move box
                         move_object(level->map,pos,xy2x(x_after2,y_after2,level->largeur),2);
                         //; Move human
-                        move_object(level->map,xy2x(level->x,level->y,level->largeur),pos,3);
+                        move_object(level->map,level->index,pos,3);
                         level->x=x_after;
                         level->y=y_after;
+                        level->index=xy2x(level->x,level->y,level->largeur);
+                        if(save){
+                            coup_t* coup=(coup_t*)malloc(sizeof(coup_t));
+                            coup->direction=direction;
+                            coup->pousse=true;
+                            gll_push(level->coups,coup);
+                        }
                         //! move box
                         return true;
                     }
@@ -138,6 +177,7 @@ bool move_human(level_t *level,char direction){
                     printf("[ERROR]2 humans\n");
                     exit(-1);
                 default:
+                    printf("It's a wall\n");
                     break;
             }
     }

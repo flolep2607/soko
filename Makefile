@@ -4,9 +4,8 @@ HEADER	=
 OUT	= compiled/io
 CC	 = gcc
 FLAGS	 = -Wall -Wextra -g3 -std=c99 
-LDFLAGS = -I./include/SDL/ -I./include/SDL_image/ -I./include/SDL_mixer/ -D_REENTRANT -lSDL2 -lSDL2_image -lSDL2_mixer
-# -I./include -lSDL2-2.0
-#   $(shell sdl2-config --cflags --libs)
+LDFLAGS = $(shell sdl2-config --cflags --libs) -lSDL2_image -lSDL2_mixer 
+# apt install libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-2.0-0 libsdl2-image-2.0-0 libsdl2-mixer-2.0-0
 # -fsanitize=address,undefined 
 # --leak-check=full
 all: $(OBJS)
@@ -21,18 +20,18 @@ test:
 
 affich_mask:
 	clear
-	$(CC) $(FLAGS)  librairies/game.c -o compiled/game.o $(LDFLAGS)
+	$(CC) $(FLAGS) librairies/game.c -o compiled/game.o $(LDFLAGS)
 	valgrind --leak-check=full --show-leak-kinds=all --gen-suppressions=all --log-file=test.log ./compiled/game.o
 	grep -E '^( |\{|\})' test.log >> supressions.txt
 
 affich_leak:
 	clear
 	$(CC) $(FLAGS) librairies/game.c -o compiled/game.o $(LDFLAGS)
-	valgrind --leak-check=full --suppressions=supressions.txt ./compiled/game.o
+	valgrind --leak-check=full --show-leak-kinds=definite --track-origins=yes --suppressions=supressions.txt ./compiled/game.o
 
 affich:
 	clear
-	$(CC) $(FLAGS) -fsanitize=address,undefined  librairies/game.c -o compiled/game.o $(LDFLAGS)
+	$(CC) $(FLAGS) -fsanitize=address,undefined librairies/affichage.c librairies/file.c librairies/movement.c librairies/pile.c librairies/game.c -o compiled/game.o $(LDFLAGS)
 	./compiled/game.o
 
 

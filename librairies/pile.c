@@ -1,5 +1,8 @@
 #include <stdbool.h>
-#include "level.h"
+#ifndef PILE_H
+#include "pile.h"
+#define PILE_H
+#endif
 // !typedef struct Case
 // {
 //     unsigned char bloc; // 0->air 1->wall 2->box 3->body
@@ -376,7 +379,7 @@ void gll_destroy(gll_t *list)
 level_t *level_init() 
 {
   level_t *level = (level_t *) malloc(sizeof(level_t));
-  level->resolue = false;
+  level->solved = false;
   level->numero_lvl = 0;
   level->largeur = 0;
   level->hauteur = 0;
@@ -394,6 +397,7 @@ void destroy_level(level_t* level){
   }
   free(level);
 }
+
 void destroy_levels(gll_t *levels){
   gll_node_t *currNode = levels->first;
   gll_node_t *nextNode;

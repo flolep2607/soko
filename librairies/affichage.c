@@ -1,17 +1,8 @@
-#include <stdbool.h>
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <SDL2/SDL_mixer.h>
-#include <unistd.h> 
-#include <stdio.h>
-#ifndef LEVEL_C
-#include "level.c"
-#define LEVEL_C
+#ifndef AFFICHAGE_H
+#include "affichage.h"
+#define AFFICHAGE_H
 #endif
 // #include "movement.c"
-
-
-SDL_bool QUIT_GAME = SDL_FALSE;
 
 int renderer_set_color(runtime_t *runtime,SDL_Color color){
     if(0 != SDL_SetRenderDrawColor(runtime->renderer, color.r, color.g, color.b, color.a))
@@ -92,8 +83,12 @@ int affichage_init(runtime_t *runtime){
         }
     }
     if(IMG_Init(IMG_INIT_PNG|IMG_INIT_JPG)!=(IMG_INIT_PNG|IMG_INIT_JPG)){
-        printf("IMG_Init: Failed to init required png support!\n");
-        printf("IMG_Init: %s\n", IMG_GetError());
+        printf("Erreur IMG_Init : %s\n", IMG_GetError());
+        return -1;
+    }
+    if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024) == -1) //Initialisation de l'API Mixer
+    {
+        printf("Erreur Mix_OpenAudio :%s\n", Mix_GetError());
         return -1;
     }
     return 0;
@@ -114,6 +109,10 @@ void affichage_quit(runtime_t *runtime){
     if(NULL != runtime->win){
         SDL_DestroyWindow(runtime->win);
     }
+    if(NULL != runtime->musique){
+        Mix_FreeMusic(runtime->musique); //Libération de la musique
+        Mix_CloseAudio(); //Fermeture de l'API
+    }
     SDL_Quit();
     free(runtime);
 }
@@ -121,6 +120,15 @@ void affichage_quit(runtime_t *runtime){
 void affichage_texture(runtime_t *runtime,unsigned int texture_number,int X,int Y){
     SDL_Rect dest = {(int)X*SIZE_TEXTURE_W,(int)Y*SIZE_TEXTURE_H,(int)SIZE_TEXTURE_W,(int)SIZE_TEXTURE_H};
     SDL_RenderCopy(runtime->renderer, runtime->textures[texture_number], NULL, &dest);
+}
+int load_music(runtime_t* runtime,const char * file_path){
+    runtime->musique = Mix_LoadMUS(file_path); //Chargement de la musique
+    if(runtime->musique==NULL){
+        printf("[ERROR] loading mp3 file %s",file_path);
+        return -1;
+    }
+    Mix_PlayMusic(runtime->musique, -1); //Jouer infiniment la musique
+    return 0;
 }
 
 void load_all_textures(runtime_t* runtime){

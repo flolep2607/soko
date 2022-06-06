@@ -1,11 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-#ifndef LEVEL_C
-#include "../librairies/level.c"
-#define LEVEL_C
+#ifndef FILE_H
+#include "file.h"
+#define FILE_H
 #endif
-
-
 
 gll_t *read_map(FILE *flux_entree, unsigned int largeur_max)
 {
@@ -147,6 +145,8 @@ int read_one_level(FILE * flux_entree,level_t* level){
         exit(-1);
     }
     level->hauteur=level->map->size/largeur_max;
+    find_human(level);
+    level->coups=gll_init();
     return 1;
 }
 
@@ -211,7 +211,7 @@ bool save_game(gll_t* levels,unsigned int current_level,const char *file_name){
         fputc('|',flux_sortie);
         fprintf(flux_sortie,"%hhu",level->numero_lvl);
         fputc('|',flux_sortie);
-        fprintf(flux_sortie,"%i",level->resolue);
+        fprintf(flux_sortie,"%i",level->solved);
 
         currNode = currNode->next;
         fputc('\n',flux_sortie);

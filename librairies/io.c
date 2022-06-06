@@ -41,18 +41,18 @@ int litClavier()
 	}
 }
 
-int main(void)
-{
-	configureTerminal();
-	while (1)
-	{
-		printf("%d",litClavier());
-		printf("\n");
-		sleep(1);
-	}
+// int main(void)
+// {
+// 	configureTerminal();
+// 	while (1)
+// 	{
+// 		printf("%d",litClavier());
+// 		printf("\n");
+// 		sleep(1);
+// 	}
 	
-	return 0;
-}
+// 	return 0;
+// }
 
 
 

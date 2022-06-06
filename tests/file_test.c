@@ -1,12 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
-#ifndef FILE_C
+#ifndef FILE_H
 #include "../librairies/file.c"
 #define FILE_C
 #endif
 #ifndef LEVEL_C
-#include "../librairies/level.c"
+#include "../librairies/#ifndef PILE_H
+#include "pile.h"
+#define PILE_H
+#endif"
 #define LEVEL_C
 #endif
 #define SIZE 209
