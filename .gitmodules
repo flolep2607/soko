@@ -1,4 +1,10 @@
 [submodule "include/SDL_mixer"]
 	path = include/SDL_mixer
+	url = https://github.com/libsdl-org/SDL_mixer
 [submodule "include/SDL_image"]
 	path = include/SDL_image
+	url = https://github.com/libsdl-org/SDL_image
+[submodule "include/SDL"]
+	path = include/SDL
+	url = https://github.com/libsdl-org/SDL
+	branch = 2.0.22
