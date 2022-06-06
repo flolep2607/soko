@@ -2,5 +2,3 @@
 	path = include/SDL_mixer
 [submodule "include/SDL_image"]
 	path = include/SDL_image
-[submodule "include/SDL"]
-	path = include/SDL
