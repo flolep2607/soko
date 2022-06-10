@@ -1,0 +1,305 @@
+.TH "src/pathfinding.c" 3 "Vendredi 10 Juin 2022" "Sokoban" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/pathfinding.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdbool\&.h>\fP
+.br
+\fC#include <SDL2/SDL\&.h>\fP
+.br
+\fC#include <SDL2/SDL_image\&.h>\fP
+.br
+\fC#include <SDL2/SDL_mixer\&.h>\fP
+.br
+\fC#include 'runtime\&.h'\fP
+.br
+\fC#include 'pile\&.h'\fP
+.br
+\fC#include 'movement\&.h'\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBRUNTIME_H\fP"
+.br
+.ti -1c
+.RI "#define \fBPILE_H\fP"
+.br
+.ti -1c
+.RI "#define \fBMOVEMENT_H\fP"
+.br
+.in -1c
+.SS "Fonctions"
+
+.in +1c
+.ti -1c
+.RI "bool \fBrandom_pathfinding\fP (\fBlevel_t\fP *level, unsigned int x, unsigned int y, \fBruntime_t\fP *runtime)"
+.br
+.RI "fonction de pathfinding random (donc pas l'utiliser svp) "
+.ti -1c
+.RI "bool \fBworking_pathfinding\fP (\fBlevel_t\fP *level, unsigned int index, unsigned int value, unsigned int index_cible, \fBliste_double\fP *coups)"
+.br
+.RI "pathfind avec recurrence simple mais efficace (ne trouve pas le chemin le plus court mais utilise peu de memoire) "
+.ti -1c
+.RI "void \fBmap_reset_weigth\fP (\fBliste_double\fP *map)"
+.br
+.ti -1c
+.RI "bool \fBrecurrence_pathfinding\fP (\fBlevel_t\fP *level, unsigned int x, unsigned int y, \fBruntime_t\fP *runtime)"
+.br
+.ti -1c
+.RI "bool \fBpath_finding\fP (\fBlevel_t\fP *level, unsigned int x, unsigned int y, \fBruntime_t\fP *runtime)"
+.br
+.in -1c
+.SH "Documentation des macros"
+.PP 
+.SS "#define RUNTIME_H"
+
+.SS "#define PILE_H"
+
+.SS "#define MOVEMENT_H"
+
+.SH "Documentation des fonctions"
+.PP 
+.SS "bool random_pathfinding (\fBlevel_t\fP * level, unsigned int x, unsigned int y, \fBruntime_t\fP * runtime)"
+
+.PP
+fonction de pathfinding random (donc pas l'utiliser svp) 
+.PP
+\fBParamètres\fP
+.RS 4
+\fIlevel\fP 
+.br
+\fIx\fP 
+.br
+\fIy\fP 
+.br
+\fIruntime\fP 
+.RE
+.PP
+\fBRenvoie\fP
+.RS 4
+true 
+.PP
+false 
+.RE
+.PP
+
+.PP
+.nf
+29                                                                                         {
+30     case_t* final_cell = ((case_t*)liste_double_get(level->map,xy2x(x,y,level->largeur)));
+31     bool possible[4];
+32     char direction;
+33     if(is_on_map(level,x,y) && final_cell->bloc==0){
+34         unsigned short int i=1;
+35         while(i>0 && !runtime->QUIT_GAME && runtime->pathfinding){
+36             possible_move(level,possible);
+37             direction=random_from_array(possible);
+38             if(direction<0){
+39                 fprintf(stderr,"[ERROR] u blocked between walls/blocks\n");
+40                 return false;
+41             }
+42             move_human(level,direction,true,false,runtime);
+43             if(final_cell->bloc==3){
+44                 return true;
+45             }
+46             renderer_clear_window(runtime);
+47             show_game(runtime);
+48             SDL_Rect rect = {x*SIZE_TEXTURE, y*SIZE_TEXTURE, SIZE_TEXTURE, SIZE_TEXTURE};
+49             renderer_set_color(runtime,(SDL_Color){255,0,0,255});
+50             SDL_RenderFillRect(runtime->renderer, &rect); 
+51             SDL_RenderPresent(runtime->renderer);
+52             // SDL_Delay(1);
+53             SDL_PumpEvents();
+54         }
+55     }
+56     return false;
+57 }
+.fi
+.PP
+Références Case::bloc, is_on_map(), liste_double_get(), move_human(), runtime_s::pathfinding, possible_move(), runtime_s::QUIT_GAME, random_from_array(), runtime_s::renderer, renderer_clear_window(), renderer_set_color(), show_game(), SIZE_TEXTURE, et xy2x\&.
+.SS "bool working_pathfinding (\fBlevel_t\fP * level, unsigned int index, unsigned int value, unsigned int index_cible, \fBliste_double\fP * coups)"
+
+.PP
+pathfind avec recurrence simple mais efficace (ne trouve pas le chemin le plus court mais utilise peu de memoire) 
+.PP
+\fBParamètres\fP
+.RS 4
+\fIlevel\fP 
+.br
+\fIindex\fP 
+.br
+\fIvalue\fP 
+.br
+\fIindex_cible\fP 
+.br
+\fIcoups\fP 
+.RE
+.PP
+\fBRenvoie\fP
+.RS 4
+bool 
+.RE
+.PP
+if index_cible found
+.PP
+.nf
+71                                                                                                                            {
+72     if(index_cible==index){
+73         return true;
+74     }
+75     case_t* cell =(case_t*)liste_double_get(level->map,index);
+76     if((cell->bloc==0 || cell->bloc==3) && !(cell->weight)){
+77         cell->weight=true;
+78         for(char i=0;i<4;i++){
+79             //! if index_cible found
+80             if(working_pathfinding(level,move_direction(i,index,level->largeur),value,index_cible,coups)){
+81                 liste_double_ajout_en_tete(coups,create_coup(i,false));
+82                 return true;
+83             }
+84         }
+85     }
+86     return false;
+87 }
+.fi
+.PP
+Références Case::bloc, create_coup(), liste_double_ajout_en_tete(), liste_double_get(), move_direction(), et Case::weight\&.
+.PP
+Référencé par recurrence_pathfinding()\&.
+.SS "void map_reset_weigth (\fBliste_double\fP * map)"
+
+.PP
+\fBParamètres\fP
+.RS 4
+\fImap\fP 
+.RE
+.PP
+
+.PP
+.nf
+95                                         {
+96     liste_double_node_t *current_node = map->first;
+97 
+98     while(current_node != NULL) {
+99         ((case_t*)current_node->data)->weight=false;
+100         current_node = current_node->next;
+101     }
+102 }
+.fi
+.PP
+Références node_t::data, liste_double::first, et node_t::next\&.
+.PP
+Référencé par recurrence_pathfinding()\&.
+.SS "bool recurrence_pathfinding (\fBlevel_t\fP * level, unsigned int x, unsigned int y, \fBruntime_t\fP * runtime)"
+
+.PP
+\fBParamètres\fP
+.RS 4
+\fIlevel\fP 
+.br
+\fIx\fP 
+.br
+\fIy\fP 
+.br
+\fIruntime\fP 
+.RE
+.PP
+\fBRenvoie\fP
+.RS 4
+true 
+.PP
+false 
+.RE
+.PP
+
+.PP
+.nf
+114                                                                                             {
+115     unsigned int index_cible=xy2x(x,y,level->largeur);
+116     if(index_cible>=level->map->size || ((case_t*)liste_double_get(level->map,index_cible))->bloc!=0 ){
+117         return false;
+118     }
+119     SDL_Rect rect = {x*SIZE_TEXTURE, y*SIZE_TEXTURE, SIZE_TEXTURE, SIZE_TEXTURE};
+120     renderer_set_color(runtime,(SDL_Color){255,0,0,255});
+121     SDL_RenderFillRect(runtime->renderer, &rect); 
+122     SDL_RenderPresent(runtime->renderer);
+123     map_reset_weigth(level->map);
+124     liste_double* coups = liste_double_init();
+125     if(working_pathfinding(level,level->index,0,index_cible,coups)){
+126         liste_double_node_t *current_node = coups->first;
+127         while(current_node != NULL) {
+128             coup_t* coup=(coup_t*)(current_node->data);
+129             move_human(level,coup->direction,true,false,runtime);
+130             current_node = current_node->next;
+131             renderer_clear_window(runtime);
+132             show_game(runtime);
+133             SDL_Rect rect = {x*SIZE_TEXTURE, y*SIZE_TEXTURE, SIZE_TEXTURE, SIZE_TEXTURE};
+134             renderer_set_color(runtime,(SDL_Color){255,0,0,255});
+135             SDL_RenderFillRect(runtime->renderer, &rect); 
+136             SDL_RenderPresent(runtime->renderer);
+137             SDL_Delay(20);
+138             SDL_PumpEvents();
+139         }
+140         liste_double_destroy(coups);
+141         return true;
+142     }else{
+143         fprintf(stderr,"NOT FOUND\n");
+144     }
+145     liste_double_destroy(coups);
+146     return false;
+147 }
+.fi
+.PP
+Références node_t::data, Coups::direction, liste_double::first, liste_double_destroy(), liste_double_get(), liste_double_init(), map_reset_weigth(), move_human(), node_t::next, runtime_s::renderer, renderer_clear_window(), renderer_set_color(), show_game(), SIZE_TEXTURE, working_pathfinding(), et xy2x\&.
+.PP
+Référencé par path_finding()\&.
+.SS "bool path_finding (\fBlevel_t\fP * level, unsigned int x, unsigned int y, \fBruntime_t\fP * runtime)"
+
+.PP
+\fBParamètres\fP
+.RS 4
+\fIlevel\fP 
+.br
+\fIx\fP 
+.br
+\fIy\fP 
+.br
+\fIruntime\fP 
+.RE
+.PP
+\fBRenvoie\fP
+.RS 4
+true 
+.PP
+false 
+.RE
+.PP
+
+.PP
+.nf
+159                                                                                   {
+160     runtime->pathfinding=true;
+161     // if(random_pathfinding(level,x,y,runtime)){
+162     //     runtime->pathfinding=false;
+163     //     return true;
+164     // }
+165     if(recurrence_pathfinding(level,x,y,runtime)){
+166         runtime->pathfinding=false;
+167         return true;
+168     }
+169     runtime->pathfinding=false;
+170     return false;
+171 }
+.fi
+.PP
+Références runtime_s::pathfinding, et recurrence_pathfinding()\&.
+.PP
+Référencé par event_handler()\&.
+.SH "Auteur"
+.PP 
+Généré automatiquement par Doxygen pour Sokoban à partir du code source\&.

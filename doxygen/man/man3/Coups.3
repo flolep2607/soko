@@ -1,0 +1,38 @@
+.TH "Coups" 3 "Vendredi 10 Juin 2022" "Sokoban" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Coups \- créer la structure \fBCoups\fP qui spécifie le type des \fBCoups\fP effectués\&. Spécifie la direction du coup et si il s'agit d'une poussée ou non\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <structures\&.h>\fP
+.SS "Champs de données"
+
+.in +1c
+.ti -1c
+.RI "unsigned char \fBdirection\fP"
+.br
+.ti -1c
+.RI "bool \fBpousse\fP"
+.br
+.in -1c
+.SH "Description détaillée"
+.PP 
+créer la structure \fBCoups\fP qui spécifie le type des \fBCoups\fP effectués\&. Spécifie la direction du coup et si il s'agit d'une poussée ou non\&. 
+.SH "Documentation des champs"
+.PP 
+.SS "unsigned char Coups::direction"
+
+.PP
+Référencé par create_coup(), go_back(), recurrence_pathfinding(), et save_game()\&.
+.SS "bool Coups::pousse"
+
+.PP
+Référencé par create_coup(), go_back(), et save_game()\&.
+
+.SH "Auteur"
+.PP 
+Généré automatiquement par Doxygen pour Sokoban à partir du code source\&.

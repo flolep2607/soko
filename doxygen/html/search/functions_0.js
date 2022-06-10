@@ -1,0 +1,7 @@
+var searchData=
+[
+  ['affichage_5finit_154',['affichage_init',['../affichage_8c.html#aefb04ca8c29b586bbac2158b57cd311b',1,'affichage_init(runtime_t *runtime):&#160;affichage.c'],['../affichage_8h.html#aefb04ca8c29b586bbac2158b57cd311b',1,'affichage_init(runtime_t *runtime):&#160;affichage.c']]],
+  ['affichage_5fquit_155',['affichage_quit',['../affichage_8c.html#a7a11a8144501d8adae5cdb6aa2e2232d',1,'affichage_quit(runtime_t *runtime):&#160;affichage.c'],['../affichage_8h.html#a7a11a8144501d8adae5cdb6aa2e2232d',1,'affichage_quit(runtime_t *runtime):&#160;affichage.c']]],
+  ['affichage_5ftexture_156',['affichage_texture',['../affichage_8c.html#a1b2fa13be4601c6d3552f446f4e955f2',1,'affichage_texture(runtime_t *runtime, unsigned int texture_number, int X, int Y):&#160;affichage.c'],['../affichage_8h.html#a1b2fa13be4601c6d3552f446f4e955f2',1,'affichage_texture(runtime_t *runtime, unsigned int texture_number, int X, int Y):&#160;affichage.c']]],
+  ['animate_5fbox_5fmoving_157',['animate_box_moving',['../animation_8c.html#a4731ea04b06c27789a9e6b706ab45928',1,'animate_box_moving(runtime_t *runtime, unsigned char direction, unsigned int index_start, unsigned int index_end):&#160;animation.c'],['../animation_8h.html#a4731ea04b06c27789a9e6b706ab45928',1,'animate_box_moving(runtime_t *runtime, unsigned char direction, unsigned int index_start, unsigned int index_end):&#160;animation.c']]]
+];

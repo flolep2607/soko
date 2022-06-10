@@ -1,0 +1,105 @@
+.TH "src/animation.c" 3 "Vendredi 10 Juin 2022" "Sokoban" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/animation.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'animation\&.h'\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBANIMATION_H\fP"
+.br
+.in -1c
+.SS "Fonctions"
+
+.in +1c
+.ti -1c
+.RI "void \fBanimate_box_moving\fP (\fBruntime_t\fP *runtime, unsigned char direction, unsigned int index_start, unsigned int index_end)"
+.br
+.RI "Anime le mouvement des oeufs\&. "
+.in -1c
+.SH "Documentation des macros"
+.PP 
+.SS "#define ANIMATION_H"
+
+.SH "Documentation des fonctions"
+.PP 
+.SS "void animate_box_moving (\fBruntime_t\fP * runtime, unsigned char direction, unsigned int index_start, unsigned int index_end)"
+
+.PP
+Anime le mouvement des oeufs\&. 
+.PP
+\fBParamètres\fP
+.RS 4
+\fIruntime\fP 
+.br
+\fIdirection\fP 
+.br
+\fIindex_start\fP 
+.br
+\fIindex_end\fP 
+.RE
+.PP
+
+.PP
+.nf
+15                                                                                                                    {
+16     int depart,arrive;
+17     double angle = 0;
+18     SDL_Rect clear_zone={
+19         x2x(index_start<index_end?index_start:index_end,runtime->level->largeur)*SIZE_TEXTURE,
+20         x2y(index_start,runtime->level->largeur)*SIZE_TEXTURE,
+21         2*SIZE_TEXTURE,SIZE_TEXTURE};
+22     SDL_Rect * position=(SDL_Rect *) malloc(sizeof(SDL_Rect));
+23     position->w=(int)SIZE_TEXTURE;
+24     position->h=(int)SIZE_TEXTURE;
+25     switch (direction)
+26     {
+27     case DROITE:
+28         position->y=x2y(index_start,runtime->level->largeur)*SIZE_TEXTURE;
+29         depart=x2x(index_start,runtime->level->largeur)*SIZE_TEXTURE;
+30         arrive=x2x(index_end,runtime->level->largeur)*SIZE_TEXTURE;
+31         for(int i=depart;i<arrive;i++){
+32             position->x=i;
+33             renderer_set_color(runtime,runtime->empty);
+34             SDL_RenderFillRect(runtime->renderer, &clear_zone);
+35             angle=(double)(i-depart)/(arrive-depart)*360;
+36             SDL_RenderCopyEx(runtime->renderer,runtime->textures[1],NULL,position,angle,NULL,SDL_FLIP_NONE);
+37             SDL_RenderPresent(runtime->renderer);
+38             SDL_Delay(30/(arrive-depart));
+39         }
+40         break;
+41     case GAUCHE:
+42         position->y=x2y(index_start,runtime->level->largeur)*SIZE_TEXTURE;
+43         depart=x2x(index_start,runtime->level->largeur)*SIZE_TEXTURE;
+44         arrive=x2x(index_end,runtime->level->largeur)*SIZE_TEXTURE;
+45         for(int i=depart;i>arrive;i--){
+46             position->x=i;
+47             renderer_set_color(runtime,runtime->empty);
+48             SDL_RenderFillRect(runtime->renderer, &clear_zone);
+49             angle=(double)(i-arrive)/(depart-arrive)*360;
+50             SDL_RenderCopyEx(runtime->renderer,runtime->textures[1],NULL,position,angle,NULL,SDL_FLIP_NONE);
+51             SDL_RenderPresent(runtime->renderer);
+52             SDL_Delay(30/(depart-arrive));
+53         }
+54         break;
+55     
+56     default:
+57         break;
+58     }
+59     free(position);
+60 }
+.fi
+.PP
+Références DROITE, runtime_s::empty, GAUCHE, runtime_s::level, runtime_s::renderer, renderer_set_color(), SIZE_TEXTURE, runtime_s::textures, x2x, et x2y\&.
+.PP
+Référencé par move_human()\&.
+.SH "Auteur"
+.PP 
+Généré automatiquement par Doxygen pour Sokoban à partir du code source\&.

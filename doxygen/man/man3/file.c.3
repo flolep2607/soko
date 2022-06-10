@@ -1,0 +1,602 @@
+.TH "src/file.c" 3 "Vendredi 10 Juin 2022" "Sokoban" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/file.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include 'file\&.h'\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBFILE_H\fP"
+.br
+.in -1c
+.SS "Fonctions"
+
+.in +1c
+.ti -1c
+.RI "void \fBfind_human\fP (\fBlevel_t\fP *level)"
+.br
+.RI "permet d'initialiser et de trouver la position du joueur en parcourant la liste chainee (en reconstituant la position du joueur sur le tableau) "
+.ti -1c
+.RI "void \fBread_map\fP (FILE *flux_entree, unsigned int largeur_max, \fBliste_double\fP *map)"
+.br
+.RI "Fonction de creation / gestion des files\&. "
+.ti -1c
+.RI "unsigned int \fBlargeur\fP (FILE *flux_entree)"
+.br
+.RI "Fonction parcourant tout le niveau afin de deteriner la largeur maximale du niveau\&. "
+.ti -1c
+.RI "bool \fBremove_useless\fP (FILE *flux_entree)"
+.br
+.RI "enleve tous les commentaires sur le fichier source et se replace au debut "
+.ti -1c
+.RI "int \fBread_one_level\fP (FILE *flux_entree, \fBlevel_t\fP *level)"
+.br
+.RI "Fonction permettant de lire un niveau dans le fichier source\&. "
+.ti -1c
+.RI "\fBliste_double\fP * \fBread_file\fP (const char *file_name)"
+.br
+.RI "Fonction principale, permet de lire le fichier, et en utilisant les autres fonctions permet de retourner la liste chainee dans laquelle on a les differnets niveaux, au format desire\&. "
+.ti -1c
+.RI "bool \fBsave_game\fP (\fBliste_double\fP *levels, const char *file_name)"
+.br
+.RI "Fonction permettant la sauvegarde de la partie dans son etat actuel Creer un fichier contenant les parametres qui pour chaque niveau se presente sous la forme : largeur(uint)|hauteur(uint)|[map(uchar,bool)]|[coup(uchar,bool)]|numerolvl(uint)|resolu(bool) "
+.ti -1c
+.RI "bool \fBread_save\fP (const char *file_name, \fBliste_double\fP *levels)"
+.br
+.RI "Fonction lisant le fichier save\&.c pour reprendre la partie au point arrete\&. Pour chaque niveau, la fonction a besoin de connaitre la largeur, la hauteur, la liste chainee contenant la specification de la carte du niveau, ainsi que la liste des coups joues, le numero du niveau et un booleen pour savoir si il a etait resolu ou non\&. "
+.ti -1c
+.RI "void \fBsave_coups\fP (\fBliste_double\fP *coups, int level_number)"
+.br
+.in -1c
+.SH "Documentation des macros"
+.PP 
+.SS "#define FILE_H"
+
+.SH "Documentation des fonctions"
+.PP 
+.SS "void find_human (\fBlevel_t\fP * level)"
+
+.PP
+permet d'initialiser et de trouver la position du joueur en parcourant la liste chainee (en reconstituant la position du joueur sur le tableau) 
+.PP
+\fBParamètres\fP
+.RS 4
+\fIlevel\fP 
+.RE
+.PP
+
+.PP
+.nf
+14                                {
+15     unsigned int index=0;
+16     liste_double_node_t *current_node = level->map->first;
+17     while(current_node != NULL) {
+18         if(((case_t*)current_node->data)->bloc==3){
+19             level->index=index;
+20             return;
+21         }
+22         current_node = current_node->next;
+23         index++;
+24     }
+25     fprintf(stderr,"[ERROR] No human\n");
+26     exit(-1);
+27 }
+.fi
+.PP
+Références node_t::data, et node_t::next\&.
+.PP
+Référencé par read_one_level()\&.
+.SS "void read_map (FILE * flux_entree, unsigned int largeur_max, \fBliste_double\fP * map)"
+
+.PP
+Fonction de creation / gestion des files\&. 
+.PP
+\fBParamètres\fP
+.RS 4
+\fIflux_entree\fP 
+.br
+\fIlargeur_max\fP 
+.br
+\fImap\fP map qui va etre remplie 
+.RE
+.PP
+Lit la ligne tant que l'on ne rencontre pas un ';' qui indique la fin d'un plateau, gere les cas de retour a la ligne et de fin de fichier
+.PP
+Construct a new switch object permettant d'associer chaque caractere du fichier source a un couple d'int et de booleen, le premier permettant de determiner le type du bloc, le second permettant de savoir si l'on se trouve sur une cible ou non
+.PP
+Si on arrive a la fin du fichier, en ayant deja Remplissage de la liste chainee par des blocs vides pour completer les espaces vides pour que le 'tableau'soit rectangulaire
+.PP
+Remplissage de la liste chainee par des blocs vides pour completer les espaces vides pour que le 'tableau'soit rectangulaire
+.PP
+.nf
+38 {
+39     char character;
+40     while (!feof(flux_entree) && !ferror(flux_entree))
+41     {
+42         /**
+43         Lit la ligne tant que l'on ne rencontre pas un ';' qui indique la fin d'un plateau, gere les cas de retour a la ligne
+44         et de fin de fichier
+45         */
+46         unsigned int i = 0;
+47         while (!feof(flux_entree) && !ferror(flux_entree) && character != ';')
+48         {
+49             character = fgetc(flux_entree);
+50             if (i == 0 && character == ';')
+51             {
+52                 fseek(flux_entree, -1, SEEK_CUR);
+53                 return ;
+54             }
+55             else if (character == '\n')
+56             {
+57                 break;
+58             }
+59             /**
+60              * @brief Construct a new switch object permettant d'associer chaque caractere du fichier source a un couple d'int et de booleen,
+61              le premier permettant de determiner le type du bloc, le second permettant de savoir si l'on se trouve sur une cible ou non
+62              *
+63              */
+64             switch (character)
+65             {
+66             case '#':
+67                 liste_double_ajout_en_queue(map, create_case(1, false));
+68                 break;
+69             case ' ':
+70                 liste_double_ajout_en_queue(map, create_case(0, false));
+71                 break;
+72             case '$':
+73                 liste_double_ajout_en_queue(map, create_case(2, false));
+74                 break;
+75             case '@':
+76                 liste_double_ajout_en_queue(map, create_case(3, false));
+77                 break;
+78             case '\&.':
+79                 liste_double_ajout_en_queue(map, create_case(0, true));
+80                 break;
+81             case '*':
+82                 liste_double_ajout_en_queue(map, create_case(2, true));
+83                 break;
+84             case '\r':
+85                 i--;
+86                 break;
+87             case EOF:
+88                 if (i != 0)
+89                 {
+90                     /**
+91                      * @brief Si on arrive a la fin du fichier, en ayant deja Remplissage de la liste chainee par des blocs vides pour completer les espaces vides pour que
+92                      le 'tableau'soit rectangulaire
+93                      *
+94                      */
+95                     while (i < largeur_max)
+96                     {
+97                         liste_double_ajout_en_queue(map, create_case(0, false));
+98                         i++;
+99                     }
+100                 }
+101                 return;
+102             default:
+103                 fprintf(stderr,"Fichier corrompu |%c|%d|\n",character, character);
+104                 exit(-1);
+105                 break;
+106             }
+107             i++;
+108         }
+109         /**
+110         * @brief Remplissage de la liste chainee par des blocs vides pour completer les espaces vides pour que
+111         le 'tableau'soit rectangulaire
+112         *
+113         */
+114         while (i < largeur_max)
+115         {
+116             liste_double_ajout_en_queue(map, create_case(0, false));
+117             i++;
+118         }
+119     }
+120 }
+.fi
+.PP
+Références create_case(), et liste_double_ajout_en_queue()\&.
+.PP
+Référencé par read_one_level()\&.
+.SS "unsigned int largeur (FILE * flux_entree)"
+
+.PP
+Fonction parcourant tout le niveau afin de deteriner la largeur maximale du niveau\&. 
+.PP
+\fBParamètres\fP
+.RS 4
+\fIflux_entree\fP 
+.RE
+.PP
+\fBRenvoie\fP
+.RS 4
+unsigned int largeur_max 
+.RE
+.PP
+
+.PP
+.nf
+128 {
+129     unsigned long position_before_map = ftell(flux_entree);
+130     unsigned int largeur_max = 0;
+131     unsigned int a = 0;
+132     char caract = 0;
+133     while (!feof(flux_entree) && caract != ';')
+134     {
+135         caract = fgetc(flux_entree);
+136         while (!feof(flux_entree) && caract != '\n')
+137         {
+138             a++;
+139             if (a > largeur_max)
+140             {
+141                 largeur_max = a;
+142             }
+143             caract = fgetc(flux_entree);
+144         }
+145         if (!feof(flux_entree))
+146         {
+147             caract = fgetc(flux_entree);
+148             if (caract == '\r')
+149             {
+150                 caract = fgetc(flux_entree);
+151             }
+152             a = 1;
+153         }
+154     }
+155     fseek(flux_entree, position_before_map, SEEK_SET);
+156     return largeur_max;
+157 }
+.fi
+.PP
+Référencé par is_on_map2(), move_direction(), read_one_level(), et read_save()\&.
+.SS "bool remove_useless (FILE * flux_entree)"
+
+.PP
+enleve tous les commentaires sur le fichier source et se replace au debut 
+.PP
+\fBParamètres\fP
+.RS 4
+\fIflux_entree\fP 
+.RE
+.PP
+\fBRenvoie\fP
+.RS 4
+booleen 
+.RE
+.PP
+
+.PP
+.nf
+165 {
+166     if (fgetc(flux_entree) == ';')
+167     {
+168         while (fgetc(flux_entree) != '\n')
+169         {
+170         }
+171         if (fgetc(flux_entree) != '\r')
+172         {
+173             fseek(flux_entree, -1, SEEK_CUR);
+174         }
+175         return true;
+176     }
+177     else
+178     {
+179         fseek(flux_entree, -1, SEEK_CUR);
+180         return false;
+181     }
+182 }
+.fi
+.PP
+Référencé par read_one_level()\&.
+.SS "int read_one_level (FILE * flux_entree, \fBlevel_t\fP * level)"
+
+.PP
+Fonction permettant de lire un niveau dans le fichier source\&. 
+.PP
+\fBParamètres\fP
+.RS 4
+\fIflux_entree\fP 
+.br
+\fIlevel\fP 
+.RE
+.PP
+\fBRenvoie\fP
+.RS 4
+int 
+.RE
+.PP
+enleve les commentaires et autre annotation inutile pour la lecture du niveau
+.PP
+Lis les informations du niveau en associant le numero du niveau, la largeur max, la map du niveau a l'objet de classe level
+.PP
+.nf
+191 {
+192     int level_number = -1;
+193     while (!feof(flux_entree) && fscanf(flux_entree, ";LEVEL %d", &level_number) == 0)
+194     {
+195         fgetc(flux_entree);
+196     }
+197 
+198     while (!feof(flux_entree) && fgetc(flux_entree) != '\n')
+199     {
+200     }
+201     if (fgetc(flux_entree) != '\r')
+202     {
+203         fseek(flux_entree, -1, SEEK_CUR);
+204     }
+205     /**
+206      * @brief enleve les commentaires et autre annotation inutile pour la lecture du niveau
+207      *
+208      */
+209     while (remove_useless(flux_entree))
+210     {
+211     }
+212     /**
+213      * @brief Lis les informations du niveau en associant le numero du niveau, la largeur max, la map du niveau
+214       a l'objet de classe level
+215      *
+216      */
+217     if (level_number == -1)
+218     {
+219         return 0;
+220     }
+221 
+222     level->lvl_number = level_number;
+223     int largeur_max = largeur(flux_entree);
+224     level->largeur = largeur_max;
+225     read_map(flux_entree, largeur_max,level->map);
+226     if (level->map->size <= 0)
+227     {
+228         fprintf(stderr,"[ERROR] map size null");
+229         exit(-1);
+230     }
+231     level->hauteur = level->map->size / largeur_max;
+232     find_human(level);
+233     return 1;
+234 }
+.fi
+.PP
+Références find_human(), largeur(), read_map(), et remove_useless()\&.
+.PP
+Référencé par read_file()\&.
+.SS "\fBliste_double\fP* read_file (const char * file_name)"
+
+.PP
+Fonction principale, permet de lire le fichier, et en utilisant les autres fonctions permet de retourner la liste chainee dans laquelle on a les differnets niveaux, au format desire\&. 
+.PP
+\fBParamètres\fP
+.RS 4
+\fIfile_name\fP 
+.RE
+.PP
+\fBRenvoie\fP
+.RS 4
+levels, la liste chainee avec les niveaux remplis, au bon format 
+.RE
+.PP
+
+.PP
+.nf
+243 {
+244     FILE *flux_entree;
+245     bool end=false;
+246     flux_entree = fopen(file_name, "r");
+247     if (flux_entree == NULL)
+248     {
+249         fprintf(stderr,"Cannot open file\n");
+250         exit(-1);
+251     }
+252     liste_double *levels = liste_double_init();
+253     while(!end)
+254     {
+255         level_t *level = level_init();
+256         if (read_one_level(flux_entree, level) == 1)
+257         {
+258             liste_double_ajout_en_queue(levels, level);
+259         }
+260         else
+261         {
+262             level_destroy(level);
+263             end=true;
+264             break;
+265         }
+266     }
+267     fclose(flux_entree);
+268     return levels;
+269 }
+.fi
+.PP
+Références level_destroy(), level_init(), liste_double_ajout_en_queue(), liste_double_init(), et read_one_level()\&.
+.PP
+Référencé par main()\&.
+.SS "bool save_game (\fBliste_double\fP * levels, const char * file_name)"
+
+.PP
+Fonction permettant la sauvegarde de la partie dans son etat actuel Creer un fichier contenant les parametres qui pour chaque niveau se presente sous la forme : largeur(uint)|hauteur(uint)|[map(uchar,bool)]|[coup(uchar,bool)]|numerolvl(uint)|resolu(bool) 
+.PP
+\fBParamètres\fP
+.RS 4
+\fIlevels\fP 
+.br
+\fIfile_name\fP 
+.RE
+.PP
+\fBRenvoie\fP
+.RS 4
+booleen accusant la sauvegarde ou non 
+.RE
+.PP
+
+.PP
+.nf
+281 {
+282     FILE *flux_sortie;
+283     flux_sortie = fopen(file_name, "wb");
+284     if (flux_sortie == NULL)
+285     {
+286         fprintf(stderr,"Cannot open save_file\n");
+287         exit(-1);
+288     }
+289     liste_double_node_t *current_node = levels->first;
+290     while (current_node != NULL)
+291     {
+292         level_t *level = (level_t *)current_node->data;
+293         fwrite(&(level->largeur),sizeof(unsigned int),1,flux_sortie);
+294         fwrite(&(level->hauteur),sizeof(unsigned int),1,flux_sortie);
+295         liste_double_node_t *current_node_temp = (level->map)->first;
+296         while (current_node_temp != NULL)
+297         {
+298             case_t *cell = (case_t *)current_node_temp->data;
+299             fwrite(&(cell->bloc),sizeof(unsigned char),1,flux_sortie);
+300             fwrite(&(cell->cible),sizeof(bool),1,flux_sortie);
+301             current_node_temp = current_node_temp->next;
+302         }
+303         current_node_temp = (level->coups)->first;
+304         fwrite(&(level->coups->size),sizeof(unsigned int),1,flux_sortie);
+305         while (current_node_temp != NULL)
+306         {
+307             coup_t *coup = (coup_t *)current_node_temp->data;
+308             fwrite(&(coup->direction),sizeof(unsigned char),1,flux_sortie);
+309             fwrite(&(coup->pousse),sizeof(bool),1,flux_sortie);
+310             current_node_temp = current_node_temp->next;
+311         }
+312         fwrite(&(level->lvl_number),sizeof(unsigned int),1,flux_sortie);
+313         fwrite(&(level->solved),sizeof(bool),1,flux_sortie);
+314         current_node = current_node->next;
+315     }
+316     fclose(flux_sortie);
+317     return true;
+318 }
+.fi
+.PP
+Références Case::bloc, Case::cible, node_t::data, Coups::direction, liste_double::first, node_t::next, et Coups::pousse\&.
+.PP
+Référencé par event_handler()\&.
+.SS "bool read_save (const char * file_name, \fBliste_double\fP * levels)"
+
+.PP
+Fonction lisant le fichier save\&.c pour reprendre la partie au point arrete\&. Pour chaque niveau, la fonction a besoin de connaitre la largeur, la hauteur, la liste chainee contenant la specification de la carte du niveau, ainsi que la liste des coups joues, le numero du niveau et un booleen pour savoir si il a etait resolu ou non\&. 
+.PP
+\fBParamètres\fP
+.RS 4
+\fIfile_name\fP 
+.br
+\fIlevels\fP 
+.RE
+.PP
+\fBRenvoie\fP
+.RS 4
+booleen (false si erreur de lecture du fichier ou pas de fichier, true sinon) 
+.RE
+.PP
+
+.PP
+.nf
+333 {
+334     unsigned int i;
+335     unsigned char bloc=0;
+336     unsigned int largeur,hauteur;
+337     bool cible=0;
+338     unsigned int size_coups=0;
+339     FILE *flux_entree;
+340     level_t * level;
+341     flux_entree = fopen(file_name, "rb");
+342     liste_double_vider(levels,true);
+343     if (flux_entree == NULL)
+344     {
+345         printf("Cannot open save_file\n");
+346         exit(-1);
+347     }
+348     while (!feof(flux_entree))
+349     {
+350         level = level_init();
+351         if(fread(&(level->largeur), sizeof(unsigned int), 1, flux_entree)!=1){
+352             printf("finish read save\n");
+353             level_destroy(level);
+354             break;
+355         }
+356         fread(&(level->hauteur),sizeof(unsigned int),1,flux_entree);
+357         // level->largeur=largeur;
+358         // level->hauteur=hauteur;
+359         i=0;
+360         while (i<level->hauteur*level->largeur)
+361         {
+362             fread(&bloc,sizeof(unsigned char),1,flux_entree);
+363             fread(&cible,sizeof(bool),1,flux_entree);
+364             // printf("%d-%d\n",bloc,cible); GOOD
+365             liste_double_ajout_en_queue(level->map, create_case(bloc,cible));
+366             i++;
+367         }
+368         i=0;
+369         fread(&(size_coups),sizeof(unsigned int),1,flux_entree);
+370         while (i<size_coups)
+371         {
+372             fread(&bloc,sizeof(unsigned char),1,flux_entree);
+373             fread(&cible,sizeof(bool),1,flux_entree);
+374             liste_double_ajout_en_queue(level->coups, create_coup(bloc,cible));
+375             i++;
+376         }
+377         fread(&(level->lvl_number),sizeof(unsigned int),1,flux_entree);
+378         fread(&(level->solved),sizeof(bool),1,flux_entree);
+379         liste_double_ajout_en_queue(levels, level);
+380     }
+381     return true;
+382 }
+.fi
+.PP
+Références create_case(), create_coup(), largeur(), level_destroy(), level_init(), liste_double_ajout_en_queue(), et liste_double_vider()\&.
+.PP
+Référencé par event_handler()\&.
+.SS "void save_coups (\fBliste_double\fP * coups, int level_number)"
+
+.PP
+.nf
+384                                                      {
+385     if(coups->size==0){
+386         return;
+387     }
+388     FILE *flux_sortie;
+389     char file_name[40];
+390     sprintf(file_name,"data/soluce/%d\&.txt",level_number);
+391     flux_sortie = fopen(file_name, "wb");
+392     liste_double_node_t *current_node = coups->first;
+393     fprintf(flux_sortie,"Coups:%d Poussées:%d\n",coups->size,somme_poussees(coups));
+394     printf("Coups:%d Poussées:%d\n",coups->size,somme_poussees(coups));
+395     while(current_node != NULL) {
+396         switch (((coup_t*)current_node->data)->direction)
+397         {
+398             case HAUT:
+399                 fprintf(flux_sortie,"HAUT\n");
+400                 break;
+401             case BAS:
+402                 fprintf(flux_sortie,"BAS\n");
+403                 break;
+404             case DROITE:
+405                 fprintf(flux_sortie,"DROITE\n");
+406                 break;
+407             case GAUCHE:
+408                 fprintf(flux_sortie,"GAUCHE\n");
+409                 break;
+410             default:
+411                 break;
+412         }
+413         current_node = current_node->next;
+414     }
+415     fclose(flux_sortie);
+416 }
+.fi
+.PP
+Références BAS, node_t::data, DROITE, liste_double::first, GAUCHE, HAUT, node_t::next, liste_double::size, et somme_poussees()\&.
+.SH "Auteur"
+.PP 
+Généré automatiquement par Doxygen pour Sokoban à partir du code source\&.

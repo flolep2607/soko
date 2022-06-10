@@ -1,0 +1,16 @@
+var affichage_8c =
+[
+    [ "AFFICHAGE_H", "affichage_8c.html#af3c7fefa17b91965936a0d33465e7851", null ],
+    [ "renderer_set_color", "affichage_8c.html#a0b384aa0deabab2f69448ab748b80608", null ],
+    [ "renderer_clear", "affichage_8c.html#aee708a2858a064a587095e4a1542b471", null ],
+    [ "renderer_setWindowColor", "affichage_8c.html#abea33a91541ddf0f283506f1c7ff3960", null ],
+    [ "renderer_clear_window", "affichage_8c.html#a971f171aa91761c3da94f10fe58d2f99", null ],
+    [ "loadTexture", "affichage_8c.html#a439ea8960a03751bd58326855a9a9a09", null ],
+    [ "affichage_init", "affichage_8c.html#aefb04ca8c29b586bbac2158b57cd311b", null ],
+    [ "affichage_quit", "affichage_8c.html#a7a11a8144501d8adae5cdb6aa2e2232d", null ],
+    [ "affichage_texture", "affichage_8c.html#a1b2fa13be4601c6d3552f446f4e955f2", null ],
+    [ "load_music", "affichage_8c.html#a6928f6262b38383dd279c8d7b4ede8cc", null ],
+    [ "print_text", "affichage_8c.html#a46fe9276336f6c80aac8bf9e9b1e2c4f", null ],
+    [ "load_all_textures", "affichage_8c.html#a5db3fdfe5bab59e32be12b39bdd3c53a", null ],
+    [ "show_game", "affichage_8c.html#aca4195d6aa38a7e4578c436ed72951ae", null ]
+];

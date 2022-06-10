@@ -1,0 +1,124 @@
+.TH "src/structures.h" 3 "Vendredi 10 Juin 2022" "Sokoban" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/structures.h
+.SH SYNOPSIS
+.br
+.PP
+.SS "Structures de données"
+
+.in +1c
+.ti -1c
+.RI "struct \fBnode_t\fP"
+.br
+.RI "créer la structure \fBnode_t\fP qui permet de créer une liste chainée de avec n'importe quel type de données\&. "
+.ti -1c
+.RI "struct \fBliste_double\fP"
+.br
+.ti -1c
+.RI "struct \fBLevel\fP"
+.br
+.ti -1c
+.RI "struct \fBCase\fP"
+.br
+.RI "créer la structure \fBCase\fP qui spécifie le type de chaque case d'un niveau\&. Spécifie le type de bloc, la présence d'une cible ou non et le poids (sert pour le pathfinding) "
+.ti -1c
+.RI "struct \fBCoups\fP"
+.br
+.RI "créer la structure \fBCoups\fP qui spécifie le type des \fBCoups\fP effectués\&. Spécifie la direction du coup et si il s'agit d'une poussée ou non\&. "
+.in -1c
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBNUMBER_TEXTURES\fP   6"
+.br
+.ti -1c
+.RI "#define \fBSIZE_TEXTURE\fP   64"
+.br
+.ti -1c
+.RI "#define \fBAIR\fP   0"
+.br
+.ti -1c
+.RI "#define \fBWALL\fP   1"
+.br
+.ti -1c
+.RI "#define \fBBOX\fP   2"
+.br
+.ti -1c
+.RI "#define \fBBODY\fP   3"
+.br
+.ti -1c
+.RI "#define \fBHAUT\fP   0"
+.br
+.ti -1c
+.RI "#define \fBBAS\fP   1"
+.br
+.ti -1c
+.RI "#define \fBDROITE\fP   2"
+.br
+.ti -1c
+.RI "#define \fBGAUCHE\fP   3"
+.br
+.in -1c
+.SS "Définitions de type"
+
+.in +1c
+.ti -1c
+.RI "typedef struct \fBnode_t\fP \fBliste_double_node_t\fP"
+.br
+.RI "créer la structure \fBnode_t\fP qui permet de créer une liste chainée de avec n'importe quel type de données\&. "
+.ti -1c
+.RI "typedef struct \fBLevel\fP \fBlevel_t\fP"
+.br
+.ti -1c
+.RI "typedef struct \fBCase\fP \fBcase_t\fP"
+.br
+.RI "créer la structure \fBCase\fP qui spécifie le type de chaque case d'un niveau\&. Spécifie le type de bloc, la présence d'une cible ou non et le poids (sert pour le pathfinding) "
+.ti -1c
+.RI "typedef struct \fBCoups\fP \fBcoup_t\fP"
+.br
+.RI "créer la structure \fBCoups\fP qui spécifie le type des \fBCoups\fP effectués\&. Spécifie la direction du coup et si il s'agit d'une poussée ou non\&. "
+.in -1c
+.SH "Documentation des macros"
+.PP 
+.SS "#define NUMBER_TEXTURES   6"
+
+.SS "#define SIZE_TEXTURE   64"
+
+.SS "#define AIR   0"
+
+.SS "#define WALL   1"
+
+.SS "#define BOX   2"
+
+.SS "#define BODY   3"
+
+.SS "#define HAUT   0"
+
+.SS "#define BAS   1"
+
+.SS "#define DROITE   2"
+
+.SS "#define GAUCHE   3"
+
+.SH "Documentation des définitions de type"
+.PP 
+.SS "typedef struct \fBnode_t\fP \fBliste_double_node_t\fP"
+
+.PP
+créer la structure \fBnode_t\fP qui permet de créer une liste chainée de avec n'importe quel type de données\&. 
+.SS "typedef struct \fBLevel\fP \fBlevel_t\fP"
+
+.SS "typedef struct \fBCase\fP \fBcase_t\fP"
+
+.PP
+créer la structure \fBCase\fP qui spécifie le type de chaque case d'un niveau\&. Spécifie le type de bloc, la présence d'une cible ou non et le poids (sert pour le pathfinding) 
+.SS "typedef struct \fBCoups\fP \fBcoup_t\fP"
+
+.PP
+créer la structure \fBCoups\fP qui spécifie le type des \fBCoups\fP effectués\&. Spécifie la direction du coup et si il s'agit d'une poussée ou non\&. 
+.SH "Auteur"
+.PP 
+Généré automatiquement par Doxygen pour Sokoban à partir du code source\&.

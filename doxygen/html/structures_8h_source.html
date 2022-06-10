@@ -1,0 +1,200 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Sokoban:  Fichier source de src/structures.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Sokoban
+   </div>
+   <div id="projectbrief">Sokoban en C</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('structures_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">structures.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="structures_8h.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno"><a class="line" href="structures_8h.html#a1dbc17091b8a589fdeda79651aafc2b5">    1</a></span>&#160;<span class="preprocessor">#define NUMBER_TEXTURES 6</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno"><a class="line" href="structures_8h.html#a91961ba701c714848d756fdc80a0b954">    2</a></span>&#160;<span class="preprocessor">#define SIZE_TEXTURE 64</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno"><a class="line" href="structures_8h.html#a9c9ed176f84de328afaf7f514ded7df3">    3</a></span>&#160;<span class="preprocessor">#define AIR  0</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno"><a class="line" href="structures_8h.html#ac749b87dd5d843e4add3eb8e8a130f62">    4</a></span>&#160;<span class="preprocessor">#define WALL 1</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno"><a class="line" href="structures_8h.html#a23a390cc01279924f6190334c5fa97a0">    5</a></span>&#160;<span class="preprocessor">#define BOX  2</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="structures_8h.html#aa6bdf6a6d9916c343e1e17774d84a156">    6</a></span>&#160;<span class="preprocessor">#define BODY 3</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="structures_8h.html#acd0f9b88c35112b35f67d3cde4b2365c">    8</a></span>&#160;<span class="preprocessor">#define HAUT 0</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="structures_8h.html#abd7bcdd3b14eec4414469f88f2bd8f12">    9</a></span>&#160;<span class="preprocessor">#define BAS 1</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="structures_8h.html#af625d3f3bc022848a558f2b18def5b15">   10</a></span>&#160;<span class="preprocessor">#define DROITE 2</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="structures_8h.html#af07f8bf974fdf76afd17f2b97ac15a22">   11</a></span>&#160;<span class="preprocessor">#define GAUCHE 3</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> * @brief créer la structure node_t qui permet de créer une liste chainée de avec n&#39;importe quel type de données.</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> * </span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="structnode__t.html">   17</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structnode__t.html">node_t</a></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;{</div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="structnode__t.html#aa69340d9d81a183ddfbfec74a7524966">   19</a></span>&#160;  <span class="keywordtype">void</span> *<a class="code" href="structnode__t.html#aa69340d9d81a183ddfbfec74a7524966">data</a>;</div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="structnode__t.html#aed5643ccd87b35d3fb69f04903e59b95">   20</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="structnode__t.html">node_t</a> *<a class="code" href="structnode__t.html#aed5643ccd87b35d3fb69f04903e59b95">prev</a>;</div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="structnode__t.html#aca548c9bafe54ba9db19d40a7a7f1cb3">   21</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="structnode__t.html">node_t</a> *<a class="code" href="structnode__t.html#aca548c9bafe54ba9db19d40a7a7f1cb3">next</a>;</div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="structures_8h.html#ae69d97561431bbf336f420077f3577d4">   22</a></span>&#160;} <a class="code" href="structures_8h.html#ae69d97561431bbf336f420077f3577d4">liste_double_node_t</a>;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">/*</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment"> * Generic Linked liste Type: liste_double</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="structliste__double.html">   27</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;{</div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="structliste__double.html#ae018afac9b249fff91bde9a072ff8a69">   29</a></span>&#160;  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="structliste__double.html#ae018afac9b249fff91bde9a072ff8a69">size</a>;</div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="structliste__double.html#a08ecec17b9574bdd2801ec8c9d6abc5f">   30</a></span>&#160;  <a class="code" href="structnode__t.html">liste_double_node_t</a> *<a class="code" href="structliste__double.html#a08ecec17b9574bdd2801ec8c9d6abc5f">first</a>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="structliste__double.html#a221956ffe46f8b99d4782c7cbf341a1b">   31</a></span>&#160;  <a class="code" href="structnode__t.html">liste_double_node_t</a> *<a class="code" href="structliste__double.html#a221956ffe46f8b99d4782c7cbf341a1b">last</a>;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;} <a class="code" href="structliste__double.html">liste_double</a>;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="structlevel__t.html">   35</a></span>&#160;<span class="comment"> * @struct level_t</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment"> * @brief Créer la structure Level qui permet de spécifier un niveau en entier.</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment"> Spécifie la construction de la map (tout les blocs présent et où ils se trouvent)</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment"> Spécifie aussi la liste des coups jouées sous la forme d&#39;une liste chainée.</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment"> Spécifie enfin le numéro du niveau, la largeur du niveau, la hauteur du niveau, si le niveau a était résolu ou non, </span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment"> l&#39;index du maillon ou se trouve le joueur dans la liste chainée map et les coordonnées x et y du joueur dans le niveau</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="structLevel.html">   42</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structLevel.html">Level</a></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;{</div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="structLevel.html#a7943418d425dfdf1265ef1c6c3bf6c2d">   44</a></span>&#160;  <a class="code" href="structliste__double.html">liste_double</a> *<a class="code" href="structLevel.html#a7943418d425dfdf1265ef1c6c3bf6c2d">map</a>; <span class="comment">///&lt; liste formant la map</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="structLevel.html#a6acc3df687aa882d444ac1eb8d3e8284">   45</a></span>&#160;  <a class="code" href="structliste__double.html">liste_double</a> *<a class="code" href="structLevel.html#a6acc3df687aa882d444ac1eb8d3e8284">coups</a>; <span class="comment">///&lt; pile de coups</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="structLevel.html#a5eac3fccfc7438226c38e68a098aae3a">   46</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="structLevel.html#a5eac3fccfc7438226c38e68a098aae3a">solved</a>;</div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="structLevel.html#a102c7c6fac97ebd12b99de6d2ef6176b">   47</a></span>&#160;  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="structLevel.html#a102c7c6fac97ebd12b99de6d2ef6176b">lvl_number</a>;</div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="structLevel.html#a03e7ffe043416127b0e500820099ac9a">   48</a></span>&#160;  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="structLevel.html#a03e7ffe043416127b0e500820099ac9a">largeur</a>;</div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="structLevel.html#a5d9a5de50ce89c59b2b9b2345255457d">   49</a></span>&#160;  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="structLevel.html#a5d9a5de50ce89c59b2b9b2345255457d">hauteur</a>;</div>
+<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="structLevel.html#a09a6c3b43aaf36bf3ad4de2d20ac7072">   50</a></span>&#160;  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="structLevel.html#a09a6c3b43aaf36bf3ad4de2d20ac7072">index</a>;</div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="structures_8h.html#ac8c2f141b74e95eec8d3af39420fd7c4">   51</a></span>&#160;} <a class="code" href="structures_8h.html#ac8c2f141b74e95eec8d3af39420fd7c4">level_t</a>;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment"> * @brief créer la structure Case qui spécifie le type de chaque case d&#39;un niveau. </span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">Spécifie le type de bloc, la présence d&#39;une cible ou non et le poids (sert pour le pathfinding)</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment"> * </span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="structCase.html">   59</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structCase.html">Case</a></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;{</div>
+<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="structCase.html#a81cbe670d6b905144687025151021512">   61</a></span>&#160;  <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="structCase.html#a81cbe670d6b905144687025151021512">bloc</a>; <span class="comment">// 0-&gt;air 1-&gt;wall 2-&gt;box 3-&gt;body</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="structCase.html#a6034ac2c0f76439b9b9966c4ea4da4f7">   62</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="structCase.html#a6034ac2c0f76439b9b9966c4ea4da4f7">cible</a>;</div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="structCase.html#a882f5a0d73408c1464d559a43690d672">   63</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="structCase.html#a882f5a0d73408c1464d559a43690d672">weight</a>;</div>
+<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="structures_8h.html#ad570f19fb269fb3ee823db487d26637a">   64</a></span>&#160;} <a class="code" href="structures_8h.html#ad570f19fb269fb3ee823db487d26637a">case_t</a>;<span class="comment"></span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment"> * @brief créer la structure Coups qui spécifie le type des Coups effectués.</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment"> Spécifie la direction du coup et si il s&#39;agit d&#39;une poussée ou non.</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment"> * </span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="structCoups.html">   70</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structCoups.html">Coups</a></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;{</div>
+<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="structCoups.html#a739170969dd8bdc1fdaefa29be877a5c">   72</a></span>&#160;  <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="structCoups.html#a739170969dd8bdc1fdaefa29be877a5c">direction</a>;</div>
+<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="structCoups.html#ac316b7ffdfbb8ec0f1c1ea17b31ecbae">   73</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="structCoups.html#ac316b7ffdfbb8ec0f1c1ea17b31ecbae">pousse</a>;</div>
+<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="structures_8h.html#ad9569bd87f46de4aeae21925455cbe82">   74</a></span>&#160;} <a class="code" href="structures_8h.html#ad9569bd87f46de4aeae21925455cbe82">coup_t</a>;</div>
+<div class="ttc" id="astructCase_html"><div class="ttname"><a href="structCase.html">Case</a></div><div class="ttdoc">créer la structure Case qui spécifie le type de chaque case d'un niveau. Spécifie le type de bloc,...</div><div class="ttdef"><b>Definition:</b> structures.h:60</div></div>
+<div class="ttc" id="astructCase_html_a6034ac2c0f76439b9b9966c4ea4da4f7"><div class="ttname"><a href="structCase.html#a6034ac2c0f76439b9b9966c4ea4da4f7">Case::cible</a></div><div class="ttdeci">bool cible</div><div class="ttdef"><b>Definition:</b> structures.h:62</div></div>
+<div class="ttc" id="astructCase_html_a81cbe670d6b905144687025151021512"><div class="ttname"><a href="structCase.html#a81cbe670d6b905144687025151021512">Case::bloc</a></div><div class="ttdeci">unsigned char bloc</div><div class="ttdef"><b>Definition:</b> structures.h:61</div></div>
+<div class="ttc" id="astructCase_html_a882f5a0d73408c1464d559a43690d672"><div class="ttname"><a href="structCase.html#a882f5a0d73408c1464d559a43690d672">Case::weight</a></div><div class="ttdeci">bool weight</div><div class="ttdef"><b>Definition:</b> structures.h:63</div></div>
+<div class="ttc" id="astructCoups_html"><div class="ttname"><a href="structCoups.html">Coups</a></div><div class="ttdoc">créer la structure Coups qui spécifie le type des Coups effectués. Spécifie la direction du coup et s...</div><div class="ttdef"><b>Definition:</b> structures.h:71</div></div>
+<div class="ttc" id="astructCoups_html_a739170969dd8bdc1fdaefa29be877a5c"><div class="ttname"><a href="structCoups.html#a739170969dd8bdc1fdaefa29be877a5c">Coups::direction</a></div><div class="ttdeci">unsigned char direction</div><div class="ttdef"><b>Definition:</b> structures.h:72</div></div>
+<div class="ttc" id="astructCoups_html_ac316b7ffdfbb8ec0f1c1ea17b31ecbae"><div class="ttname"><a href="structCoups.html#ac316b7ffdfbb8ec0f1c1ea17b31ecbae">Coups::pousse</a></div><div class="ttdeci">bool pousse</div><div class="ttdef"><b>Definition:</b> structures.h:73</div></div>
+<div class="ttc" id="astructLevel_html"><div class="ttname"><a href="structLevel.html">Level</a></div><div class="ttdef"><b>Definition:</b> structures.h:43</div></div>
+<div class="ttc" id="astructLevel_html_a03e7ffe043416127b0e500820099ac9a"><div class="ttname"><a href="structLevel.html#a03e7ffe043416127b0e500820099ac9a">Level::largeur</a></div><div class="ttdeci">unsigned int largeur</div><div class="ttdef"><b>Definition:</b> structures.h:48</div></div>
+<div class="ttc" id="astructLevel_html_a09a6c3b43aaf36bf3ad4de2d20ac7072"><div class="ttname"><a href="structLevel.html#a09a6c3b43aaf36bf3ad4de2d20ac7072">Level::index</a></div><div class="ttdeci">unsigned int index</div><div class="ttdef"><b>Definition:</b> structures.h:50</div></div>
+<div class="ttc" id="astructLevel_html_a102c7c6fac97ebd12b99de6d2ef6176b"><div class="ttname"><a href="structLevel.html#a102c7c6fac97ebd12b99de6d2ef6176b">Level::lvl_number</a></div><div class="ttdeci">unsigned int lvl_number</div><div class="ttdef"><b>Definition:</b> structures.h:47</div></div>
+<div class="ttc" id="astructLevel_html_a5d9a5de50ce89c59b2b9b2345255457d"><div class="ttname"><a href="structLevel.html#a5d9a5de50ce89c59b2b9b2345255457d">Level::hauteur</a></div><div class="ttdeci">unsigned int hauteur</div><div class="ttdef"><b>Definition:</b> structures.h:49</div></div>
+<div class="ttc" id="astructLevel_html_a5eac3fccfc7438226c38e68a098aae3a"><div class="ttname"><a href="structLevel.html#a5eac3fccfc7438226c38e68a098aae3a">Level::solved</a></div><div class="ttdeci">bool solved</div><div class="ttdef"><b>Definition:</b> structures.h:46</div></div>
+<div class="ttc" id="astructLevel_html_a6acc3df687aa882d444ac1eb8d3e8284"><div class="ttname"><a href="structLevel.html#a6acc3df687aa882d444ac1eb8d3e8284">Level::coups</a></div><div class="ttdeci">liste_double * coups</div><div class="ttdoc">pile de coups</div><div class="ttdef"><b>Definition:</b> structures.h:45</div></div>
+<div class="ttc" id="astructLevel_html_a7943418d425dfdf1265ef1c6c3bf6c2d"><div class="ttname"><a href="structLevel.html#a7943418d425dfdf1265ef1c6c3bf6c2d">Level::map</a></div><div class="ttdeci">liste_double * map</div><div class="ttdoc">liste formant la map</div><div class="ttdef"><b>Definition:</b> structures.h:44</div></div>
+<div class="ttc" id="astructliste__double_html"><div class="ttname"><a href="structliste__double.html">liste_double</a></div><div class="ttdef"><b>Definition:</b> structures.h:28</div></div>
+<div class="ttc" id="astructliste__double_html_a08ecec17b9574bdd2801ec8c9d6abc5f"><div class="ttname"><a href="structliste__double.html#a08ecec17b9574bdd2801ec8c9d6abc5f">liste_double::first</a></div><div class="ttdeci">liste_double_node_t * first</div><div class="ttdef"><b>Definition:</b> structures.h:30</div></div>
+<div class="ttc" id="astructliste__double_html_a221956ffe46f8b99d4782c7cbf341a1b"><div class="ttname"><a href="structliste__double.html#a221956ffe46f8b99d4782c7cbf341a1b">liste_double::last</a></div><div class="ttdeci">liste_double_node_t * last</div><div class="ttdef"><b>Definition:</b> structures.h:31</div></div>
+<div class="ttc" id="astructliste__double_html_ae018afac9b249fff91bde9a072ff8a69"><div class="ttname"><a href="structliste__double.html#ae018afac9b249fff91bde9a072ff8a69">liste_double::size</a></div><div class="ttdeci">unsigned int size</div><div class="ttdef"><b>Definition:</b> structures.h:29</div></div>
+<div class="ttc" id="astructnode__t_html"><div class="ttname"><a href="structnode__t.html">node_t</a></div><div class="ttdoc">créer la structure node_t qui permet de créer une liste chainée de avec n'importe quel type de donnée...</div><div class="ttdef"><b>Definition:</b> structures.h:18</div></div>
+<div class="ttc" id="astructnode__t_html_aa69340d9d81a183ddfbfec74a7524966"><div class="ttname"><a href="structnode__t.html#aa69340d9d81a183ddfbfec74a7524966">node_t::data</a></div><div class="ttdeci">void * data</div><div class="ttdef"><b>Definition:</b> structures.h:19</div></div>
+<div class="ttc" id="astructnode__t_html_aca548c9bafe54ba9db19d40a7a7f1cb3"><div class="ttname"><a href="structnode__t.html#aca548c9bafe54ba9db19d40a7a7f1cb3">node_t::next</a></div><div class="ttdeci">struct node_t * next</div><div class="ttdef"><b>Definition:</b> structures.h:21</div></div>
+<div class="ttc" id="astructnode__t_html_aed5643ccd87b35d3fb69f04903e59b95"><div class="ttname"><a href="structnode__t.html#aed5643ccd87b35d3fb69f04903e59b95">node_t::prev</a></div><div class="ttdeci">struct node_t * prev</div><div class="ttdef"><b>Definition:</b> structures.h:20</div></div>
+<div class="ttc" id="astructures_8h_html_ac8c2f141b74e95eec8d3af39420fd7c4"><div class="ttname"><a href="structures_8h.html#ac8c2f141b74e95eec8d3af39420fd7c4">level_t</a></div><div class="ttdeci">struct Level level_t</div></div>
+<div class="ttc" id="astructures_8h_html_ad570f19fb269fb3ee823db487d26637a"><div class="ttname"><a href="structures_8h.html#ad570f19fb269fb3ee823db487d26637a">case_t</a></div><div class="ttdeci">struct Case case_t</div><div class="ttdoc">créer la structure Case qui spécifie le type de chaque case d'un niveau. Spécifie le type de bloc,...</div></div>
+<div class="ttc" id="astructures_8h_html_ad9569bd87f46de4aeae21925455cbe82"><div class="ttname"><a href="structures_8h.html#ad9569bd87f46de4aeae21925455cbe82">coup_t</a></div><div class="ttdeci">struct Coups coup_t</div><div class="ttdoc">créer la structure Coups qui spécifie le type des Coups effectués. Spécifie la direction du coup et s...</div></div>
+<div class="ttc" id="astructures_8h_html_ae69d97561431bbf336f420077f3577d4"><div class="ttname"><a href="structures_8h.html#ae69d97561431bbf336f420077f3577d4">liste_double_node_t</a></div><div class="ttdeci">struct node_t liste_double_node_t</div><div class="ttdoc">créer la structure node_t qui permet de créer une liste chainée de avec n'importe quel type de donnée...</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="structures_8h.html">structures.h</a></li>
+    <li class="footer">Généré le Vendredi 10 Juin 2022 08:34:21 pour Sokoban par <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
+</body>
+</html>

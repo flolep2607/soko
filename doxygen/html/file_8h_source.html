@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Sokoban:  Fichier source de src/file.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Sokoban
+   </div>
+   <div id="projectbrief">Sokoban en C</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('file_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">file.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="file_8h.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#ifndef STRUCTURES_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="structures_8h.html">structures.h</a>&quot;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno"><a class="line" href="file_8h.html#a4f167b736c2a41080c8068973ec85211">    4</a></span>&#160;<span class="preprocessor">#define STRUCTURES_H</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#ifndef PILE_H</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="pile_8h.html">pile.h</a>&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="file_8h.html#a04aeb117d754dffa0a66861b979bc559">    8</a></span>&#160;<span class="preprocessor">#define PILE_H</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keywordtype">void</span> <a class="code" href="file_8h.html#aa8c09c64ea0e91431cc3e42f013c9ac0">read_map</a>(FILE *flux_entree,<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> largeur_max,<a class="code" href="structliste__double.html">liste_double</a> *map);</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="file_8h.html#afe6a48abe8e6c5d3ced33992b0ab4b58">largeur</a>(FILE *flux_entree);</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="file_8h.html#a7b4f19f39be42da4d7b082b0dd89f8fb">remove_useless</a>(FILE *flux_entree);</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keywordtype">int</span> <a class="code" href="file_8h.html#a952df8a5206422068d48c8d710ab1765">read_one_level</a>(FILE *flux_entree,<a class="code" href="structlevel__t.html">level_t</a> *level);</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<a class="code" href="structliste__double.html">liste_double</a> *<a class="code" href="file_8h.html#a5a3c8dd65facc9cc21d0ceebfaede8cd">read_file</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *file_name);</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="file_8h.html#aa8d0efea98d0a41faf9e959749aa673a">save_game</a>(<a class="code" href="structliste__double.html">liste_double</a> *levels,<span class="keyword">const</span> <span class="keywordtype">char</span> *file_name);</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="file_8h.html#af46205608c21ef57656406443b952c65">read_save</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *file_name, <a class="code" href="structliste__double.html">liste_double</a>* levels);</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keywordtype">void</span> <a class="code" href="file_8h.html#a23247ef98737691bfc6f4324866b7046">save_coups</a>(<a class="code" href="structliste__double.html">liste_double</a>* coups,<span class="keywordtype">int</span> level_number);</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keywordtype">void</span> <a class="code" href="file_8h.html#ab4af0fcf27b4202a006f2d6af643ff04">find_human</a>(<a class="code" href="structlevel__t.html">level_t</a> *level);</div>
+<div class="ttc" id="afile_8h_html_a23247ef98737691bfc6f4324866b7046"><div class="ttname"><a href="file_8h.html#a23247ef98737691bfc6f4324866b7046">save_coups</a></div><div class="ttdeci">void save_coups(liste_double *coups, int level_number)</div><div class="ttdef"><b>Definition:</b> file.c:384</div></div>
+<div class="ttc" id="afile_8h_html_a5a3c8dd65facc9cc21d0ceebfaede8cd"><div class="ttname"><a href="file_8h.html#a5a3c8dd65facc9cc21d0ceebfaede8cd">read_file</a></div><div class="ttdeci">liste_double * read_file(const char *file_name)</div><div class="ttdoc">Fonction principale, permet de lire le fichier, et en utilisant les autres fonctions permet de retour...</div><div class="ttdef"><b>Definition:</b> file.c:242</div></div>
+<div class="ttc" id="afile_8h_html_a7b4f19f39be42da4d7b082b0dd89f8fb"><div class="ttname"><a href="file_8h.html#a7b4f19f39be42da4d7b082b0dd89f8fb">remove_useless</a></div><div class="ttdeci">bool remove_useless(FILE *flux_entree)</div><div class="ttdoc">enleve tous les commentaires sur le fichier source et se replace au debut</div><div class="ttdef"><b>Definition:</b> file.c:164</div></div>
+<div class="ttc" id="afile_8h_html_a952df8a5206422068d48c8d710ab1765"><div class="ttname"><a href="file_8h.html#a952df8a5206422068d48c8d710ab1765">read_one_level</a></div><div class="ttdeci">int read_one_level(FILE *flux_entree, level_t *level)</div><div class="ttdoc">Fonction permettant de lire un niveau dans le fichier source.</div><div class="ttdef"><b>Definition:</b> file.c:190</div></div>
+<div class="ttc" id="afile_8h_html_aa8c09c64ea0e91431cc3e42f013c9ac0"><div class="ttname"><a href="file_8h.html#aa8c09c64ea0e91431cc3e42f013c9ac0">read_map</a></div><div class="ttdeci">void read_map(FILE *flux_entree, unsigned int largeur_max, liste_double *map)</div><div class="ttdoc">Fonction de creation / gestion des files.</div><div class="ttdef"><b>Definition:</b> file.c:37</div></div>
+<div class="ttc" id="afile_8h_html_aa8d0efea98d0a41faf9e959749aa673a"><div class="ttname"><a href="file_8h.html#aa8d0efea98d0a41faf9e959749aa673a">save_game</a></div><div class="ttdeci">bool save_game(liste_double *levels, const char *file_name)</div><div class="ttdoc">Fonction permettant la sauvegarde de la partie dans son etat actuel Creer un fichier contenant les pa...</div><div class="ttdef"><b>Definition:</b> file.c:280</div></div>
+<div class="ttc" id="afile_8h_html_ab4af0fcf27b4202a006f2d6af643ff04"><div class="ttname"><a href="file_8h.html#ab4af0fcf27b4202a006f2d6af643ff04">find_human</a></div><div class="ttdeci">void find_human(level_t *level)</div><div class="ttdoc">permet d'initialiser et de trouver la position du joueur en parcourant la liste chainee (en reconstit...</div><div class="ttdef"><b>Definition:</b> file.c:14</div></div>
+<div class="ttc" id="afile_8h_html_af46205608c21ef57656406443b952c65"><div class="ttname"><a href="file_8h.html#af46205608c21ef57656406443b952c65">read_save</a></div><div class="ttdeci">bool read_save(const char *file_name, liste_double *levels)</div><div class="ttdoc">Fonction lisant le fichier save.c pour reprendre la partie au point arrete. Pour chaque niveau,...</div><div class="ttdef"><b>Definition:</b> file.c:332</div></div>
+<div class="ttc" id="afile_8h_html_afe6a48abe8e6c5d3ced33992b0ab4b58"><div class="ttname"><a href="file_8h.html#afe6a48abe8e6c5d3ced33992b0ab4b58">largeur</a></div><div class="ttdeci">unsigned int largeur(FILE *flux_entree)</div><div class="ttdoc">Fonction parcourant tout le niveau afin de deteriner la largeur maximale du niveau.</div><div class="ttdef"><b>Definition:</b> file.c:127</div></div>
+<div class="ttc" id="apile_8h_html"><div class="ttname"><a href="pile_8h.html">pile.h</a></div></div>
+<div class="ttc" id="astructlevel__t_html"><div class="ttname"><a href="structlevel__t.html">level_t</a></div><div class="ttdoc">Créer la structure Level qui permet de spécifier un niveau en entier. Spécifie la construction de la ...</div></div>
+<div class="ttc" id="astructliste__double_html"><div class="ttname"><a href="structliste__double.html">liste_double</a></div><div class="ttdef"><b>Definition:</b> structures.h:28</div></div>
+<div class="ttc" id="astructures_8h_html"><div class="ttname"><a href="structures_8h.html">structures.h</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="file_8h.html">file.h</a></li>
+    <li class="footer">Généré le Vendredi 10 Juin 2022 08:34:21 pour Sokoban par <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
+</body>
+</html>

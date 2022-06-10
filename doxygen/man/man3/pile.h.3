@@ -1,0 +1,514 @@
+.TH "src/pile.h" 3 "Vendredi 10 Juin 2022" "Sokoban" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/pile.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <stdbool\&.h>\fP
+.br
+\fC#include 'structures\&.h'\fP
+.br
+
+.SS "Fonctions"
+
+.in +1c
+.ti -1c
+.RI "\fBliste_double\fP * \fBliste_double_init\fP ()"
+.br
+.RI "intialise une liste chainee, met la valeur de ses donnees a 0 et intialise le pointeur de tete et de queue a NULL "
+.ti -1c
+.RI "\fBlevel_t\fP * \fBlevel_init\fP ()"
+.br
+.RI "Initialise une structure \fBlevel_t\fP\&. Met les valeurs des donnees de type entiers a 0 et celle de type booleen a false\&. Initialise la valeur des liste chainee contenue dans \fBlevel_t\fP en faisant appel a 2 fonctions d'initialisation\&. "
+.ti -1c
+.RI "\fBcase_t\fP * \fBcreate_case\fP (unsigned char bloc, bool cible)"
+.br
+.RI "Creer une structure case_t en prenant le contenu de la structure en parametre\&. "
+.ti -1c
+.RI "\fBcoup_t\fP * \fBcreate_coup\fP (unsigned char direction, bool pousse)"
+.br
+.RI "Creer une structure coup_t en prenant le contenu de la structure en parametre\&. "
+.ti -1c
+.RI "void * \fBliste_double_get\fP (\fBliste_double\fP *, unsigned int)"
+.br
+.RI "recupere la valeur d'un element d'une liste a une certaine position passee en parametre "
+.ti -1c
+.RI "void \fBliste_double_ajout_en_tete\fP (\fBliste_double\fP *, void *)"
+.br
+.RI "Empile un maillon au debut d'une liste chainee en prenant en parametre la donnee du maillon a ajouter\&. "
+.ti -1c
+.RI "void \fBliste_double_ajout_en_queue\fP (\fBliste_double\fP *, void *data)"
+.br
+.RI "Empile un maillon a la fin d'une liste chainee en prenant en parametre la valeur contenu dans le maillon qu'il faut ajouter\&. "
+.ti -1c
+.RI "void \fBliste_double_vider\fP (\fBliste_double\fP *liste, bool levels)"
+.br
+.RI "Vide une liste chainee\&. Parcours la liste et libere chacun des maillons pour les supprimer\&. "
+.ti -1c
+.RI "void * \fBliste_double_supprimer_tete\fP (\fBliste_double\fP *)"
+.br
+.RI "Supprime une maillon d'une liste chainee dont la position est passee en parametre\&. "
+.ti -1c
+.RI "void * \fBliste_double_depiler_tete\fP (\fBliste_double\fP *)"
+.br
+.RI "Depile l'element en tete de la liste chainee et nous retourne sa valeur\&. "
+.ti -1c
+.RI "void \fBliste_double_destroy\fP (\fBliste_double\fP *)"
+.br
+.RI "Supprime une liste et libere l'espace memoire de chacun des maillons de la liste\&. "
+.ti -1c
+.RI "void \fBlevel_destroy\fP (\fBlevel_t\fP *level)"
+.br
+.RI "Supprime une structure niveau en liberant les liste chainees contenu dans la structure (map et coups) puis libere l'espace alloue a la structure\&. "
+.ti -1c
+.RI "void \fBlevels_destroy\fP (\fBliste_double\fP *levels)"
+.br
+.RI "Supprime une liste chainee de level en appliquant en boucle la fonction 'level_destroy' tant que le pointeur vers le level suivant est different de NULL\&. "
+.ti -1c
+.RI "int \fBsomme_poussees\fP (\fBliste_double\fP *coups)"
+.br
+.in -1c
+.SH "Documentation des fonctions"
+.PP 
+.SS "\fBliste_double\fP* liste_double_init ()"
+
+.PP
+intialise une liste chainee, met la valeur de ses donnees a 0 et intialise le pointeur de tete et de queue a NULL 
+.PP
+\fBRenvoie\fP
+.RS 4
+liste_double* 
+.RE
+.PP
+
+.PP
+.nf
+65 {
+66   liste_double *liste = (liste_double *) malloc(sizeof(liste_double));
+67   liste->size = 0;
+68   liste->first = NULL;
+69   liste->last = NULL;
+70   return liste;
+71 }
+.fi
+.PP
+Références liste_double::first, liste_double::last, et liste_double::size\&.
+.PP
+Référencé par level_init(), read_file(), et recurrence_pathfinding()\&.
+.SS "\fBlevel_t\fP* level_init ()"
+
+.PP
+Initialise une structure \fBlevel_t\fP\&. Met les valeurs des donnees de type entiers a 0 et celle de type booleen a false\&. Initialise la valeur des liste chainee contenue dans \fBlevel_t\fP en faisant appel a 2 fonctions d'initialisation\&. 
+.PP
+\fBRenvoie\fP
+.RS 4
+level_t* 
+.RE
+.PP
+
+.PP
+.nf
+28 {
+29   level_t *level = (level_t *) malloc(sizeof(level_t));
+30   level->solved = false;
+31   level->lvl_number = 0;
+32   level->largeur = 0;
+33   level->hauteur = 0;
+34   level->map=liste_double_init();
+35   level->coups=liste_double_init();
+36   level->index=0;
+37   return level;
+38 }
+.fi
+.PP
+Références liste_double_init()\&.
+.PP
+Référencé par read_file(), et read_save()\&.
+.SS "\fBcase_t\fP* create_case (unsigned char bloc, bool cible)"
+
+.PP
+Creer une structure case_t en prenant le contenu de la structure en parametre\&. 
+.PP
+\fBParamètres\fP
+.RS 4
+\fIbloc\fP 
+.br
+\fIcible\fP 
+.RE
+.PP
+\fBRenvoie\fP
+.RS 4
+case_t* 
+.RE
+.PP
+
+.PP
+.nf
+14                                                     {
+15     case_t* case_=(case_t *) malloc(sizeof(case_t));
+16     case_->bloc = bloc;
+17     case_->cible = cible;
+18     return case_;
+19 }
+.fi
+.PP
+Références Case::bloc, et Case::cible\&.
+.PP
+Référencé par read_map(), et read_save()\&.
+.SS "\fBcoup_t\fP* create_coup (unsigned char direction, bool pousse)"
+
+.PP
+Creer une structure coup_t en prenant le contenu de la structure en parametre\&. 
+.PP
+\fBParamètres\fP
+.RS 4
+\fIdirection\fP 
+.br
+\fIpousse\fP (pousse ou non => Bool) 
+.RE
+.PP
+\fBRenvoie\fP
+.RS 4
+coup_t* 
+.RE
+.PP
+
+.PP
+.nf
+47                                                           {
+48     coup_t* coup_=(coup_t *) malloc(sizeof(case_t));
+49     coup_->direction = direction;
+50     coup_->pousse = pousse;
+51     return coup_;
+52 }
+.fi
+.PP
+Références Coups::direction, et Coups::pousse\&.
+.PP
+Référencé par move_human(), read_save(), et working_pathfinding()\&.
+.SS "void* liste_double_get (\fBliste_double\fP * liste, unsigned int pos)"
+
+.PP
+recupere la valeur d'un element d'une liste a une certaine position passee en parametre 
+.PP
+\fBParamètres\fP
+.RS 4
+\fIliste\fP 
+.br
+\fIpos\fP 
+.RE
+.PP
+\fBRenvoie\fP
+.RS 4
+void* du type de la donnee contenu dans la liste chainee 
+.RE
+.PP
+
+.PP
+.nf
+134 {
+135   liste_double_node_t *node = liste_double_trouver_node(liste, pos);
+136   if(node != NULL){
+137     return node->data;
+138   }else{
+139     return NULL;
+140   }
+141 }
+.fi
+.PP
+Référencé par check_empty(), move_human(), move_object(), random_pathfinding(), recurrence_pathfinding(), et working_pathfinding()\&.
+.SS "void liste_double_ajout_en_tete (\fBliste_double\fP * liste, void * data)"
+
+.PP
+Empile un maillon au debut d'une liste chainee en prenant en parametre la donnee du maillon a ajouter\&. 
+.PP
+\fBParamètres\fP
+.RS 4
+\fIliste\fP 
+.br
+\fIdata\fP 
+.RE
+.PP
+
+.PP
+.nf
+150 {
+151   liste_double_node_t *newNode = liste_double_init_node(data); 
+152   /* if liste is empty */
+153   if(liste->size == 0) {
+154     liste->last = newNode;
+155   } else {
+156     /* if there is at least one element */
+157     liste->first->prev = newNode;
+158     newNode->next = liste->first;
+159   }
+160   liste->first = newNode;
+161   liste->size++;
+162 }
+.fi
+.PP
+Référencé par move_human(), et working_pathfinding()\&.
+.SS "void liste_double_ajout_en_queue (\fBliste_double\fP * liste, void * data)"
+
+.PP
+Empile un maillon a la fin d'une liste chainee en prenant en parametre la valeur contenu dans le maillon qu'il faut ajouter\&. 
+.PP
+\fBParamètres\fP
+.RS 4
+\fIliste\fP 
+.br
+\fIdata\fP 
+.RE
+.PP
+
+.PP
+.nf
+173 {
+174   /* initialize new node */
+175   liste_double_node_t *newNode = liste_double_init_node(data);
+176   /* if liste is empty */
+177   if(liste->size == 0) {
+178     liste->first = newNode;
+179   } else {
+180     /* if there is at least one element */
+181     liste->last->next = newNode;
+182     newNode->prev = liste->last;
+183   }
+184   liste->last = newNode;
+185   liste->size++;
+186 }
+.fi
+.PP
+Référencé par read_file(), read_map(), et read_save()\&.
+.SS "void liste_double_vider (\fBliste_double\fP * liste, bool levels)"
+
+.PP
+Vide une liste chainee\&. Parcours la liste et libere chacun des maillons pour les supprimer\&. 
+.PP
+\fBParamètres\fP
+.RS 4
+\fIliste\fP 
+.br
+\fIlevels\fP si c'est une liste de levels 
+.RE
+.PP
+
+.PP
+.nf
+273 {
+274   liste_double_node_t *current_node = liste->first;
+275   liste_double_node_t *nextNode;
+276   
+277   while(current_node != NULL) {
+278     nextNode = current_node->next;
+279     if(levels){
+280       level_destroy(current_node->data);
+281     }else{
+282       free(current_node->data);
+283     }
+284     free(current_node);
+285     current_node = nextNode;  
+286   }
+287 
+288   liste->first = NULL;
+289   liste->last = NULL;
+290   liste->size = 0;
+291 }
+.fi
+.PP
+Références node_t::data, liste_double::first, liste_double::last, level_destroy(), node_t::next, et liste_double::size\&.
+.PP
+Référencé par event_handler(), et read_save()\&.
+.SS "void* liste_double_supprimer_tete (\fBliste_double\fP * liste)"
+
+.PP
+Supprime une maillon d'une liste chainee dont la position est passee en parametre\&. 
+.PP
+\fBParamètres\fP
+.RS 4
+\fIliste\fP liste double 
+.RE
+.PP
+\fBRenvoie\fP
+.RS 4
+void* 
+.RE
+.PP
+
+.PP
+.nf
+197 {
+198   liste_double_node_t *current_node = liste_double_trouver_node(liste, 0);
+199   void *data = NULL;
+200 
+201   if(current_node == NULL){
+202     return NULL;
+203   }
+204   data = current_node->data;
+205 
+206   if(current_node->prev == NULL) {
+207     liste->first = current_node->next;
+208   }else{
+209     current_node->prev->next = current_node->next;
+210   }
+211   if(current_node->next == NULL){
+212     liste->last = current_node->prev; 
+213   } else{
+214     current_node->next->prev = current_node->prev;
+215   }
+216   liste->size--;
+217   free(current_node);
+218   return data;
+219 }
+.fi
+.PP
+Référencé par liste_double_depiler_tete()\&.
+.SS "void* liste_double_depiler_tete (\fBliste_double\fP * liste)"
+
+.PP
+Depile l'element en tete de la liste chainee et nous retourne sa valeur\&. 
+.PP
+\fBParamètres\fP
+.RS 4
+\fIliste\fP 
+.RE
+.PP
+\fBRenvoie\fP
+.RS 4
+void* (du type de la donnee contenu dans les maillons de la liste) 
+.RE
+.PP
+
+.PP
+.nf
+230 {
+231   if(!liste){
+232     return NULL;
+233   }
+234   liste_double_node_t *node = liste->first;
+235   if(node == NULL){
+236     return NULL;
+237   }
+238   void *data = node->data;
+239   if(liste_double_supprimer_tete(liste) == NULL){
+240     return NULL;
+241   }
+242   return data;
+243 }
+.fi
+.PP
+Références node_t::data, liste_double::first, et liste_double_supprimer_tete()\&.
+.PP
+Référencé par go_back()\&.
+.SS "void liste_double_destroy (\fBliste_double\fP * liste)"
+
+.PP
+Supprime une liste et libere l'espace memoire de chacun des maillons de la liste\&. 
+.PP
+\fBParamètres\fP
+.RS 4
+\fIliste\fP 
+.RE
+.PP
+
+.PP
+.nf
+253 {
+254   liste_double_node_t *current_node = liste->first;
+255   liste_double_node_t *nextNode;
+256   
+257   while(current_node != NULL) {
+258     nextNode = current_node->next;
+259     free(current_node->data);
+260     free(current_node);
+261     current_node = nextNode;  
+262   }
+263   free(liste);
+264 }
+.fi
+.PP
+Références node_t::data, liste_double::first, et node_t::next\&.
+.PP
+Référencé par level_destroy(), et recurrence_pathfinding()\&.
+.SS "void level_destroy (\fBlevel_t\fP * level)"
+
+.PP
+Supprime une structure niveau en liberant les liste chainees contenu dans la structure (map et coups) puis libere l'espace alloue a la structure\&. 
+.PP
+\fBParamètres\fP
+.RS 4
+\fIlevel\fP 
+.RE
+.PP
+
+.PP
+.nf
+298                                   {
+299   if(level->map!=NULL){
+300     liste_double_destroy(level->map);
+301   }
+302   if(level->coups!=NULL){
+303     liste_double_destroy(level->coups);
+304   }
+305   free(level);
+306 }
+.fi
+.PP
+Références liste_double_destroy()\&.
+.PP
+Référencé par levels_destroy(), liste_double_vider(), read_file(), et read_save()\&.
+.SS "void levels_destroy (\fBliste_double\fP * levels)"
+
+.PP
+Supprime une liste chainee de level en appliquant en boucle la fonction 'level_destroy' tant que le pointeur vers le level suivant est different de NULL\&. 
+.PP
+\fBParamètres\fP
+.RS 4
+\fIlevels\fP 
+.RE
+.PP
+
+.PP
+.nf
+314                                          {
+315   liste_double_node_t *current_node = levels->first;
+316   liste_double_node_t *nextNode;
+317   
+318   while(current_node != NULL) {
+319     nextNode = current_node->next;
+320     level_destroy(current_node->data);
+321     free(current_node);
+322     current_node = nextNode;  
+323   }
+324   free(levels);
+325 }
+.fi
+.PP
+Références node_t::data, liste_double::first, level_destroy(), et node_t::next\&.
+.SS "int somme_poussees (\fBliste_double\fP * coups)"
+
+.PP
+.nf
+327                                        {
+328     unsigned int i=0;
+329     liste_double_node_t *current_node = coups->first;
+330     while(current_node != NULL) {
+331         if(((coup_t*)current_node->data)->pousse){
+332             i++;
+333         }
+334         current_node = current_node->next;  
+335     }
+336     return i;
+337 }
+.fi
+.PP
+Références node_t::data, liste_double::first, et node_t::next\&.
+.PP
+Référencé par save_coups()\&.
+.SH "Auteur"
+.PP 
+Généré automatiquement par Doxygen pour Sokoban à partir du code source\&.

@@ -1,0 +1,206 @@
+.TH "src/game.h" 3 "Vendredi 10 Juin 2022" "Sokoban" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/game.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'runtime\&.h'\fP
+.br
+\fC#include 'pile\&.h'\fP
+.br
+\fC#include 'affichage\&.h'\fP
+.br
+\fC#include 'file\&.h'\fP
+.br
+\fC#include 'pathfinding\&.c'\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBRUNTIME_H\fP"
+.br
+.ti -1c
+.RI "#define \fBPILE_H\fP"
+.br
+.ti -1c
+.RI "#define \fBAFFICHAGE_H\fP"
+.br
+.ti -1c
+.RI "#define \fBFILE_H\fP"
+.br
+.ti -1c
+.RI "#define \fBPATHFINDING_H\fP"
+.br
+.in -1c
+.SS "Fonctions"
+
+.in +1c
+.ti -1c
+.RI "bool \fBevent_handler\fP (\fBliste_double\fP *levels, \fBliste_double_node_t\fP *level_node, \fBruntime_t\fP *runtime)"
+.br
+.RI "Reagis aux actions des touches pendant qu'il n'y a pas d'action en cours\&. "
+.ti -1c
+.RI "unsigned char \fBratio_finder\fP (\fBruntime_t\fP *runtime)"
+.br
+.RI "definie la taille des blocs pour qu'ils rentrent dans la fenetre sans etre trop grand\&. "
+.in -1c
+.SH "Documentation des macros"
+.PP 
+.SS "#define RUNTIME_H"
+
+.SS "#define PILE_H"
+
+.SS "#define AFFICHAGE_H"
+
+.SS "#define FILE_H"
+
+.SS "#define PATHFINDING_H"
+
+.SH "Documentation des fonctions"
+.PP 
+.SS "bool event_handler (\fBliste_double\fP * levels, \fBliste_double_node_t\fP * level_node, \fBruntime_t\fP * runtime)"
+
+.PP
+Reagis aux actions des touches pendant qu'il n'y a pas d'action en cours\&. 
+.PP
+\fBParamètres\fP
+.RS 4
+\fIlevels\fP 
+.br
+\fIlevel_node\fP position dans la liste des levels 
+.br
+\fIruntime\fP 
+.RE
+.PP
+\fBRenvoie\fP
+.RS 4
+bool 
+.RE
+.PP
+
+.PP
+.nf
+113                                                                                            {
+114     SDL_Event event;
+115     char title[256];
+116     if(SDL_WaitEventTimeout(&event,20)){
+117         switch (event\&.type)
+118         {
+119         case SDL_QUIT:
+120             runtime->QUIT_GAME = true;
+121             return false;
+122         case SDL_MOUSEBUTTONDOWN:
+123             if(event\&.button\&.button == SDL_BUTTON_RIGHT){
+124                 unsigned int x=event\&.button\&.x/runtime->texture_size;
+125                 unsigned int y=event\&.button\&.y/runtime->texture_size;
+126                 path_finding(runtime->level,x,y,runtime);
+127             }
+128             return true;
+129         case SDL_KEYDOWN:
+130             switch (event\&.key\&.keysym\&.sym)
+131             {
+132                 case SDLK_ESCAPE:
+133                     runtime->QUIT_GAME = true;
+134                     return false;
+135                 case SDLK_z:
+136                 case SDLK_UP:
+137                     move_human(runtime->level,HAUT,true,true,runtime);
+138                     break;
+139                 case SDLK_s:
+140                 case SDLK_DOWN:
+141                     move_human(runtime->level,BAS,true,true,runtime);
+142                     break;
+143                 case SDLK_q:
+144                 case SDLK_LEFT:
+145                     move_human(runtime->level,GAUCHE,true,true,runtime);
+146                     break;
+147                 case SDLK_d:
+148                 case SDLK_RIGHT:
+149                     move_human(runtime->level,DROITE,true,true,runtime);
+150                     break;
+151                 case SDLK_BACKSPACE:
+152                     if(!go_back(runtime->level,runtime)){
+153                         fprintf(stderr,"[INFO] go_back empty or error \n");
+154                         return false;
+155                     }
+156                     // printf("REVERSE\n");
+157                     break;
+158                 case SDLK_r:
+159                     go_all_back(runtime->level,runtime);
+160                     // printf("REVERSED\n");
+161                     break;
+162                 case SDLK_g:
+163                     save_game(levels,"data/save\&.bin");
+164                     printf("SAVED\n");
+165                     break;
+166                 case SDLK_n:
+167                     liste_double_vider(runtime->level->coups,false);
+168                     runtime->level->solved=true;
+169                     // printf("SKIP\n");
+170                     break;
+171                 case SDLK_l:
+172                     read_save("data/save\&.bin",levels);
+173                     level_node=levels->first;
+174                     runtime->level=(level_t *)level_node->data;
+175                     runtime->texture_size=ratio_finder(runtime);
+176                     sprintf(title, "Level %d", runtime->level->lvl_number);
+177                     SDL_SetWindowTitle(runtime->win,title);
+178                     update_zoom(runtime);
+179                     return true;
+180                 default:
+181                     return false;
+182             }
+183             return true;
+184         default:
+185             return false;
+186         }
+187     }
+188     return false;
+189 }
+.fi
+.PP
+Références BAS, node_t::data, DROITE, liste_double::first, GAUCHE, go_all_back(), go_back(), HAUT, runtime_s::level, liste_double_vider(), move_human(), path_finding(), runtime_s::QUIT_GAME, ratio_finder(), read_save(), save_game(), runtime_s::texture_size, update_zoom(), et runtime_s::win\&.
+.SS "unsigned char ratio_finder (\fBruntime_t\fP * runtime)"
+
+.PP
+definie la taille des blocs pour qu'ils rentrent dans la fenetre sans etre trop grand\&. 
+.PP
+\fBParamètres\fP
+.RS 4
+\fIruntime\fP 
+.RE
+.PP
+\fBRenvoie\fP
+.RS 4
+unsigned char 
+.RE
+.PP
+
+.PP
+.nf
+90                                               {
+91     int h=0;
+92     int w=0;
+93     SDL_GetWindowSize(runtime->win,&w,&h);
+94     unsigned char a=w/runtime->level->largeur;
+95     unsigned char b=h/runtime->level->hauteur;
+96     if(a<=2 && b<=2){
+97         return 2;
+98     }
+99     if(a>b){
+100         return b;
+101     }
+102     return a;
+103 }
+.fi
+.PP
+Références runtime_s::level, et runtime_s::win\&.
+.PP
+Référencé par event_handler()\&.
+.SH "Auteur"
+.PP 
+Généré automatiquement par Doxygen pour Sokoban à partir du code source\&.

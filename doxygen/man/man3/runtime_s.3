@@ -1,0 +1,112 @@
+.TH "runtime_s" 3 "Vendredi 10 Juin 2022" "Sokoban" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+runtime_s \- structure qui stock tout ce qui fait parti de l'affichage  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <runtime\&.h>\fP
+.SS "Champs de données"
+
+.in +1c
+.ti -1c
+.RI "SDL_Window * \fBwin\fP"
+.br
+.RI "fenetre (SDL2 "
+.ti -1c
+.RI "SDL_Renderer * \fBrenderer\fP"
+.br
+.RI "renderer pour afficher (SDL2) "
+.ti -1c
+.RI "SDL_Texture * \fBtextures\fP [\fBNUMBER_TEXTURES\fP]"
+.br
+.RI "array de textures (SDL2) "
+.ti -1c
+.RI "\fBlevel_t\fP * \fBlevel\fP"
+.br
+.RI "pointeur vers le level en cours "
+.ti -1c
+.RI "Mix_Music * \fBmusique\fP"
+.br
+.RI "musique (SDL2) "
+.ti -1c
+.RI "SDL_Color \fBempty\fP"
+.br
+.RI "couleur de l'arriere plan (SDL2) "
+.ti -1c
+.RI "bool \fBQUIT_GAME\fP"
+.br
+.ti -1c
+.RI "bool \fBpathfinding\fP"
+.br
+.ti -1c
+.RI "unsigned char \fBdirection\fP"
+.br
+.ti -1c
+.RI "unsigned char \fBtexture_size\fP"
+.br
+.in -1c
+.SH "Description détaillée"
+.PP 
+structure qui stock tout ce qui fait parti de l'affichage 
+.SH "Documentation des champs"
+.PP 
+.SS "SDL_Window* runtime_s::win"
+
+.PP
+fenetre (SDL2 
+.PP
+Référencé par affichage_init(), affichage_quit(), event_handler(), ratio_finder(), et show_game()\&.
+.SS "SDL_Renderer* runtime_s::renderer"
+
+.PP
+renderer pour afficher (SDL2) 
+.PP
+Référencé par affichage_init(), affichage_quit(), affichage_texture(), animate_box_moving(), loadTexture(), print_text(), random_pathfinding(), recurrence_pathfinding(), renderer_clear(), renderer_set_color(), et update_zoom()\&.
+.SS "SDL_Texture* runtime_s::textures[\fBNUMBER_TEXTURES\fP]"
+
+.PP
+array de textures (SDL2) 
+.PP
+Référencé par affichage_quit(), affichage_texture(), animate_box_moving(), et load_all_textures()\&.
+.SS "\fBlevel_t\fP* runtime_s::level"
+
+.PP
+pointeur vers le level en cours 
+.PP
+Référencé par animate_box_moving(), event_handler(), main(), ratio_finder(), et show_game()\&.
+.SS "Mix_Music* runtime_s::musique"
+
+.PP
+musique (SDL2) 
+.PP
+Référencé par affichage_quit(), et load_music()\&.
+.SS "SDL_Color runtime_s::empty"
+
+.PP
+couleur de l'arriere plan (SDL2) 
+.PP
+Référencé par animate_box_moving(), main(), et renderer_clear_window()\&.
+.SS "bool runtime_s::QUIT_GAME"
+
+.PP
+Référencé par event_handler(), main(), et random_pathfinding()\&.
+.SS "bool runtime_s::pathfinding"
+
+.PP
+Référencé par main(), path_finding(), et random_pathfinding()\&.
+.SS "unsigned char runtime_s::direction"
+
+.PP
+Référencé par main(), et move_human()\&.
+.SS "unsigned char runtime_s::texture_size"
+
+.PP
+Référencé par event_handler(), main(), show_game(), et update_zoom()\&.
+
+.SH "Auteur"
+.PP 
+Généré automatiquement par Doxygen pour Sokoban à partir du code source\&.

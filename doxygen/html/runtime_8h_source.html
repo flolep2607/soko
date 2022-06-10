@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Sokoban:  Fichier source de src/runtime.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Sokoban
+   </div>
+   <div id="projectbrief">Sokoban en C</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('runtime_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">runtime.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="runtime_8h.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &lt;SDL2/SDL.h&gt;</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &lt;SDL2/SDL_image.h&gt;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;SDL2/SDL_mixer.h&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;SDL2/SDL_ttf.h&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#ifndef STRUCTURES_H</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="structures_8h.html">structures.h</a>&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#define STRUCTURES_H</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> * @brief structure qui stock tout ce qui fait parti de l&#39;affichage</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> * </span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="structruntime__s.html">   15</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structruntime__s.html">runtime_s</a> {</div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="structruntime__s.html#a15bcdc7abff129a0750e0dd5478a4c2b">   16</a></span>&#160;  SDL_Window* <a class="code" href="structruntime__s.html#a15bcdc7abff129a0750e0dd5478a4c2b">win</a>;        <span class="comment">///&lt; fenetre (SDL2</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="structruntime__s.html#ac4883232f94b3a7216d33c31fc40309e">   17</a></span>&#160;  SDL_Renderer* <a class="code" href="structruntime__s.html#ac4883232f94b3a7216d33c31fc40309e">renderer</a>; <span class="comment">///&lt; renderer pour afficher (SDL2)</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="structruntime__s.html#a645aea0e956f40f26b15c0268b803712">   18</a></span>&#160;  SDL_Texture* <a class="code" href="structruntime__s.html#a645aea0e956f40f26b15c0268b803712">textures</a>[<a class="code" href="structures_8h.html#a1dbc17091b8a589fdeda79651aafc2b5">NUMBER_TEXTURES</a>]; <span class="comment">///&lt; array de textures (SDL2)</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="structruntime__s.html#a9a6eb984747b811d7e99169d69ec6182">   19</a></span>&#160;  <a class="code" href="structlevel__t.html">level_t</a>* <a class="code" href="structruntime__s.html#a9a6eb984747b811d7e99169d69ec6182">level</a>; <span class="comment">///&lt; pointeur vers le level en cours</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="structruntime__s.html#aec0c1c554db18f81c1fb914cf5dce044">   20</a></span>&#160;  Mix_Music *<a class="code" href="structruntime__s.html#aec0c1c554db18f81c1fb914cf5dce044">musique</a>; <span class="comment">///&lt; musique (SDL2)</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="structruntime__s.html#ae96249ecf0ca573ed74775ffc9597c8c">   21</a></span>&#160;  SDL_Color <a class="code" href="structruntime__s.html#ae96249ecf0ca573ed74775ffc9597c8c">empty</a>;   <span class="comment">///&lt; couleur de l&#39;arriere plan (SDL2)</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="structruntime__s.html#a56c8de7d595dd4ce454922abfffbe303">   22</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="structruntime__s.html#a56c8de7d595dd4ce454922abfffbe303">QUIT_GAME</a>;</div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="structruntime__s.html#adfdcccba997262c2ab0eb915b64de6c8">   23</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="structruntime__s.html#adfdcccba997262c2ab0eb915b64de6c8">pathfinding</a>;</div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="structruntime__s.html#afe11d9239c887efb5bb5dce957fb17b6">   24</a></span>&#160;  <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="structruntime__s.html#afe11d9239c887efb5bb5dce957fb17b6">direction</a>;</div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="structruntime__s.html#acea4fb43280950a9dcafa84b5015297f">   25</a></span>&#160;  <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="structruntime__s.html#acea4fb43280950a9dcafa84b5015297f">texture_size</a>;</div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="runtime_8h.html#a6f8d42486447554436c109e1663870a1">   26</a></span>&#160;} <a class="code" href="runtime_8h.html#a6f8d42486447554436c109e1663870a1">runtime_t</a>;</div>
+<div class="ttc" id="aruntime_8h_html_a6f8d42486447554436c109e1663870a1"><div class="ttname"><a href="runtime_8h.html#a6f8d42486447554436c109e1663870a1">runtime_t</a></div><div class="ttdeci">struct runtime_s runtime_t</div><div class="ttdoc">structure qui stock tout ce qui fait parti de l'affichage</div></div>
+<div class="ttc" id="astructlevel__t_html"><div class="ttname"><a href="structlevel__t.html">level_t</a></div><div class="ttdoc">Créer la structure Level qui permet de spécifier un niveau en entier. Spécifie la construction de la ...</div></div>
+<div class="ttc" id="astructruntime__s_html"><div class="ttname"><a href="structruntime__s.html">runtime_s</a></div><div class="ttdoc">structure qui stock tout ce qui fait parti de l'affichage</div><div class="ttdef"><b>Definition:</b> runtime.h:15</div></div>
+<div class="ttc" id="astructruntime__s_html_a15bcdc7abff129a0750e0dd5478a4c2b"><div class="ttname"><a href="structruntime__s.html#a15bcdc7abff129a0750e0dd5478a4c2b">runtime_s::win</a></div><div class="ttdeci">SDL_Window * win</div><div class="ttdoc">fenetre (SDL2</div><div class="ttdef"><b>Definition:</b> runtime.h:16</div></div>
+<div class="ttc" id="astructruntime__s_html_a56c8de7d595dd4ce454922abfffbe303"><div class="ttname"><a href="structruntime__s.html#a56c8de7d595dd4ce454922abfffbe303">runtime_s::QUIT_GAME</a></div><div class="ttdeci">bool QUIT_GAME</div><div class="ttdef"><b>Definition:</b> runtime.h:22</div></div>
+<div class="ttc" id="astructruntime__s_html_a645aea0e956f40f26b15c0268b803712"><div class="ttname"><a href="structruntime__s.html#a645aea0e956f40f26b15c0268b803712">runtime_s::textures</a></div><div class="ttdeci">SDL_Texture * textures[NUMBER_TEXTURES]</div><div class="ttdoc">array de textures (SDL2)</div><div class="ttdef"><b>Definition:</b> runtime.h:18</div></div>
+<div class="ttc" id="astructruntime__s_html_a9a6eb984747b811d7e99169d69ec6182"><div class="ttname"><a href="structruntime__s.html#a9a6eb984747b811d7e99169d69ec6182">runtime_s::level</a></div><div class="ttdeci">level_t * level</div><div class="ttdoc">pointeur vers le level en cours</div><div class="ttdef"><b>Definition:</b> runtime.h:19</div></div>
+<div class="ttc" id="astructruntime__s_html_ac4883232f94b3a7216d33c31fc40309e"><div class="ttname"><a href="structruntime__s.html#ac4883232f94b3a7216d33c31fc40309e">runtime_s::renderer</a></div><div class="ttdeci">SDL_Renderer * renderer</div><div class="ttdoc">renderer pour afficher (SDL2)</div><div class="ttdef"><b>Definition:</b> runtime.h:17</div></div>
+<div class="ttc" id="astructruntime__s_html_acea4fb43280950a9dcafa84b5015297f"><div class="ttname"><a href="structruntime__s.html#acea4fb43280950a9dcafa84b5015297f">runtime_s::texture_size</a></div><div class="ttdeci">unsigned char texture_size</div><div class="ttdef"><b>Definition:</b> runtime.h:25</div></div>
+<div class="ttc" id="astructruntime__s_html_adfdcccba997262c2ab0eb915b64de6c8"><div class="ttname"><a href="structruntime__s.html#adfdcccba997262c2ab0eb915b64de6c8">runtime_s::pathfinding</a></div><div class="ttdeci">bool pathfinding</div><div class="ttdef"><b>Definition:</b> runtime.h:23</div></div>
+<div class="ttc" id="astructruntime__s_html_ae96249ecf0ca573ed74775ffc9597c8c"><div class="ttname"><a href="structruntime__s.html#ae96249ecf0ca573ed74775ffc9597c8c">runtime_s::empty</a></div><div class="ttdeci">SDL_Color empty</div><div class="ttdoc">couleur de l'arriere plan (SDL2)</div><div class="ttdef"><b>Definition:</b> runtime.h:21</div></div>
+<div class="ttc" id="astructruntime__s_html_aec0c1c554db18f81c1fb914cf5dce044"><div class="ttname"><a href="structruntime__s.html#aec0c1c554db18f81c1fb914cf5dce044">runtime_s::musique</a></div><div class="ttdeci">Mix_Music * musique</div><div class="ttdoc">musique (SDL2)</div><div class="ttdef"><b>Definition:</b> runtime.h:20</div></div>
+<div class="ttc" id="astructruntime__s_html_afe11d9239c887efb5bb5dce957fb17b6"><div class="ttname"><a href="structruntime__s.html#afe11d9239c887efb5bb5dce957fb17b6">runtime_s::direction</a></div><div class="ttdeci">unsigned char direction</div><div class="ttdef"><b>Definition:</b> runtime.h:24</div></div>
+<div class="ttc" id="astructures_8h_html"><div class="ttname"><a href="structures_8h.html">structures.h</a></div></div>
+<div class="ttc" id="astructures_8h_html_a1dbc17091b8a589fdeda79651aafc2b5"><div class="ttname"><a href="structures_8h.html#a1dbc17091b8a589fdeda79651aafc2b5">NUMBER_TEXTURES</a></div><div class="ttdeci">#define NUMBER_TEXTURES</div><div class="ttdef"><b>Definition:</b> structures.h:1</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="runtime_8h.html">runtime.h</a></li>
+    <li class="footer">Généré le Vendredi 10 Juin 2022 08:34:21 pour Sokoban par <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
+</body>
+</html>

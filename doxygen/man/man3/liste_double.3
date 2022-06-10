@@ -1,0 +1,41 @@
+.TH "liste_double" 3 "Vendredi 10 Juin 2022" "Sokoban" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+liste_double
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <structures\&.h>\fP
+.SS "Champs de données"
+
+.in +1c
+.ti -1c
+.RI "unsigned int \fBsize\fP"
+.br
+.ti -1c
+.RI "\fBliste_double_node_t\fP * \fBfirst\fP"
+.br
+.ti -1c
+.RI "\fBliste_double_node_t\fP * \fBlast\fP"
+.br
+.in -1c
+.SH "Documentation des champs"
+.PP 
+.SS "unsigned int liste_double::size"
+
+.PP
+Référencé par liste_double_init(), liste_double_vider(), et save_coups()\&.
+.SS "\fBliste_double_node_t\fP* liste_double::first"
+
+.PP
+Référencé par event_handler(), is_finish(), levels_destroy(), liste_double_depiler_tete(), liste_double_destroy(), liste_double_init(), liste_double_vider(), main(), map_reset_weigth(), recurrence_pathfinding(), save_coups(), save_game(), et somme_poussees()\&.
+.SS "\fBliste_double_node_t\fP* liste_double::last"
+
+.PP
+Référencé par liste_double_init(), et liste_double_vider()\&.
+
+.SH "Auteur"
+.PP 
+Généré automatiquement par Doxygen pour Sokoban à partir du code source\&.

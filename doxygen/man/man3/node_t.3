@@ -1,0 +1,43 @@
+.TH "node_t" 3 "Vendredi 10 Juin 2022" "Sokoban" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+node_t \- créer la structure \fBnode_t\fP qui permet de créer une liste chainée de avec n'importe quel type de données\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <structures\&.h>\fP
+.SS "Champs de données"
+
+.in +1c
+.ti -1c
+.RI "void * \fBdata\fP"
+.br
+.ti -1c
+.RI "struct \fBnode_t\fP * \fBprev\fP"
+.br
+.ti -1c
+.RI "struct \fBnode_t\fP * \fBnext\fP"
+.br
+.in -1c
+.SH "Description détaillée"
+.PP 
+créer la structure \fBnode_t\fP qui permet de créer une liste chainée de avec n'importe quel type de données\&. 
+.SH "Documentation des champs"
+.PP 
+.SS "void* node_t::data"
+
+.PP
+Référencé par event_handler(), find_human(), is_finish(), levels_destroy(), liste_double_depiler_tete(), liste_double_destroy(), liste_double_vider(), main(), map_reset_weigth(), recurrence_pathfinding(), save_coups(), save_game(), show_game(), et somme_poussees()\&.
+.SS "struct \fBnode_t\fP* node_t::prev"
+
+.SS "struct \fBnode_t\fP* node_t::next"
+
+.PP
+Référencé par find_human(), is_finish(), levels_destroy(), liste_double_destroy(), liste_double_vider(), map_reset_weigth(), recurrence_pathfinding(), save_coups(), save_game(), show_game(), et somme_poussees()\&.
+
+.SH "Auteur"
+.PP 
+Généré automatiquement par Doxygen pour Sokoban à partir du code source\&.

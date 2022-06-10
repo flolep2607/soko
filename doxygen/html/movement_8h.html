@@ -1,0 +1,1124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Sokoban: Référence du fichier src/movement.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Sokoban
+   </div>
+   <div id="projectbrief">Sokoban en C</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('movement_8h.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#define-members">Macros</a> &#124;
+<a href="#func-members">Fonctions</a>  </div>
+  <div class="headertitle">
+<div class="title">Référence du fichier movement.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;stdbool.h&gt;</code><br />
+<code>#include &lt;time.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="runtime_8h_source.html">runtime.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="structures_8h_source.html">structures.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="pile_8h_source.html">pile.h</a>&quot;</code><br />
+</div>
+<p><a href="movement_8h_source.html">Aller au code source de ce fichier.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a4f167b736c2a41080c8068973ec85211"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="movement_8h.html#a4f167b736c2a41080c8068973ec85211">STRUCTURES_H</a></td></tr>
+<tr class="separator:a4f167b736c2a41080c8068973ec85211"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04aeb117d754dffa0a66861b979bc559"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="movement_8h.html#a04aeb117d754dffa0a66861b979bc559">PILE_H</a></td></tr>
+<tr class="separator:a04aeb117d754dffa0a66861b979bc559"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2582be218a91ba8e6d94ffc0b40fc485"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="movement_8h.html#a2582be218a91ba8e6d94ffc0b40fc485">xy2x</a>(X,  Y,  LONG)&#160;&#160;&#160;(X + Y * LONG)</td></tr>
+<tr class="separator:a2582be218a91ba8e6d94ffc0b40fc485"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f7c1418e3a547de452300c567f0c984"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="movement_8h.html#a4f7c1418e3a547de452300c567f0c984">x2x</a>(X,  LONG)&#160;&#160;&#160;(X%LONG)</td></tr>
+<tr class="separator:a4f7c1418e3a547de452300c567f0c984"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8db7c1109f63cdae674f03896928a70e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="movement_8h.html#a8db7c1109f63cdae674f03896928a70e">x2y</a>(X,  LONG)&#160;&#160;&#160;(X/LONG)</td></tr>
+<tr class="separator:a8db7c1109f63cdae674f03896928a70e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:a8f4042de201e5e6012df253f1422f27d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="movement_8h.html#a8f4042de201e5e6012df253f1422f27d">x2xy</a> (unsigned int X, unsigned int LONG, unsigned int *x, unsigned int *y)</td></tr>
+<tr class="memdesc:a8f4042de201e5e6012df253f1422f27d"><td class="mdescLeft">&#160;</td><td class="mdescRight">transforme les donnees de la liste chainee (en 1 dimension) en un tableau (de 2 dimensions) pour l'affichage du niveau  <a href="movement_8h.html#a8f4042de201e5e6012df253f1422f27d">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a8f4042de201e5e6012df253f1422f27d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8be5aac811bb75a2969c848c2b9ff2e9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="movement_8h.html#a8be5aac811bb75a2969c848c2b9ff2e9">is_on_map</a> (<a class="el" href="structlevel__t.html">level_t</a> *level, unsigned int x, unsigned int y)</td></tr>
+<tr class="memdesc:a8be5aac811bb75a2969c848c2b9ff2e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">fonction permettant de verifier si l'on a pas depasse les limites du niveau (utile aussi pour le pathfiding)  <a href="movement_8h.html#a8be5aac811bb75a2969c848c2b9ff2e9">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a8be5aac811bb75a2969c848c2b9ff2e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75964ea0ca1ec900d9dc7a47b6c89c40"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="movement_8h.html#a75964ea0ca1ec900d9dc7a47b6c89c40">is_on_map2</a> (unsigned <a class="el" href="file_8h.html#afe6a48abe8e6c5d3ced33992b0ab4b58">largeur</a>, unsigned int hauteur, unsigned int x, unsigned int y)</td></tr>
+<tr class="memdesc:a75964ea0ca1ec900d9dc7a47b6c89c40"><td class="mdescLeft">&#160;</td><td class="mdescRight">permet aussi de verifier si l'on a pas depasse les limites du niveau  <a href="movement_8h.html#a75964ea0ca1ec900d9dc7a47b6c89c40">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a75964ea0ca1ec900d9dc7a47b6c89c40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cd9956b727eb8b47280e783795c9bf4"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="movement_8h.html#a4cd9956b727eb8b47280e783795c9bf4">move_direction</a> (char direction, unsigned int index, unsigned int <a class="el" href="file_8h.html#afe6a48abe8e6c5d3ced33992b0ab4b58">largeur</a>)</td></tr>
+<tr class="memdesc:a4cd9956b727eb8b47280e783795c9bf4"><td class="mdescLeft">&#160;</td><td class="mdescRight">permet de connaitre les coordonnees de la case qui se trouve dans la direction demandee  <a href="movement_8h.html#a4cd9956b727eb8b47280e783795c9bf4">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a4cd9956b727eb8b47280e783795c9bf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80b8c9f7b3d285bf9e6eaef81c5367c8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="movement_8h.html#a80b8c9f7b3d285bf9e6eaef81c5367c8">is_finish</a> (<a class="el" href="structliste__double.html">liste_double</a> *map)</td></tr>
+<tr class="memdesc:a80b8c9f7b3d285bf9e6eaef81c5367c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">verifie si toute les cibles sont occupees et renvoie true si c'est le cas  <a href="movement_8h.html#a80b8c9f7b3d285bf9e6eaef81c5367c8">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a80b8c9f7b3d285bf9e6eaef81c5367c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3219eb881cf3a81561d776c04432b74"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="movement_8h.html#ae3219eb881cf3a81561d776c04432b74">move_object</a> (<a class="el" href="structliste__double.html">liste_double</a> *map, unsigned int pos1, unsigned int pos2)</td></tr>
+<tr class="memdesc:ae3219eb881cf3a81561d776c04432b74"><td class="mdescLeft">&#160;</td><td class="mdescRight">deplace un objet vers la position demandee (donc adjacente)  <a href="movement_8h.html#ae3219eb881cf3a81561d776c04432b74">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ae3219eb881cf3a81561d776c04432b74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5cf73e60e83b29b56a083a13205ec447"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="movement_8h.html#a5cf73e60e83b29b56a083a13205ec447">move_human</a> (<a class="el" href="structlevel__t.html">level_t</a> *level, char direction, bool save, bool move_box, <a class="el" href="runtime_8h.html#a6f8d42486447554436c109e1663870a1">runtime_t</a> *runtime)</td></tr>
+<tr class="memdesc:a5cf73e60e83b29b56a083a13205ec447"><td class="mdescLeft">&#160;</td><td class="mdescRight">gere les deplacements du joueur et de l'objet  <a href="movement_8h.html#a5cf73e60e83b29b56a083a13205ec447">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a5cf73e60e83b29b56a083a13205ec447"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a529e6b7e193b756a15e7ea5d6899d5cf"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="movement_8h.html#a529e6b7e193b756a15e7ea5d6899d5cf">go_back</a> (<a class="el" href="structlevel__t.html">level_t</a> *level, <a class="el" href="runtime_8h.html#a6f8d42486447554436c109e1663870a1">runtime_t</a> *runtim)</td></tr>
+<tr class="memdesc:a529e6b7e193b756a15e7ea5d6899d5cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">deplier la double pile d'un element pour connaitre le dernier deplacement effectue  <a href="movement_8h.html#a529e6b7e193b756a15e7ea5d6899d5cf">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a529e6b7e193b756a15e7ea5d6899d5cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d6a64ba63e3de3d298a53ad9475f65e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="movement_8h.html#a8d6a64ba63e3de3d298a53ad9475f65e">go_all_back</a> (<a class="el" href="structlevel__t.html">level_t</a> *level, <a class="el" href="runtime_8h.html#a6f8d42486447554436c109e1663870a1">runtime_t</a> *runtime)</td></tr>
+<tr class="memdesc:a8d6a64ba63e3de3d298a53ad9475f65e"><td class="mdescLeft">&#160;</td><td class="mdescRight">permet de depiler la pile des mouvements au maximum, et donc de revenir a la situation initiale  <a href="movement_8h.html#a8d6a64ba63e3de3d298a53ad9475f65e">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a8d6a64ba63e3de3d298a53ad9475f65e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd4257ae17bd4e3533be2e03487acfae"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="movement_8h.html#acd4257ae17bd4e3533be2e03487acfae">path_finding</a> (<a class="el" href="structlevel__t.html">level_t</a> *level, unsigned int x, unsigned int y, <a class="el" href="runtime_8h.html#a6f8d42486447554436c109e1663870a1">runtime_t</a> *runtime)</td></tr>
+<tr class="separator:acd4257ae17bd4e3533be2e03487acfae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e80a1deedb94ce998c1ef4caa33327a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="movement_8h.html#a7e80a1deedb94ce998c1ef4caa33327a">check_empty</a> (<a class="el" href="structliste__double.html">liste_double</a> *map, unsigned int index)</td></tr>
+<tr class="memdesc:a7e80a1deedb94ce998c1ef4caa33327a"><td class="mdescLeft">&#160;</td><td class="mdescRight">fonction verifiant si un deplacement dans une direction est possible, en verifiant si la case suivante est bien vide  <a href="movement_8h.html#a7e80a1deedb94ce998c1ef4caa33327a">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a7e80a1deedb94ce998c1ef4caa33327a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27891a140640646a31d735b9819299ed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="movement_8h.html#a27891a140640646a31d735b9819299ed">possible_move</a> (<a class="el" href="structlevel__t.html">level_t</a> *level, bool *array)</td></tr>
+<tr class="memdesc:a27891a140640646a31d735b9819299ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">verifie la nature des blocs adjacents pour determiner les mouvements possibles  <a href="movement_8h.html#a27891a140640646a31d735b9819299ed">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a27891a140640646a31d735b9819299ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47ac3c1b2e136022dcd48f51d10f93dd"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="movement_8h.html#a47ac3c1b2e136022dcd48f51d10f93dd">random_from_array</a> (bool array[4])</td></tr>
+<tr class="memdesc:a47ac3c1b2e136022dcd48f51d10f93dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui permet de choisir un indice aleatoire dans une liste de 4 elements (correspondant aux 4 mouvements idealement disponibles pour le joueur)et verifiant si le deplacement est faisable avec la fonction precedente avant de l'effectuer.  <a href="movement_8h.html#a47ac3c1b2e136022dcd48f51d10f93dd">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a47ac3c1b2e136022dcd48f51d10f93dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Documentation des macros</h2>
+<a id="a4f167b736c2a41080c8068973ec85211"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f167b736c2a41080c8068973ec85211">&#9670;&nbsp;</a></span>STRUCTURES_H</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define STRUCTURES_H</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a04aeb117d754dffa0a66861b979bc559"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04aeb117d754dffa0a66861b979bc559">&#9670;&nbsp;</a></span>PILE_H</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PILE_H</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2582be218a91ba8e6d94ffc0b40fc485"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2582be218a91ba8e6d94ffc0b40fc485">&#9670;&nbsp;</a></span>xy2x</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define xy2x</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">X, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Y, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">LONG&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;(X + Y * LONG)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4f7c1418e3a547de452300c567f0c984"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f7c1418e3a547de452300c567f0c984">&#9670;&nbsp;</a></span>x2x</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define x2x</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">X, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">LONG&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;(X%LONG)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8db7c1109f63cdae674f03896928a70e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8db7c1109f63cdae674f03896928a70e">&#9670;&nbsp;</a></span>x2y</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define x2y</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">X, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">LONG&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;(X/LONG)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Documentation des fonctions</h2>
+<a id="a8f4042de201e5e6012df253f1422f27d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f4042de201e5e6012df253f1422f27d">&#9670;&nbsp;</a></span>x2xy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void x2xy </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>X</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>LONG</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int *&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int *&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>transforme les donnees de la liste chainee (en 1 dimension) en un tableau (de 2 dimensions) pour l'affichage du niveau </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">X</td><td></td></tr>
+    <tr><td class="paramname">LONG</td><td></td></tr>
+    <tr><td class="paramname">x</td><td></td></tr>
+    <tr><td class="paramname">y</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;                                                                             {</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    *x=X%LONG;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    *y=X/LONG;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a8be5aac811bb75a2969c848c2b9ff2e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8be5aac811bb75a2969c848c2b9ff2e9">&#9670;&nbsp;</a></span>is_on_map()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool is_on_map </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structlevel__t.html">level_t</a> *&#160;</td>
+          <td class="paramname"><em>level</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>fonction permettant de verifier si l'on a pas depasse les limites du niveau (utile aussi pour le pathfiding) </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">level</td><td></td></tr>
+    <tr><td class="paramname">x</td><td></td></tr>
+    <tr><td class="paramname">y</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>true </dd>
+<dd>
+false </dd></dl>
+<div class="fragment"><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;                                                             {</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordflow">if</span>(level-&gt;hauteur&gt;y &amp;&amp; level-&gt;largeur&gt;x){</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    }    </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;}</div>
+</div><!-- fragment -->
+<p class="reference">Référencé par <a class="el" href="pathfinding_8c.html#a75b4ed69e3446882845e1752b82d659b">random_pathfinding()</a>.</p>
+
+</div>
+</div>
+<a id="a75964ea0ca1ec900d9dc7a47b6c89c40"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75964ea0ca1ec900d9dc7a47b6c89c40">&#9670;&nbsp;</a></span>is_on_map2()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool is_on_map2 </td>
+          <td>(</td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>largeur</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>hauteur</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>permet aussi de verifier si l'on a pas depasse les limites du niveau </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">largeur</td><td></td></tr>
+    <tr><td class="paramname">hauteur</td><td></td></tr>
+    <tr><td class="paramname">x</td><td></td></tr>
+    <tr><td class="paramname">y</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>true </dd>
+<dd>
+false </dd></dl>
+<div class="fragment"><div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                                                                                     {</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordflow">if</span>(hauteur&gt;y &amp;&amp; <a class="code" href="file_8c.html#afe6a48abe8e6c5d3ced33992b0ab4b58">largeur</a>&gt;x){<span class="comment">//? unsigned donc inutile &amp;&amp; y&gt;=0 &amp;&amp; x&gt;=0 </span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    }    </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;}</div>
+<div class="ttc" id="afile_8c_html_afe6a48abe8e6c5d3ced33992b0ab4b58"><div class="ttname"><a href="file_8c.html#afe6a48abe8e6c5d3ced33992b0ab4b58">largeur</a></div><div class="ttdeci">unsigned int largeur(FILE *flux_entree)</div><div class="ttdoc">Fonction parcourant tout le niveau afin de deteriner la largeur maximale du niveau.</div><div class="ttdef"><b>Definition:</b> file.c:127</div></div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="file_8c.html#afe6a48abe8e6c5d3ced33992b0ab4b58">largeur()</a>.</p>
+
+</div>
+</div>
+<a id="a4cd9956b727eb8b47280e783795c9bf4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4cd9956b727eb8b47280e783795c9bf4">&#9670;&nbsp;</a></span>move_direction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int move_direction </td>
+          <td>(</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>direction</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>largeur</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>permet de connaitre les coordonnees de la case qui se trouve dans la direction demandee </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">direction</td><td></td></tr>
+    <tr><td class="paramname">index</td><td></td></tr>
+    <tr><td class="paramname">largeur</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>unsigned int </dd></dl>
+<div class="fragment"><div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                                                                                   {</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordflow">switch</span> (direction)</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    {</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="keywordflow">case</span> <a class="code" href="structures_8h.html#acd0f9b88c35112b35f67d3cde4b2365c">HAUT</a>:</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            <span class="keywordflow">return</span> index-<a class="code" href="file_8c.html#afe6a48abe8e6c5d3ced33992b0ab4b58">largeur</a>;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <span class="keywordflow">case</span> <a class="code" href="structures_8h.html#abd7bcdd3b14eec4414469f88f2bd8f12">BAS</a>:</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            <span class="keywordflow">return</span> index+<a class="code" href="file_8c.html#afe6a48abe8e6c5d3ced33992b0ab4b58">largeur</a>;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="keywordflow">case</span> <a class="code" href="structures_8h.html#af625d3f3bc022848a558f2b18def5b15">DROITE</a>:</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            <span class="keywordflow">return</span> index+1;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        <span class="keywordflow">case</span> <a class="code" href="structures_8h.html#af07f8bf974fdf76afd17f2b97ac15a22">GAUCHE</a>:</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            <span class="keywordflow">return</span> index-1;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            fprintf(stderr,<span class="stringliteral">&quot;[ERROR] Direction %d\n&quot;</span>,direction);</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            exit(-1);</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    }</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    fprintf(stderr,<span class="stringliteral">&quot;[ERROR] No Direction\n&quot;</span>);</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    exit(-1);</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;}</div>
+<div class="ttc" id="astructures_8h_html_abd7bcdd3b14eec4414469f88f2bd8f12"><div class="ttname"><a href="structures_8h.html#abd7bcdd3b14eec4414469f88f2bd8f12">BAS</a></div><div class="ttdeci">#define BAS</div><div class="ttdef"><b>Definition:</b> structures.h:9</div></div>
+<div class="ttc" id="astructures_8h_html_acd0f9b88c35112b35f67d3cde4b2365c"><div class="ttname"><a href="structures_8h.html#acd0f9b88c35112b35f67d3cde4b2365c">HAUT</a></div><div class="ttdeci">#define HAUT</div><div class="ttdef"><b>Definition:</b> structures.h:8</div></div>
+<div class="ttc" id="astructures_8h_html_af07f8bf974fdf76afd17f2b97ac15a22"><div class="ttname"><a href="structures_8h.html#af07f8bf974fdf76afd17f2b97ac15a22">GAUCHE</a></div><div class="ttdeci">#define GAUCHE</div><div class="ttdef"><b>Definition:</b> structures.h:11</div></div>
+<div class="ttc" id="astructures_8h_html_af625d3f3bc022848a558f2b18def5b15"><div class="ttname"><a href="structures_8h.html#af625d3f3bc022848a558f2b18def5b15">DROITE</a></div><div class="ttdeci">#define DROITE</div><div class="ttdef"><b>Definition:</b> structures.h:10</div></div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="structures_8h.html#abd7bcdd3b14eec4414469f88f2bd8f12">BAS</a>, <a class="el" href="structures_8h.html#af625d3f3bc022848a558f2b18def5b15">DROITE</a>, <a class="el" href="structures_8h.html#af07f8bf974fdf76afd17f2b97ac15a22">GAUCHE</a>, <a class="el" href="structures_8h.html#acd0f9b88c35112b35f67d3cde4b2365c">HAUT</a>, et <a class="el" href="file_8c.html#afe6a48abe8e6c5d3ced33992b0ab4b58">largeur()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="movement_8c.html#a5cf73e60e83b29b56a083a13205ec447">move_human()</a>, et <a class="el" href="pathfinding_8c.html#a718f8560f9d9a64bbc0d99c1142ef97e">working_pathfinding()</a>.</p>
+
+</div>
+</div>
+<a id="a80b8c9f7b3d285bf9e6eaef81c5367c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80b8c9f7b3d285bf9e6eaef81c5367c8">&#9670;&nbsp;</a></span>is_finish()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool is_finish </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structliste__double.html">liste_double</a> *&#160;</td>
+          <td class="paramname"><em>map</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>verifie si toute les cibles sont occupees et renvoie true si c'est le cas </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">map</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>true </dd>
+<dd>
+false peut etre opti en mettant une pile de cible </dd></dl>
+<div class="fragment"><div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;{ </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <a class="code" href="structnode__t.html">liste_double_node_t</a> *current_node = map-&gt;<a class="code" href="structliste__double.html#a08ecec17b9574bdd2801ec8c9d6abc5f">first</a>;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keywordtype">bool</span> cible;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> bloc;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="keywordflow">while</span> (current_node != NULL)</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    {</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        bloc=((<a class="code" href="structCase.html">case_t</a> *)current_node-&gt;<a class="code" href="structnode__t.html#aa69340d9d81a183ddfbfec74a7524966">data</a>)-&gt;bloc;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        cible=((<a class="code" href="structCase.html">case_t</a> *)current_node-&gt;<a class="code" href="structnode__t.html#aa69340d9d81a183ddfbfec74a7524966">data</a>)-&gt;cible;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        <span class="keywordflow">if</span>((bloc==2 &amp;&amp; !cible)||(cible &amp;&amp; bloc!=2)){</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        }</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        current_node = current_node-&gt;<a class="code" href="structnode__t.html#aca548c9bafe54ba9db19d40a7a7f1cb3">next</a>;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    }</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;}</div>
+<div class="ttc" id="astructCase_html"><div class="ttname"><a href="structCase.html">Case</a></div><div class="ttdoc">créer la structure Case qui spécifie le type de chaque case d'un niveau. Spécifie le type de bloc,...</div><div class="ttdef"><b>Definition:</b> structures.h:60</div></div>
+<div class="ttc" id="astructliste__double_html_a08ecec17b9574bdd2801ec8c9d6abc5f"><div class="ttname"><a href="structliste__double.html#a08ecec17b9574bdd2801ec8c9d6abc5f">liste_double::first</a></div><div class="ttdeci">liste_double_node_t * first</div><div class="ttdef"><b>Definition:</b> structures.h:30</div></div>
+<div class="ttc" id="astructnode__t_html"><div class="ttname"><a href="structnode__t.html">node_t</a></div><div class="ttdoc">créer la structure node_t qui permet de créer une liste chainée de avec n'importe quel type de donnée...</div><div class="ttdef"><b>Definition:</b> structures.h:18</div></div>
+<div class="ttc" id="astructnode__t_html_aa69340d9d81a183ddfbfec74a7524966"><div class="ttname"><a href="structnode__t.html#aa69340d9d81a183ddfbfec74a7524966">node_t::data</a></div><div class="ttdeci">void * data</div><div class="ttdef"><b>Definition:</b> structures.h:19</div></div>
+<div class="ttc" id="astructnode__t_html_aca548c9bafe54ba9db19d40a7a7f1cb3"><div class="ttname"><a href="structnode__t.html#aca548c9bafe54ba9db19d40a7a7f1cb3">node_t::next</a></div><div class="ttdeci">struct node_t * next</div><div class="ttdef"><b>Definition:</b> structures.h:21</div></div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="structnode__t.html#aa69340d9d81a183ddfbfec74a7524966">node_t::data</a>, <a class="el" href="structliste__double.html#a08ecec17b9574bdd2801ec8c9d6abc5f">liste_double::first</a>, et <a class="el" href="structnode__t.html#aca548c9bafe54ba9db19d40a7a7f1cb3">node_t::next</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="movement_8c.html#a5cf73e60e83b29b56a083a13205ec447">move_human()</a>.</p>
+
+</div>
+</div>
+<a id="ae3219eb881cf3a81561d776c04432b74"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3219eb881cf3a81561d776c04432b74">&#9670;&nbsp;</a></span>move_object()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void move_object </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structliste__double.html">liste_double</a> *&#160;</td>
+          <td class="paramname"><em>map</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>from</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>to</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>deplace un objet vers la position demandee (donc adjacente) </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">map</td><td></td></tr>
+    <tr><td class="paramname">from</td><td></td></tr>
+    <tr><td class="paramname">to</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;                                                                     {<span class="comment">//unsigned char object_value</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    ((<a class="code" href="structCase.html">case_t</a> *)<a class="code" href="pile_8c.html#ab7030678e9afcbca6ad435e672e4e602">liste_double_get</a>(map,to))-&gt;bloc=((<a class="code" href="structCase.html">case_t</a> *)<a class="code" href="pile_8c.html#ab7030678e9afcbca6ad435e672e4e602">liste_double_get</a>(map,from))-&gt;bloc;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    ((<a class="code" href="structCase.html">case_t</a> *)<a class="code" href="pile_8c.html#ab7030678e9afcbca6ad435e672e4e602">liste_double_get</a>(map,from))-&gt;bloc=0;</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;}</div>
+<div class="ttc" id="apile_8c_html_ab7030678e9afcbca6ad435e672e4e602"><div class="ttname"><a href="pile_8c.html#ab7030678e9afcbca6ad435e672e4e602">liste_double_get</a></div><div class="ttdeci">void * liste_double_get(liste_double *liste, unsigned int pos)</div><div class="ttdoc">recupere la valeur d'un element d'une liste a une certaine position passee en parametre</div><div class="ttdef"><b>Definition:</b> pile.c:133</div></div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="pile_8c.html#ab7030678e9afcbca6ad435e672e4e602">liste_double_get()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="movement_8c.html#a33b5a5febc6dc9972f90c48e2a430f9d">go_back()</a>, et <a class="el" href="movement_8c.html#a5cf73e60e83b29b56a083a13205ec447">move_human()</a>.</p>
+
+</div>
+</div>
+<a id="a5cf73e60e83b29b56a083a13205ec447"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5cf73e60e83b29b56a083a13205ec447">&#9670;&nbsp;</a></span>move_human()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool move_human </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structlevel__t.html">level_t</a> *&#160;</td>
+          <td class="paramname"><em>level</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>direction</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>save</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>move_box</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="runtime_8h.html#a6f8d42486447554436c109e1663870a1">runtime_t</a> *&#160;</td>
+          <td class="paramname"><em>runtime</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>gere les deplacements du joueur et de l'objet </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">level</td><td></td></tr>
+    <tr><td class="paramname">direction</td><td></td></tr>
+    <tr><td class="paramname">save</td><td></td></tr>
+    <tr><td class="paramname">move_box</td><td></td></tr>
+    <tr><td class="paramname">runtime</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>booleen qui indique si l'on peut bouger (oui = true) </dd></dl>
+<p>diferencie les differentes situations que l'on rencontre , cas 0: on es sur du vide, on peut bouger, et on modifie l'indice et la direction + gestion du chargement de la sauvegarde cas 2: on doit deplacer l'objet, il faut verifier si c'est possible, puis on deplace l'objet et le joueur, en modifiant son indices et sa direction cas 3: on se trouve dans un cas d'erreur, car on ne dois pas pouvoir rencontrer un autre joueur cas de base: on se trouve face a un mur, on ne peux pas bouger</p>
+<div class="fragment"><div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;                                                                                         {</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    <span class="keywordflow">if</span>(0==<a class="code" href="movement_8h.html#a4f7c1418e3a547de452300c567f0c984">x2x</a>(level-&gt;index,level-&gt;largeur)){<span class="keywordflow">return</span> <span class="keyword">false</span>;}</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> index_after = <a class="code" href="movement_8c.html#a4cd9956b727eb8b47280e783795c9bf4">move_direction</a>(direction,level-&gt;index,level-&gt;largeur);</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    <span class="keywordflow">if</span>(level-&gt;map-&gt;size&gt;index_after){</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;        <a class="code" href="structCase.html">case_t</a>* cell=(<a class="code" href="structCase.html">case_t</a>*)<a class="code" href="pile_8c.html#ab7030678e9afcbca6ad435e672e4e602">liste_double_get</a>(level-&gt;map,index_after);</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;       <span class="comment"></span></div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;<span class="comment">        /**</span></div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;<span class="comment">         * @brief diferencie les differentes situations que l&#39;on rencontre , </span></div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;<span class="comment">         cas 0: on es sur du vide, on peut bouger, et on modifie l&#39;indice et la direction + gestion du chargement de la sauvegarde</span></div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;<span class="comment">         cas 2: on doit deplacer l&#39;objet, il faut verifier si c&#39;est possible, puis on deplace l&#39;objet et le joueur, en modifiant </span></div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;<span class="comment">            son indices et sa direction</span></div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;<span class="comment">         cas 3: on se trouve dans un cas d&#39;erreur, car on ne dois pas pouvoir rencontrer un autre joueur</span></div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;<span class="comment">         cas de base: on se trouve face a un mur, on ne peux pas bouger</span></div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;<span class="comment">         * </span></div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;<span class="comment">         */</span></div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;        <span class="keywordflow">switch</span> (cell-&gt;<a class="code" href="structCase.html#a81cbe670d6b905144687025151021512">bloc</a>)</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;            {</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;                <span class="keywordflow">case</span> 0:<span class="comment">// air=&gt; peut bouger no problemo</span></div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;                    <a class="code" href="movement_8c.html#acac9830a601deeae58c32ed5880bf668">move_object</a>(level-&gt;map,level-&gt;index,index_after);</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;                    level-&gt;index=index_after;</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;                    runtime-&gt;<a class="code" href="structruntime__s.html#afe11d9239c887efb5bb5dce957fb17b6">direction</a>=direction;</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;                    <span class="keywordflow">if</span>(save){</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;                        <a class="code" href="pile_8c.html#adb6a0692bc7bced9e5bf620acddf230b">liste_double_ajout_en_tete</a>(level-&gt;coups,<a class="code" href="pile_8c.html#aec9fe1dac5f230d10ea29cb2fca09690">create_coup</a>(direction,<span class="keyword">false</span>));</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;                    }</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;                    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;                <span class="keywordflow">case</span> 2:</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;                    <span class="keywordflow">if</span>(move_box){</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;                        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> index_after2 = <a class="code" href="movement_8c.html#a4cd9956b727eb8b47280e783795c9bf4">move_direction</a>(direction,index_after,level-&gt;largeur);</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;                        <a class="code" href="structCase.html">case_t</a>* next_cell=(<a class="code" href="structCase.html">case_t</a>*)<a class="code" href="pile_8c.html#ab7030678e9afcbca6ad435e672e4e602">liste_double_get</a>(level-&gt;map,index_after2);</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;                        <span class="keywordflow">if</span> (next_cell-&gt;<a class="code" href="structCase.html#a81cbe670d6b905144687025151021512">bloc</a>==0){</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;                            <a class="code" href="movement_8c.html#acac9830a601deeae58c32ed5880bf668">move_object</a>(level-&gt;map,index_after,index_after2);</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;                            <a class="code" href="movement_8c.html#acac9830a601deeae58c32ed5880bf668">move_object</a>(level-&gt;map,level-&gt;index,index_after);</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;                            <a class="code" href="animation_8c.html#a4731ea04b06c27789a9e6b706ab45928">animate_box_moving</a>(runtime,direction,index_after,index_after2);</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;                            level-&gt;index=index_after;</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;                            runtime-&gt;<a class="code" href="structruntime__s.html#afe11d9239c887efb5bb5dce957fb17b6">direction</a>=direction;</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;                            <span class="keywordflow">if</span>(save){</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;                                <a class="code" href="pile_8c.html#adb6a0692bc7bced9e5bf620acddf230b">liste_double_ajout_en_tete</a>(level-&gt;coups,<a class="code" href="pile_8c.html#aec9fe1dac5f230d10ea29cb2fca09690">create_coup</a>(direction,<span class="keyword">true</span>));</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;                            }</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;                            <span class="keywordflow">if</span>(next_cell-&gt;<a class="code" href="structCase.html#a6034ac2c0f76439b9b9966c4ea4da4f7">cible</a>){</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;                                level-&gt;solved=<a class="code" href="movement_8c.html#a80b8c9f7b3d285bf9e6eaef81c5367c8">is_finish</a>(level-&gt;map);</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;                            }</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;                            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;                        }</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;                    }</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;                <span class="keywordflow">case</span> 3: <span class="comment">//cas ou il y a 2 perso = problem</span></div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;                    fprintf(stderr,<span class="stringliteral">&quot;[ERROR]2 humans %d(%d-%d)-&gt;%d(%d-%d)\n&quot;</span>,</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;                        level-&gt;index,<a class="code" href="movement_8h.html#a4f7c1418e3a547de452300c567f0c984">x2x</a>(level-&gt;index,level-&gt;largeur),<a class="code" href="movement_8h.html#a8db7c1109f63cdae674f03896928a70e">x2y</a>(level-&gt;index,level-&gt;largeur),</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;                        index_after,<a class="code" href="movement_8h.html#a4f7c1418e3a547de452300c567f0c984">x2x</a>(index_after,level-&gt;largeur),<a class="code" href="movement_8h.html#a8db7c1109f63cdae674f03896928a70e">x2y</a>(index_after,level-&gt;largeur)</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;                    );</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;                    exit(-1);</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;                <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;            }</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;    }</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;}</div>
+<div class="ttc" id="aanimation_8c_html_a4731ea04b06c27789a9e6b706ab45928"><div class="ttname"><a href="animation_8c.html#a4731ea04b06c27789a9e6b706ab45928">animate_box_moving</a></div><div class="ttdeci">void animate_box_moving(runtime_t *runtime, unsigned char direction, unsigned int index_start, unsigned int index_end)</div><div class="ttdoc">Anime le mouvement des oeufs.</div><div class="ttdef"><b>Definition:</b> animation.c:15</div></div>
+<div class="ttc" id="amovement_8c_html_a4cd9956b727eb8b47280e783795c9bf4"><div class="ttname"><a href="movement_8c.html#a4cd9956b727eb8b47280e783795c9bf4">move_direction</a></div><div class="ttdeci">unsigned int move_direction(char direction, unsigned int index, unsigned int largeur)</div><div class="ttdoc">permet de connaitre les coordonnees de la case qui se trouve dans la direction demandee</div><div class="ttdef"><b>Definition:</b> movement.c:69</div></div>
+<div class="ttc" id="amovement_8c_html_a80b8c9f7b3d285bf9e6eaef81c5367c8"><div class="ttname"><a href="movement_8c.html#a80b8c9f7b3d285bf9e6eaef81c5367c8">is_finish</a></div><div class="ttdeci">bool is_finish(liste_double *map)</div><div class="ttdoc">verifie si toute les cibles sont occupees et renvoie true si c'est le cas</div><div class="ttdef"><b>Definition:</b> movement.c:100</div></div>
+<div class="ttc" id="amovement_8c_html_acac9830a601deeae58c32ed5880bf668"><div class="ttname"><a href="movement_8c.html#acac9830a601deeae58c32ed5880bf668">move_object</a></div><div class="ttdeci">void move_object(liste_double *map, unsigned int from, unsigned int to)</div><div class="ttdoc">deplace un objet vers la position demandee (donc adjacente)</div><div class="ttdef"><b>Definition:</b> movement.c:124</div></div>
+<div class="ttc" id="amovement_8h_html_a4f7c1418e3a547de452300c567f0c984"><div class="ttname"><a href="movement_8h.html#a4f7c1418e3a547de452300c567f0c984">x2x</a></div><div class="ttdeci">#define x2x(X, LONG)</div><div class="ttdef"><b>Definition:</b> movement.h:20</div></div>
+<div class="ttc" id="amovement_8h_html_a8db7c1109f63cdae674f03896928a70e"><div class="ttname"><a href="movement_8h.html#a8db7c1109f63cdae674f03896928a70e">x2y</a></div><div class="ttdeci">#define x2y(X, LONG)</div><div class="ttdef"><b>Definition:</b> movement.h:21</div></div>
+<div class="ttc" id="apile_8c_html_adb6a0692bc7bced9e5bf620acddf230b"><div class="ttname"><a href="pile_8c.html#adb6a0692bc7bced9e5bf620acddf230b">liste_double_ajout_en_tete</a></div><div class="ttdeci">void liste_double_ajout_en_tete(liste_double *liste, void *data)</div><div class="ttdoc">Empile un maillon au debut d'une liste chainee en prenant en parametre la donnee du maillon a ajouter...</div><div class="ttdef"><b>Definition:</b> pile.c:149</div></div>
+<div class="ttc" id="apile_8c_html_aec9fe1dac5f230d10ea29cb2fca09690"><div class="ttname"><a href="pile_8c.html#aec9fe1dac5f230d10ea29cb2fca09690">create_coup</a></div><div class="ttdeci">coup_t * create_coup(unsigned char direction, bool pousse)</div><div class="ttdoc">Creer une structure coup_t en prenant le contenu de la structure en parametre.</div><div class="ttdef"><b>Definition:</b> pile.c:47</div></div>
+<div class="ttc" id="astructCase_html_a6034ac2c0f76439b9b9966c4ea4da4f7"><div class="ttname"><a href="structCase.html#a6034ac2c0f76439b9b9966c4ea4da4f7">Case::cible</a></div><div class="ttdeci">bool cible</div><div class="ttdef"><b>Definition:</b> structures.h:62</div></div>
+<div class="ttc" id="astructCase_html_a81cbe670d6b905144687025151021512"><div class="ttname"><a href="structCase.html#a81cbe670d6b905144687025151021512">Case::bloc</a></div><div class="ttdeci">unsigned char bloc</div><div class="ttdef"><b>Definition:</b> structures.h:61</div></div>
+<div class="ttc" id="astructruntime__s_html_afe11d9239c887efb5bb5dce957fb17b6"><div class="ttname"><a href="structruntime__s.html#afe11d9239c887efb5bb5dce957fb17b6">runtime_s::direction</a></div><div class="ttdeci">unsigned char direction</div><div class="ttdef"><b>Definition:</b> runtime.h:24</div></div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="animation_8c.html#a4731ea04b06c27789a9e6b706ab45928">animate_box_moving()</a>, <a class="el" href="structCase.html#a81cbe670d6b905144687025151021512">Case::bloc</a>, <a class="el" href="structCase.html#a6034ac2c0f76439b9b9966c4ea4da4f7">Case::cible</a>, <a class="el" href="pile_8c.html#aec9fe1dac5f230d10ea29cb2fca09690">create_coup()</a>, <a class="el" href="structruntime__s.html#afe11d9239c887efb5bb5dce957fb17b6">runtime_s::direction</a>, <a class="el" href="movement_8c.html#a80b8c9f7b3d285bf9e6eaef81c5367c8">is_finish()</a>, <a class="el" href="pile_8c.html#adb6a0692bc7bced9e5bf620acddf230b">liste_double_ajout_en_tete()</a>, <a class="el" href="pile_8c.html#ab7030678e9afcbca6ad435e672e4e602">liste_double_get()</a>, <a class="el" href="movement_8c.html#a4cd9956b727eb8b47280e783795c9bf4">move_direction()</a>, <a class="el" href="movement_8c.html#acac9830a601deeae58c32ed5880bf668">move_object()</a>, <a class="el" href="movement_8h.html#a4f7c1418e3a547de452300c567f0c984">x2x</a>, et <a class="el" href="movement_8h.html#a8db7c1109f63cdae674f03896928a70e">x2y</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="game_8c.html#aa1d3734caf58813fe5bad1587d2fd000">event_handler()</a>, <a class="el" href="movement_8c.html#a33b5a5febc6dc9972f90c48e2a430f9d">go_back()</a>, <a class="el" href="pathfinding_8c.html#a75b4ed69e3446882845e1752b82d659b">random_pathfinding()</a>, et <a class="el" href="pathfinding_8c.html#aabdc6af31e2636b0d9ccbf9833f26845">recurrence_pathfinding()</a>.</p>
+
+</div>
+</div>
+<a id="a529e6b7e193b756a15e7ea5d6899d5cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a529e6b7e193b756a15e7ea5d6899d5cf">&#9670;&nbsp;</a></span>go_back()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool go_back </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structlevel__t.html">level_t</a> *&#160;</td>
+          <td class="paramname"><em>level</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="runtime_8h.html#a6f8d42486447554436c109e1663870a1">runtime_t</a> *&#160;</td>
+          <td class="paramname"><em>runtime</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>deplier la double pile d'un element pour connaitre le dernier deplacement effectue </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">level</td><td></td></tr>
+    <tr><td class="paramname">runtime</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>true </dd>
+<dd>
+false </dd></dl>
+<p>identifie le coup deplile et "l'inverse" afin d'annuler le deplacement effectue precedement</p>
+<p>deplace le joueur et l'objet dans le sens contraire au dernier coup ( = reviens en arriere)</p>
+<div class="fragment"><div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;                                               {</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    <a class="code" href="structCoups.html">coup_t</a>* coup=(<a class="code" href="structCoups.html">coup_t</a>*)<a class="code" href="pile_8c.html#ad2fc370e3d23452aab809d947414f4bb">liste_double_depiler_tete</a>(level-&gt;coups);</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    <span class="keywordflow">if</span>(coup==NULL){</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    }</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> old_index=level-&gt;index;</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> old_index_box=old_index;</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;<span class="comment">     * @brief identifie le coup deplile et &quot;l&#39;inverse&quot; afin d&#39;annuler le deplacement effectue precedement</span></div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;<span class="comment">     * </span></div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    <span class="keywordflow">switch</span> (coup-&gt;<a class="code" href="structCoups.html#a739170969dd8bdc1fdaefa29be877a5c">direction</a>)</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    {</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;        <span class="keywordflow">case</span> <a class="code" href="structures_8h.html#acd0f9b88c35112b35f67d3cde4b2365c">HAUT</a>:</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;            coup-&gt;<a class="code" href="structCoups.html#a739170969dd8bdc1fdaefa29be877a5c">direction</a>=<a class="code" href="structures_8h.html#abd7bcdd3b14eec4414469f88f2bd8f12">BAS</a>;</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;            old_index_box-=level-&gt;largeur;</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;        <span class="keywordflow">case</span> <a class="code" href="structures_8h.html#abd7bcdd3b14eec4414469f88f2bd8f12">BAS</a>:</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;            coup-&gt;<a class="code" href="structCoups.html#a739170969dd8bdc1fdaefa29be877a5c">direction</a>=<a class="code" href="structures_8h.html#acd0f9b88c35112b35f67d3cde4b2365c">HAUT</a>;</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;            old_index_box+=level-&gt;largeur;</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;        <span class="keywordflow">case</span> <a class="code" href="structures_8h.html#af07f8bf974fdf76afd17f2b97ac15a22">GAUCHE</a>:</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;            coup-&gt;<a class="code" href="structCoups.html#a739170969dd8bdc1fdaefa29be877a5c">direction</a>=<a class="code" href="structures_8h.html#af625d3f3bc022848a558f2b18def5b15">DROITE</a>;</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;            old_index_box--;</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;        <span class="keywordflow">case</span> <a class="code" href="structures_8h.html#af625d3f3bc022848a558f2b18def5b15">DROITE</a>:</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;            coup-&gt;<a class="code" href="structCoups.html#a739170969dd8bdc1fdaefa29be877a5c">direction</a>=<a class="code" href="structures_8h.html#af07f8bf974fdf76afd17f2b97ac15a22">GAUCHE</a>;</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;            old_index_box++;</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;        </div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;        <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    }</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;<span class="comment">     * @brief deplace le joueur et l&#39;objet dans le sens contraire au dernier coup ( = reviens en arriere)</span></div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;<span class="comment">     * </span></div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;    <span class="keywordflow">if</span>(!<a class="code" href="movement_8c.html#a5cf73e60e83b29b56a083a13205ec447">move_human</a>(level,coup-&gt;<a class="code" href="structCoups.html#a739170969dd8bdc1fdaefa29be877a5c">direction</a>,<span class="keyword">false</span>,<span class="keyword">false</span>,runtime)){</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    }</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;    <span class="keywordflow">if</span>(coup-&gt;<a class="code" href="structCoups.html#ac316b7ffdfbb8ec0f1c1ea17b31ecbae">pousse</a>){</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;        <a class="code" href="movement_8c.html#acac9830a601deeae58c32ed5880bf668">move_object</a>(level-&gt;map,old_index_box,old_index);</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;    }</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;}</div>
+<div class="ttc" id="amovement_8c_html_a5cf73e60e83b29b56a083a13205ec447"><div class="ttname"><a href="movement_8c.html#a5cf73e60e83b29b56a083a13205ec447">move_human</a></div><div class="ttdeci">bool move_human(level_t *level, char direction, bool save, bool move_box, runtime_t *runtime)</div><div class="ttdoc">gere les deplacements du joueur et de l'objet</div><div class="ttdef"><b>Definition:</b> movement.c:256</div></div>
+<div class="ttc" id="apile_8c_html_ad2fc370e3d23452aab809d947414f4bb"><div class="ttname"><a href="pile_8c.html#ad2fc370e3d23452aab809d947414f4bb">liste_double_depiler_tete</a></div><div class="ttdeci">void * liste_double_depiler_tete(liste_double *liste)</div><div class="ttdoc">Depile l'element en tete de la liste chainee et nous retourne sa valeur.</div><div class="ttdef"><b>Definition:</b> pile.c:229</div></div>
+<div class="ttc" id="astructCoups_html"><div class="ttname"><a href="structCoups.html">Coups</a></div><div class="ttdoc">créer la structure Coups qui spécifie le type des Coups effectués. Spécifie la direction du coup et s...</div><div class="ttdef"><b>Definition:</b> structures.h:71</div></div>
+<div class="ttc" id="astructCoups_html_a739170969dd8bdc1fdaefa29be877a5c"><div class="ttname"><a href="structCoups.html#a739170969dd8bdc1fdaefa29be877a5c">Coups::direction</a></div><div class="ttdeci">unsigned char direction</div><div class="ttdef"><b>Definition:</b> structures.h:72</div></div>
+<div class="ttc" id="astructCoups_html_ac316b7ffdfbb8ec0f1c1ea17b31ecbae"><div class="ttname"><a href="structCoups.html#ac316b7ffdfbb8ec0f1c1ea17b31ecbae">Coups::pousse</a></div><div class="ttdeci">bool pousse</div><div class="ttdef"><b>Definition:</b> structures.h:73</div></div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="structures_8h.html#abd7bcdd3b14eec4414469f88f2bd8f12">BAS</a>, <a class="el" href="structCoups.html#a739170969dd8bdc1fdaefa29be877a5c">Coups::direction</a>, <a class="el" href="structures_8h.html#af625d3f3bc022848a558f2b18def5b15">DROITE</a>, <a class="el" href="structures_8h.html#af07f8bf974fdf76afd17f2b97ac15a22">GAUCHE</a>, <a class="el" href="structures_8h.html#acd0f9b88c35112b35f67d3cde4b2365c">HAUT</a>, <a class="el" href="pile_8c.html#ad2fc370e3d23452aab809d947414f4bb">liste_double_depiler_tete()</a>, <a class="el" href="movement_8c.html#a5cf73e60e83b29b56a083a13205ec447">move_human()</a>, <a class="el" href="movement_8c.html#acac9830a601deeae58c32ed5880bf668">move_object()</a>, et <a class="el" href="structCoups.html#ac316b7ffdfbb8ec0f1c1ea17b31ecbae">Coups::pousse</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="game_8c.html#aa1d3734caf58813fe5bad1587d2fd000">event_handler()</a>, et <a class="el" href="movement_8c.html#a8d6a64ba63e3de3d298a53ad9475f65e">go_all_back()</a>.</p>
+
+</div>
+</div>
+<a id="a8d6a64ba63e3de3d298a53ad9475f65e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d6a64ba63e3de3d298a53ad9475f65e">&#9670;&nbsp;</a></span>go_all_back()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void go_all_back </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structlevel__t.html">level_t</a> *&#160;</td>
+          <td class="paramname"><em>level</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="runtime_8h.html#a6f8d42486447554436c109e1663870a1">runtime_t</a> *&#160;</td>
+          <td class="paramname"><em>runtime</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>permet de depiler la pile des mouvements au maximum, et donc de revenir a la situation initiale </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">level</td><td></td></tr>
+    <tr><td class="paramname">runtime</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;                                                   {</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    <span class="keywordflow">while</span>(<a class="code" href="movement_8c.html#a33b5a5febc6dc9972f90c48e2a430f9d">go_back</a>(level,runtime)){}</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;}</div>
+<div class="ttc" id="amovement_8c_html_a33b5a5febc6dc9972f90c48e2a430f9d"><div class="ttname"><a href="movement_8c.html#a33b5a5febc6dc9972f90c48e2a430f9d">go_back</a></div><div class="ttdeci">bool go_back(level_t *level, runtime_t *runtime)</div><div class="ttdoc">deplier la double pile d'un element pour connaitre le dernier deplacement effectue</div><div class="ttdef"><b>Definition:</b> movement.c:197</div></div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="movement_8c.html#a33b5a5febc6dc9972f90c48e2a430f9d">go_back()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="game_8c.html#aa1d3734caf58813fe5bad1587d2fd000">event_handler()</a>.</p>
+
+</div>
+</div>
+<a id="acd4257ae17bd4e3533be2e03487acfae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd4257ae17bd4e3533be2e03487acfae">&#9670;&nbsp;</a></span>path_finding()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool path_finding </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structlevel__t.html">level_t</a> *&#160;</td>
+          <td class="paramname"><em>level</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="runtime_8h.html#a6f8d42486447554436c109e1663870a1">runtime_t</a> *&#160;</td>
+          <td class="paramname"><em>runtime</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">level</td><td></td></tr>
+    <tr><td class="paramname">x</td><td></td></tr>
+    <tr><td class="paramname">y</td><td></td></tr>
+    <tr><td class="paramname">runtime</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>true </dd>
+<dd>
+false </dd></dl>
+<div class="fragment"><div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;                                                                                  {</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    runtime-&gt;<a class="code" href="structruntime__s.html#adfdcccba997262c2ab0eb915b64de6c8">pathfinding</a>=<span class="keyword">true</span>;</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    <span class="comment">// if(random_pathfinding(level,x,y,runtime)){</span></div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    <span class="comment">//     runtime-&gt;pathfinding=false;</span></div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    <span class="comment">//     return true;</span></div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    <span class="comment">// }</span></div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="pathfinding_8c.html#aabdc6af31e2636b0d9ccbf9833f26845">recurrence_pathfinding</a>(level,x,y,runtime)){</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;        runtime-&gt;<a class="code" href="structruntime__s.html#adfdcccba997262c2ab0eb915b64de6c8">pathfinding</a>=<span class="keyword">false</span>;</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    }</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    runtime-&gt;<a class="code" href="structruntime__s.html#adfdcccba997262c2ab0eb915b64de6c8">pathfinding</a>=<span class="keyword">false</span>;</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;}</div>
+<div class="ttc" id="apathfinding_8c_html_aabdc6af31e2636b0d9ccbf9833f26845"><div class="ttname"><a href="pathfinding_8c.html#aabdc6af31e2636b0d9ccbf9833f26845">recurrence_pathfinding</a></div><div class="ttdeci">bool recurrence_pathfinding(level_t *level, unsigned int x, unsigned int y, runtime_t *runtime)</div><div class="ttdef"><b>Definition:</b> pathfinding.c:114</div></div>
+<div class="ttc" id="astructruntime__s_html_adfdcccba997262c2ab0eb915b64de6c8"><div class="ttname"><a href="structruntime__s.html#adfdcccba997262c2ab0eb915b64de6c8">runtime_s::pathfinding</a></div><div class="ttdeci">bool pathfinding</div><div class="ttdef"><b>Definition:</b> runtime.h:23</div></div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="structruntime__s.html#adfdcccba997262c2ab0eb915b64de6c8">runtime_s::pathfinding</a>, et <a class="el" href="pathfinding_8c.html#aabdc6af31e2636b0d9ccbf9833f26845">recurrence_pathfinding()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="game_8c.html#aa1d3734caf58813fe5bad1587d2fd000">event_handler()</a>.</p>
+
+</div>
+</div>
+<a id="a7e80a1deedb94ce998c1ef4caa33327a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e80a1deedb94ce998c1ef4caa33327a">&#9670;&nbsp;</a></span>check_empty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool check_empty </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structliste__double.html">liste_double</a> *&#160;</td>
+          <td class="paramname"><em>map</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>index</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>fonction verifiant si un deplacement dans une direction est possible, en verifiant si la case suivante est bien vide </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">map</td><td></td></tr>
+    <tr><td class="paramname">index</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>true </dd>
+<dd>
+false </dd></dl>
+<div class="fragment"><div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;                                                      {</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    <span class="keywordflow">return</span> ((<a class="code" href="structCase.html">case_t</a>*)<a class="code" href="pile_8c.html#ab7030678e9afcbca6ad435e672e4e602">liste_double_get</a>(map,index))-&gt;bloc == 0;</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;}</div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="pile_8c.html#ab7030678e9afcbca6ad435e672e4e602">liste_double_get()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="movement_8c.html#a27891a140640646a31d735b9819299ed">possible_move()</a>.</p>
+
+</div>
+</div>
+<a id="a27891a140640646a31d735b9819299ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27891a140640646a31d735b9819299ed">&#9670;&nbsp;</a></span>possible_move()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void possible_move </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structlevel__t.html">level_t</a> *&#160;</td>
+          <td class="paramname"><em>level</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool *&#160;</td>
+          <td class="paramname"><em>array</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>verifie la nature des blocs adjacents pour determiner les mouvements possibles </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">level</td><td></td></tr>
+    <tr><td class="paramname">array</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;                                              {</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    array[<a class="code" href="structures_8h.html#acd0f9b88c35112b35f67d3cde4b2365c">HAUT</a>]=<a class="code" href="movement_8c.html#a7e80a1deedb94ce998c1ef4caa33327a">check_empty</a>(level-&gt;map,level-&gt;index-level-&gt;largeur);<span class="comment">// HAUT</span></div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    array[<a class="code" href="structures_8h.html#abd7bcdd3b14eec4414469f88f2bd8f12">BAS</a>]=<a class="code" href="movement_8c.html#a7e80a1deedb94ce998c1ef4caa33327a">check_empty</a>(level-&gt;map,level-&gt;index+level-&gt;largeur);<span class="comment">// BAS</span></div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    array[<a class="code" href="structures_8h.html#af625d3f3bc022848a558f2b18def5b15">DROITE</a>]=<a class="code" href="movement_8c.html#a7e80a1deedb94ce998c1ef4caa33327a">check_empty</a>(level-&gt;map,level-&gt;index+1);<span class="comment">// DROITE</span></div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    array[<a class="code" href="structures_8h.html#af07f8bf974fdf76afd17f2b97ac15a22">GAUCHE</a>]=<a class="code" href="movement_8c.html#a7e80a1deedb94ce998c1ef4caa33327a">check_empty</a>(level-&gt;map,level-&gt;index-1);<span class="comment">// GAUCHE</span></div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;}</div>
+<div class="ttc" id="amovement_8c_html_a7e80a1deedb94ce998c1ef4caa33327a"><div class="ttname"><a href="movement_8c.html#a7e80a1deedb94ce998c1ef4caa33327a">check_empty</a></div><div class="ttdeci">bool check_empty(liste_double *map, unsigned int index)</div><div class="ttdoc">fonction verifiant si un deplacement dans une direction est possible, en verifiant si la case suivant...</div><div class="ttdef"><b>Definition:</b> movement.c:137</div></div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="structures_8h.html#abd7bcdd3b14eec4414469f88f2bd8f12">BAS</a>, <a class="el" href="movement_8c.html#a7e80a1deedb94ce998c1ef4caa33327a">check_empty()</a>, <a class="el" href="structures_8h.html#af625d3f3bc022848a558f2b18def5b15">DROITE</a>, <a class="el" href="structures_8h.html#af07f8bf974fdf76afd17f2b97ac15a22">GAUCHE</a>, et <a class="el" href="structures_8h.html#acd0f9b88c35112b35f67d3cde4b2365c">HAUT</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="pathfinding_8c.html#a75b4ed69e3446882845e1752b82d659b">random_pathfinding()</a>.</p>
+
+</div>
+</div>
+<a id="a47ac3c1b2e136022dcd48f51d10f93dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47ac3c1b2e136022dcd48f51d10f93dd">&#9670;&nbsp;</a></span>random_from_array()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char random_from_array </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>array</em>[4]</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction qui permet de choisir un indice aleatoire dans une liste de 4 elements (correspondant aux 4 mouvements idealement disponibles pour le joueur)et verifiant si le deplacement est faisable avec la fonction precedente avant de l'effectuer. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">array</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>char </dd></dl>
+<div class="fragment"><div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;                                     {</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    <span class="comment">//? le random est mieux sans</span></div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    <span class="keywordtype">char</span> choice=rand() % (int)(array[0]+array[1]+array[2]+array[3]);</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> i=0;i&lt;4;i++){</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        <span class="keywordflow">if</span>(array[i]){</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;            <span class="keywordflow">if</span>(choice==0){</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;                <span class="keywordflow">return</span> i;</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;            }<span class="keywordflow">else</span>{</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;                choice--;</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;            }</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        }</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    }</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;}</div>
+</div><!-- fragment -->
+<p class="reference">Référencé par <a class="el" href="pathfinding_8c.html#a75b4ed69e3446882845e1752b82d659b">random_pathfinding()</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="movement_8h.html">movement.h</a></li>
+    <li class="footer">Généré le Vendredi 10 Juin 2022 08:34:22 pour Sokoban par <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
+</body>
+</html>

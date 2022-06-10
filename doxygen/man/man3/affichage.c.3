@@ -1,0 +1,544 @@
+.TH "src/affichage.c" 3 "Vendredi 10 Juin 2022" "Sokoban" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/affichage.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'affichage\&.h'\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBAFFICHAGE_H\fP"
+.br
+.in -1c
+.SS "Fonctions"
+
+.in +1c
+.ti -1c
+.RI "int \fBrenderer_set_color\fP (\fBruntime_t\fP *runtime, SDL_Color color)"
+.br
+.RI "permet l'affichage et le bon rendu des couleurs "
+.ti -1c
+.RI "int \fBrenderer_clear\fP (\fBruntime_t\fP *runtime)"
+.br
+.RI "efface le contenu de la fenetre "
+.ti -1c
+.RI "int \fBrenderer_setWindowColor\fP (\fBruntime_t\fP *runtime, SDL_Color color)"
+.br
+.RI "verifie que les rendus pour la fenetre est correcte "
+.ti -1c
+.RI "int \fBrenderer_clear_window\fP (\fBruntime_t\fP *runtime)"
+.br
+.RI "permet d'effacer les elements affiches sur une fenetre "
+.ti -1c
+.RI "SDL_Texture * \fBloadTexture\fP (const char *file_name, \fBruntime_t\fP *runtime)"
+.br
+.RI "charge les textures pour "
+.ti -1c
+.RI "bool \fBaffichage_init\fP (\fBruntime_t\fP *runtime)"
+.br
+.RI "initialise tout les drivers de la SDL "
+.ti -1c
+.RI "void \fBaffichage_quit\fP (\fBruntime_t\fP *runtime)"
+.br
+.RI "arrete le rendu visuel, ferme la fenetre, arrete la musique "
+.ti -1c
+.RI "void \fBaffichage_texture\fP (\fBruntime_t\fP *runtime, unsigned int texture_number, int X, int Y)"
+.br
+.RI "charge et affiche les textures du jeu "
+.ti -1c
+.RI "int \fBload_music\fP (\fBruntime_t\fP *runtime, const char *file_path)"
+.br
+.RI "charge les fichiers audio, erreur si pas de musique, et joue indefiniement la musique "
+.ti -1c
+.RI "void \fBprint_text\fP (\fBruntime_t\fP *runtime, char *text)"
+.br
+.RI "ecrit du texte dans la fenetre SDL "
+.ti -1c
+.RI "void \fBload_all_textures\fP (\fBruntime_t\fP *runtime)"
+.br
+.RI "charge les differentes textures a afficher "
+.ti -1c
+.RI "void \fBshow_game\fP (\fBruntime_t\fP *runtime)"
+.br
+.RI "charge et affiche le plateau de jeu, et affiche les textures "
+.in -1c
+.SH "Documentation des macros"
+.PP 
+.SS "#define AFFICHAGE_H"
+
+.SH "Documentation des fonctions"
+.PP 
+.SS "int renderer_set_color (\fBruntime_t\fP * runtime, SDL_Color color)"
+
+.PP
+permet l'affichage et le bon rendu des couleurs 
+.PP
+\fBParamètres\fP
+.RS 4
+\fIruntime\fP 
+.br
+\fIcolor\fP 
+.RE
+.PP
+\fBRenvoie\fP
+.RS 4
+int ; -1 si erreur, 0 sinon 
+.RE
+.PP
+
+.PP
+.nf
+16                                                           {
+17     if(0 != SDL_SetRenderDrawColor(runtime->renderer, color\&.r, color\&.g, color\&.b, color\&.a))
+18     {
+19         fprintf(stderr, "Erreur SDL_SetRenderDrawColor : %s", SDL_GetError());
+20         return -1;
+21     }
+22     return 0;
+23 }
+.fi
+.PP
+Références runtime_s::renderer\&.
+.PP
+Référencé par animate_box_moving(), random_pathfinding(), recurrence_pathfinding(), et renderer_setWindowColor()\&.
+.SS "int renderer_clear (\fBruntime_t\fP * runtime)"
+
+.PP
+efface le contenu de la fenetre 
+.PP
+\fBParamètres\fP
+.RS 4
+\fIruntime\fP 
+.RE
+.PP
+\fBRenvoie\fP
+.RS 4
+int 
+.RE
+.PP
+
+.PP
+.nf
+31                                       {
+32     if(0 != SDL_RenderClear(runtime->renderer))
+33     {
+34         fprintf(stderr, "Erreur SDL_RenderClear : %s", SDL_GetError());
+35         return -1;
+36     }
+37     return 0;
+38 }
+.fi
+.PP
+Références runtime_s::renderer\&.
+.PP
+Référencé par renderer_setWindowColor()\&.
+.SS "int renderer_setWindowColor (\fBruntime_t\fP * runtime, SDL_Color color)"
+
+.PP
+verifie que les rendus pour la fenetre est correcte 
+.PP
+\fBParamètres\fP
+.RS 4
+\fIruntime\fP 
+.br
+\fIcolor\fP 
+.RE
+.PP
+\fBRenvoie\fP
+.RS 4
+int 
+.RE
+.PP
+
+.PP
+.nf
+48 {
+49     if(renderer_set_color(runtime, color) < 0){
+50         return -1;
+51     }
+52     if(renderer_clear(runtime) < 0){
+53         return -1;
+54     }
+55     return 0;  
+56 }
+.fi
+.PP
+Références renderer_clear(), et renderer_set_color()\&.
+.PP
+Référencé par renderer_clear_window()\&.
+.SS "int renderer_clear_window (\fBruntime_t\fP * runtime)"
+
+.PP
+permet d'effacer les elements affiches sur une fenetre 
+.PP
+\fBParamètres\fP
+.RS 4
+\fIruntime\fP 
+.RE
+.PP
+\fBRenvoie\fP
+.RS 4
+int 
+.RE
+.PP
+
+.PP
+.nf
+65 {
+66     return renderer_setWindowColor(runtime, runtime->empty);
+67 }
+.fi
+.PP
+Références runtime_s::empty, et renderer_setWindowColor()\&.
+.PP
+Référencé par random_pathfinding(), recurrence_pathfinding(), et show_game()\&.
+.SS "SDL_Texture* loadTexture (const char * file_name, \fBruntime_t\fP * runtime)"
+
+.PP
+charge les textures pour 
+.PP
+\fBParamètres\fP
+.RS 4
+\fIfile_name\fP 
+.br
+\fIruntime\fP 
+.RE
+.PP
+\fBRenvoie\fP
+.RS 4
+SDL_Texture* 
+.RE
+.PP
+
+.PP
+.nf
+77 {
+78     //The final texture
+79     SDL_Texture* newTexture = NULL;
+80 
+81     //Load image at specified path
+82     SDL_Surface* loadedSurface = IMG_Load( file_name );
+83     if( loadedSurface == NULL )
+84     {
+85         fprintf(stderr, "Unable to load image %s! SDL_image Error: %s\n", file_name, IMG_GetError() );
+86     }
+87     else
+88     {
+89         //Create texture from surface pixels
+90         newTexture = SDL_CreateTextureFromSurface( runtime->renderer, loadedSurface );
+91         if( newTexture == NULL )
+92         {
+93             fprintf(stderr, "Unable to create texture from %s! SDL Error: %s\n", file_name, SDL_GetError() );
+94         }
+95         //Get rid of old loaded surface
+96         SDL_FreeSurface( loadedSurface );
+97     }
+98 
+99     return newTexture;
+100 }
+.fi
+.PP
+Références runtime_s::renderer\&.
+.PP
+Référencé par load_all_textures()\&.
+.SS "bool affichage_init (\fBruntime_t\fP * runtime)"
+
+.PP
+initialise tout les drivers de la SDL 
+.PP
+\fBParamètres\fP
+.RS 4
+\fIruntime\fP 
+.RE
+.PP
+\fBRenvoie\fP
+.RS 4
+true 
+.PP
+false 
+.RE
+.PP
+
+.PP
+.nf
+109                                        {
+110     if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK) != 0){ //SDL_INIT_AUDIO
+111         fprintf(stderr, "Erreur SDL_Init : %s", SDL_GetError());
+112         return false;
+113     }
+114     runtime->win = SDL_CreateWindow("SDL2", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_SHOWN);
+115     if(NULL == runtime->win)
+116     {
+117         fprintf(stderr, "Erreur SDL_CreateWindow : %s", SDL_GetError());
+118         return false;
+119     }
+120     runtime->renderer = SDL_CreateRenderer(runtime->win, -1, SDL_RENDERER_ACCELERATED);
+121     if(NULL == runtime->renderer)
+122     {
+123         fprintf(stderr, "Erreur SDL_CreateRenderer : %s", SDL_GetError());
+124         return false;
+125     }
+126     // for(int i=0;i<NUMBER_TEXTURES;i++){
+127     //     runtime->textures[i] = SDL_CreateTexture(runtime->renderer, SDL_PIXELFORMAT_RGBA8888,  SDL_TEXTUREACCESS_STATIC, SIZE_TEXTURE, SIZE_TEXTURE);
+128     //     if(NULL == runtime->textures[i])
+129     //     {
+130     //         fprintf(stderr, "Erreur SDL_CreateTexture : %s", SDL_GetError());
+131     //         return false;
+132     //     }
+133     // }
+134     if(IMG_Init(IMG_INIT_PNG|IMG_INIT_JPG)!=(IMG_INIT_PNG|IMG_INIT_JPG)){
+135         fprintf(stderr,"Erreur IMG_Init : %s\n", IMG_GetError());
+136         return false;
+137     }
+138     if(TTF_Init()){
+139         fprintf(stderr,"Erreur TTF_INIT : %s\n", TTF_GetError());
+140         return false;
+141     }
+142     if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024) == -1) //Initialisation de l'API Mixer
+143     {
+144         fprintf(stderr,"Erreur Mix_OpenAudio :%s\n", Mix_GetError());
+145         return false;
+146     }
+147     load_music(runtime,"data/sounds/8bit\&.mp3");
+148     return true;
+149 }
+.fi
+.PP
+Références load_music(), runtime_s::renderer, et runtime_s::win\&.
+.SS "void affichage_quit (\fBruntime_t\fP * runtime)"
+
+.PP
+arrete le rendu visuel, ferme la fenetre, arrete la musique 
+.PP
+\fBParamètres\fP
+.RS 4
+\fIruntime\fP 
+.RE
+.PP
+
+.PP
+.nf
+157                                        {
+158     for(int i=0;i<NUMBER_TEXTURES;i++){
+159         if(NULL != runtime->textures[i]){
+160             SDL_DestroyTexture(runtime->textures[i]);
+161         }
+162     }
+163     if(NULL != runtime->renderer){
+164         SDL_DestroyRenderer(runtime->renderer);
+165     }
+166     if(NULL != runtime->win){
+167         SDL_DestroyWindow(runtime->win);
+168     }
+169     if(NULL != runtime->musique){
+170         Mix_FreeMusic(runtime->musique); //Liberation de la musique
+171         Mix_CloseAudio(); //Fermeture de l'API
+172     }
+173     SDL_Quit();
+174     free(runtime);
+175 }
+.fi
+.PP
+Références runtime_s::musique, NUMBER_TEXTURES, runtime_s::renderer, runtime_s::textures, et runtime_s::win\&.
+.SS "void affichage_texture (\fBruntime_t\fP * runtime, unsigned int texture_number, int X, int Y)"
+
+.PP
+charge et affiche les textures du jeu 
+.PP
+\fBParamètres\fP
+.RS 4
+\fIruntime\fP 
+.br
+\fItexture_number\fP 
+.br
+\fIX\fP 
+.br
+\fIY\fP 
+.RE
+.PP
+
+.PP
+.nf
+185                                                                                   {
+186     SDL_Rect dest = {(int)X*SIZE_TEXTURE,(int)Y*SIZE_TEXTURE,(int)SIZE_TEXTURE,(int)SIZE_TEXTURE};
+187     SDL_RenderCopy(runtime->renderer, runtime->textures[texture_number], NULL, &dest);
+188 }
+.fi
+.PP
+Références runtime_s::renderer, SIZE_TEXTURE, et runtime_s::textures\&.
+.PP
+Référencé par show_game()\&.
+.SS "int load_music (\fBruntime_t\fP * runtime, const char * file_path)"
+
+.PP
+charge les fichiers audio, erreur si pas de musique, et joue indefiniement la musique 
+.PP
+\fBParamètres\fP
+.RS 4
+\fIruntime\fP 
+.br
+\fIfile_path\fP 
+.RE
+.PP
+\fBRenvoie\fP
+.RS 4
+int 
+.RE
+.PP
+
+.PP
+.nf
+197                                                          {
+198     runtime->musique = Mix_LoadMUS(file_path); //Chargement de la musique
+199     if(runtime->musique==NULL){
+200         printf("[ERROR] loading mp3 file %s",file_path);
+201         return -1;
+202     }
+203     Mix_PlayMusic(runtime->musique, -1); //Jouer infiniment la musique
+204     return 0;
+205 }
+.fi
+.PP
+Références runtime_s::musique\&.
+.PP
+Référencé par affichage_init()\&.
+.SS "void print_text (\fBruntime_t\fP * runtime, char * text)"
+
+.PP
+ecrit du texte dans la fenetre SDL 
+.PP
+\fBParamètres\fP
+.RS 4
+\fIruntime\fP 
+.br
+\fItext\fP 
+.RE
+.PP
+
+.PP
+.nf
+212                                                {
+213     //this opens a font style and sets a size
+214     TTF_Font* Sans = TTF_OpenFont("Sans\&.ttf", 30);
+215 
+216     // as TTF_RenderText_Solid could only be used on
+217     // SDL_Surface then you have to create the surface first
+218     SDL_Surface* surfaceMessage = TTF_RenderText_Solid(Sans, text,(SDL_Color ){0, 0, 0,255}); 
+219 
+220     // now you can convert it into a texture
+221     SDL_Texture* Message = SDL_CreateTextureFromSurface(runtime->renderer, surfaceMessage);
+222 
+223     SDL_Rect Message_rect= {0,0,100,100}; //create a rect
+224     SDL_RenderCopy(runtime->renderer, Message, NULL, &Message_rect);
+225 
+226     // Don't forget to free your surface and texture
+227     SDL_FreeSurface(surfaceMessage);
+228     SDL_DestroyTexture(Message);
+229 }
+.fi
+.PP
+Références runtime_s::renderer\&.
+.SS "void load_all_textures (\fBruntime_t\fP * runtime)"
+
+.PP
+charge les differentes textures a afficher 
+.PP
+\fBParamètres\fP
+.RS 4
+\fIruntime\fP 
+.RE
+.PP
+
+.PP
+.nf
+236                                           {
+237     runtime->textures[0]=loadTexture("data/textures/brick1\&.png",runtime);  
+238     runtime->textures[1]=loadTexture("data/textures/caisse3\&.png",runtime); 
+239     runtime->textures[2]=loadTexture("data/textures/perso2\&.png",runtime);  
+240     runtime->textures[3]=loadTexture("data/textures/cible2\&.png",runtime);  
+241     runtime->textures[4]=loadTexture("data/textures/caisse4\&.png",runtime); 
+242     runtime->textures[5]=loadTexture("data/textures/brick2\&.png",runtime);  
+243 }
+.fi
+.PP
+Références loadTexture(), et runtime_s::textures\&.
+.SS "void show_game (\fBruntime_t\fP * runtime)"
+
+.PP
+charge et affiche le plateau de jeu, et affiche les textures 
+.PP
+\fBParamètres\fP
+.RS 4
+\fIruntime\fP 
+.RE
+.PP
+gere les differentes textures a afficher selon la situation rencontree
+.PP
+.nf
+250                                   {
+251     renderer_clear_window(runtime);
+252     int max_x,max_y;
+253     unsigned int index=0;
+254     unsigned int x,y;
+255     case_t * cell;
+256     // char title[256];
+257     SDL_GetWindowSize(runtime->win,&max_x,&max_y);
+258     max_x=(unsigned int)(max_x*1\&.1)/runtime->texture_size;max_y=(unsigned int)(max_y*1\&.1)/runtime->texture_size;
+259     liste_double_node_t *current_node = runtime->level->map->first;
+260     while(current_node != NULL) {
+261         x=x2x(index,runtime->level->largeur);
+262         y=x2y(index,runtime->level->largeur);
+263         if((int)x<max_x && (int)y<max_y){
+264             cell=(case_t*)current_node->data;
+265             /**
+266              * @brief gere les differentes textures a afficher selon la situation rencontree
+267              * 
+268              */
+269             switch (cell->bloc)
+270             {
+271                 case WALL:
+272                     if(rand() % 10000 < 1){
+273                         affichage_texture(runtime,5,x,y);
+274                     }else{
+275                         affichage_texture(runtime,0,x,y);
+276                     }
+277                     break;
+278                 case BOX:
+279                     if(cell->cible){
+280                         affichage_texture(runtime,4,x,y);
+281                     }else{
+282                         affichage_texture(runtime,1,x,y);
+283                     }
+284                     break;
+285                 case BODY:
+286                     if(cell->cible){
+287                         affichage_texture(runtime,3,x,y);
+288                     }
+289                     affichage_texture(runtime,2,x,y);
+290                     break;
+291                 default:
+292                     if(cell->cible){
+293                         affichage_texture(runtime,3,x,y);
+294                     }
+295                     break;
+296             }
+297         }
+298         index++;
+299         current_node = current_node->next;  
+300     }
+301     
+302 }
+.fi
+.PP
+Références affichage_texture(), Case::bloc, BODY, BOX, Case::cible, node_t::data, runtime_s::level, node_t::next, renderer_clear_window(), runtime_s::texture_size, WALL, runtime_s::win, x2x, et x2y\&.
+.PP
+Référencé par random_pathfinding(), recurrence_pathfinding(), et update_zoom()\&.
+.SH "Auteur"
+.PP 
+Généré automatiquement par Doxygen pour Sokoban à partir du code source\&.

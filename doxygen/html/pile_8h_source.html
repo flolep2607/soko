@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Sokoban:  Fichier source de src/pile.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Sokoban
+   </div>
+   <div id="projectbrief">Sokoban en C</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('pile_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">pile.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="pile_8h.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#ifndef STRUCTURES_H</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="structures_8h.html">structures.h</a>&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#define STRUCTURES_H</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">//? case  =&gt; case_t</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">//? map   =&gt; liste_double</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">//? coup  =&gt; coup_t</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">//? coups =&gt; liste_double</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">//? level =&gt; level_t</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">//? levels=&gt; liste_double</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<a class="code" href="structliste__double.html">liste_double</a> *<a class="code" href="pile_8h.html#ad560ee0e68889ad773a4b1a9acf78f84">liste_double_init</a>();</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<a class="code" href="structlevel__t.html">level_t</a> *<a class="code" href="pile_8h.html#a02afd016d79109bf8f797df30ed8df7a">level_init</a>();</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<a class="code" href="structCase.html">case_t</a>* <a class="code" href="pile_8h.html#a642c3814789a10f9a018ec9a90c60f93">create_case</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> bloc, <span class="keywordtype">bool</span> cible);</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<a class="code" href="structCoups.html">coup_t</a>* <a class="code" href="pile_8h.html#aec9fe1dac5f230d10ea29cb2fca09690">create_coup</a> (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> direction, <span class="keywordtype">bool</span> pousse);</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keywordtype">void</span> *<a class="code" href="pile_8h.html#ac4aa97f1e6c30e0cd47a546faa145595">liste_double_get</a>(<a class="code" href="structliste__double.html">liste_double</a> *, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>);</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keywordtype">void</span> <a class="code" href="pile_8h.html#ad12d6a6d9f35d4c0d3b584dd29579c41">liste_double_ajout_en_tete</a>(<a class="code" href="structliste__double.html">liste_double</a> *, <span class="keywordtype">void</span> *);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keywordtype">void</span> <a class="code" href="pile_8h.html#a280fbeeacb23f9e8a7bad141f13f516f">liste_double_ajout_en_queue</a>(<a class="code" href="structliste__double.html">liste_double</a> *, <span class="keywordtype">void</span> * data);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keywordtype">void</span> <a class="code" href="pile_8h.html#a46a1a2437fefa9f41911a6367e0cdc4d">liste_double_vider</a>(<a class="code" href="structliste__double.html">liste_double</a> *liste,<span class="keywordtype">bool</span> levels);</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keywordtype">void</span> *<a class="code" href="pile_8h.html#a30dbc2ab31e27aaa6726f3e6c958eec2">liste_double_supprimer_tete</a>(<a class="code" href="structliste__double.html">liste_double</a> *);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keywordtype">void</span> *<a class="code" href="pile_8h.html#a131477022733e1ada430506b5bf858e2">liste_double_depiler_tete</a>(<a class="code" href="structliste__double.html">liste_double</a> *);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keywordtype">void</span> <a class="code" href="pile_8h.html#abb7e25dc188aa06a5000c7a3ea4c7d83">liste_double_destroy</a>(<a class="code" href="structliste__double.html">liste_double</a> *);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keywordtype">void</span> <a class="code" href="pile_8h.html#aa22846b68df83fc80b5b7626682158ab">level_destroy</a>(<a class="code" href="structlevel__t.html">level_t</a>* level);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keywordtype">void</span> <a class="code" href="pile_8h.html#a31efd9f4d84f37e4da41638cf6904297">levels_destroy</a>(<a class="code" href="structliste__double.html">liste_double</a> *levels);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keywordtype">int</span> <a class="code" href="pile_8h.html#a7753d0c628a7ed2e2e238fdaaab455f9">somme_poussees</a>(<a class="code" href="structliste__double.html">liste_double</a> *coups);</div>
+<div class="ttc" id="apile_8h_html_a02afd016d79109bf8f797df30ed8df7a"><div class="ttname"><a href="pile_8h.html#a02afd016d79109bf8f797df30ed8df7a">level_init</a></div><div class="ttdeci">level_t * level_init()</div><div class="ttdoc">Initialise une structure level_t. Met les valeurs des donnees de type entiers a 0 et celle de type bo...</div><div class="ttdef"><b>Definition:</b> pile.c:27</div></div>
+<div class="ttc" id="apile_8h_html_a131477022733e1ada430506b5bf858e2"><div class="ttname"><a href="pile_8h.html#a131477022733e1ada430506b5bf858e2">liste_double_depiler_tete</a></div><div class="ttdeci">void * liste_double_depiler_tete(liste_double *)</div><div class="ttdoc">Depile l'element en tete de la liste chainee et nous retourne sa valeur.</div><div class="ttdef"><b>Definition:</b> pile.c:229</div></div>
+<div class="ttc" id="apile_8h_html_a280fbeeacb23f9e8a7bad141f13f516f"><div class="ttname"><a href="pile_8h.html#a280fbeeacb23f9e8a7bad141f13f516f">liste_double_ajout_en_queue</a></div><div class="ttdeci">void liste_double_ajout_en_queue(liste_double *, void *data)</div><div class="ttdoc">Empile un maillon a la fin d'une liste chainee en prenant en parametre la valeur contenu dans le mail...</div><div class="ttdef"><b>Definition:</b> pile.c:172</div></div>
+<div class="ttc" id="apile_8h_html_a30dbc2ab31e27aaa6726f3e6c958eec2"><div class="ttname"><a href="pile_8h.html#a30dbc2ab31e27aaa6726f3e6c958eec2">liste_double_supprimer_tete</a></div><div class="ttdeci">void * liste_double_supprimer_tete(liste_double *)</div><div class="ttdoc">Supprime une maillon d'une liste chainee dont la position est passee en parametre.</div><div class="ttdef"><b>Definition:</b> pile.c:196</div></div>
+<div class="ttc" id="apile_8h_html_a31efd9f4d84f37e4da41638cf6904297"><div class="ttname"><a href="pile_8h.html#a31efd9f4d84f37e4da41638cf6904297">levels_destroy</a></div><div class="ttdeci">void levels_destroy(liste_double *levels)</div><div class="ttdoc">Supprime une liste chainee de level en appliquant en boucle la fonction &quot;level_destroy&quot; tant que le p...</div><div class="ttdef"><b>Definition:</b> pile.c:314</div></div>
+<div class="ttc" id="apile_8h_html_a46a1a2437fefa9f41911a6367e0cdc4d"><div class="ttname"><a href="pile_8h.html#a46a1a2437fefa9f41911a6367e0cdc4d">liste_double_vider</a></div><div class="ttdeci">void liste_double_vider(liste_double *liste, bool levels)</div><div class="ttdoc">Vide une liste chainee. Parcours la liste et libere chacun des maillons pour les supprimer.</div><div class="ttdef"><b>Definition:</b> pile.c:272</div></div>
+<div class="ttc" id="apile_8h_html_a642c3814789a10f9a018ec9a90c60f93"><div class="ttname"><a href="pile_8h.html#a642c3814789a10f9a018ec9a90c60f93">create_case</a></div><div class="ttdeci">case_t * create_case(unsigned char bloc, bool cible)</div><div class="ttdoc">Creer une structure case_t en prenant le contenu de la structure en parametre.</div><div class="ttdef"><b>Definition:</b> pile.c:14</div></div>
+<div class="ttc" id="apile_8h_html_a7753d0c628a7ed2e2e238fdaaab455f9"><div class="ttname"><a href="pile_8h.html#a7753d0c628a7ed2e2e238fdaaab455f9">somme_poussees</a></div><div class="ttdeci">int somme_poussees(liste_double *coups)</div><div class="ttdef"><b>Definition:</b> pile.c:327</div></div>
+<div class="ttc" id="apile_8h_html_aa22846b68df83fc80b5b7626682158ab"><div class="ttname"><a href="pile_8h.html#aa22846b68df83fc80b5b7626682158ab">level_destroy</a></div><div class="ttdeci">void level_destroy(level_t *level)</div><div class="ttdoc">Supprime une structure niveau en liberant les liste chainees contenu dans la structure (map et coups)...</div><div class="ttdef"><b>Definition:</b> pile.c:298</div></div>
+<div class="ttc" id="apile_8h_html_abb7e25dc188aa06a5000c7a3ea4c7d83"><div class="ttname"><a href="pile_8h.html#abb7e25dc188aa06a5000c7a3ea4c7d83">liste_double_destroy</a></div><div class="ttdeci">void liste_double_destroy(liste_double *)</div><div class="ttdoc">Supprime une liste et libere l'espace memoire de chacun des maillons de la liste.</div><div class="ttdef"><b>Definition:</b> pile.c:252</div></div>
+<div class="ttc" id="apile_8h_html_ac4aa97f1e6c30e0cd47a546faa145595"><div class="ttname"><a href="pile_8h.html#ac4aa97f1e6c30e0cd47a546faa145595">liste_double_get</a></div><div class="ttdeci">void * liste_double_get(liste_double *, unsigned int)</div><div class="ttdoc">recupere la valeur d'un element d'une liste a une certaine position passee en parametre</div><div class="ttdef"><b>Definition:</b> pile.c:133</div></div>
+<div class="ttc" id="apile_8h_html_ad12d6a6d9f35d4c0d3b584dd29579c41"><div class="ttname"><a href="pile_8h.html#ad12d6a6d9f35d4c0d3b584dd29579c41">liste_double_ajout_en_tete</a></div><div class="ttdeci">void liste_double_ajout_en_tete(liste_double *, void *)</div><div class="ttdoc">Empile un maillon au debut d'une liste chainee en prenant en parametre la donnee du maillon a ajouter...</div><div class="ttdef"><b>Definition:</b> pile.c:149</div></div>
+<div class="ttc" id="apile_8h_html_ad560ee0e68889ad773a4b1a9acf78f84"><div class="ttname"><a href="pile_8h.html#ad560ee0e68889ad773a4b1a9acf78f84">liste_double_init</a></div><div class="ttdeci">liste_double * liste_double_init()</div><div class="ttdoc">intialise une liste chainee, met la valeur de ses donnees a 0 et intialise le pointeur de tete et de ...</div><div class="ttdef"><b>Definition:</b> pile.c:64</div></div>
+<div class="ttc" id="apile_8h_html_aec9fe1dac5f230d10ea29cb2fca09690"><div class="ttname"><a href="pile_8h.html#aec9fe1dac5f230d10ea29cb2fca09690">create_coup</a></div><div class="ttdeci">coup_t * create_coup(unsigned char direction, bool pousse)</div><div class="ttdoc">Creer une structure coup_t en prenant le contenu de la structure en parametre.</div><div class="ttdef"><b>Definition:</b> pile.c:47</div></div>
+<div class="ttc" id="astructCase_html"><div class="ttname"><a href="structCase.html">Case</a></div><div class="ttdoc">créer la structure Case qui spécifie le type de chaque case d'un niveau. Spécifie le type de bloc,...</div><div class="ttdef"><b>Definition:</b> structures.h:60</div></div>
+<div class="ttc" id="astructCoups_html"><div class="ttname"><a href="structCoups.html">Coups</a></div><div class="ttdoc">créer la structure Coups qui spécifie le type des Coups effectués. Spécifie la direction du coup et s...</div><div class="ttdef"><b>Definition:</b> structures.h:71</div></div>
+<div class="ttc" id="astructlevel__t_html"><div class="ttname"><a href="structlevel__t.html">level_t</a></div><div class="ttdoc">Créer la structure Level qui permet de spécifier un niveau en entier. Spécifie la construction de la ...</div></div>
+<div class="ttc" id="astructliste__double_html"><div class="ttname"><a href="structliste__double.html">liste_double</a></div><div class="ttdef"><b>Definition:</b> structures.h:28</div></div>
+<div class="ttc" id="astructures_8h_html"><div class="ttname"><a href="structures_8h.html">structures.h</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="pile_8h.html">pile.h</a></li>
+    <li class="footer">Généré le Vendredi 10 Juin 2022 08:34:21 pour Sokoban par <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
+</body>
+</html>

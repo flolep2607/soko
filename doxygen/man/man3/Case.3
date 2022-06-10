@@ -1,0 +1,45 @@
+.TH "Case" 3 "Vendredi 10 Juin 2022" "Sokoban" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Case \- créer la structure \fBCase\fP qui spécifie le type de chaque case d'un niveau\&. Spécifie le type de bloc, la présence d'une cible ou non et le poids (sert pour le pathfinding)  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <structures\&.h>\fP
+.SS "Champs de données"
+
+.in +1c
+.ti -1c
+.RI "unsigned char \fBbloc\fP"
+.br
+.ti -1c
+.RI "bool \fBcible\fP"
+.br
+.ti -1c
+.RI "bool \fBweight\fP"
+.br
+.in -1c
+.SH "Description détaillée"
+.PP 
+créer la structure \fBCase\fP qui spécifie le type de chaque case d'un niveau\&. Spécifie le type de bloc, la présence d'une cible ou non et le poids (sert pour le pathfinding) 
+.SH "Documentation des champs"
+.PP 
+.SS "unsigned char Case::bloc"
+
+.PP
+Référencé par create_case(), move_human(), random_pathfinding(), save_game(), show_game(), et working_pathfinding()\&.
+.SS "bool Case::cible"
+
+.PP
+Référencé par create_case(), move_human(), save_game(), et show_game()\&.
+.SS "bool Case::weight"
+
+.PP
+Référencé par working_pathfinding()\&.
+
+.SH "Auteur"
+.PP 
+Généré automatiquement par Doxygen pour Sokoban à partir du code source\&.

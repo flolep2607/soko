@@ -1,0 +1,572 @@
+.TH "src/movement.c" 3 "Vendredi 10 Juin 2022" "Sokoban" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/movement.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'movement\&.h'\fP
+.br
+\fC#include 'animation\&.h'\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBMOVEMENT_H\fP"
+.br
+.ti -1c
+.RI "#define \fBANIMATION_H\fP"
+.br
+.in -1c
+.SS "Fonctions"
+
+.in +1c
+.ti -1c
+.RI "void \fBx2xy\fP (unsigned int X, unsigned int LONG, unsigned int *x, unsigned int *y)"
+.br
+.RI "transforme les donnees de la liste chainee (en 1 dimension) en un tableau (de 2 dimensions) pour l'affichage du niveau "
+.ti -1c
+.RI "bool \fBis_on_map\fP (\fBlevel_t\fP *level, unsigned int x, unsigned int y)"
+.br
+.RI "fonction permettant de verifier si l'on a pas depasse les limites du niveau (utile aussi pour le pathfiding) "
+.ti -1c
+.RI "bool \fBis_on_map2\fP (unsigned \fBlargeur\fP, unsigned int hauteur, unsigned int x, unsigned int y)"
+.br
+.RI "permet aussi de verifier si l'on a pas depasse les limites du niveau "
+.ti -1c
+.RI "unsigned int \fBmove_direction\fP (char direction, unsigned int index, unsigned int \fBlargeur\fP)"
+.br
+.RI "permet de connaitre les coordonnees de la case qui se trouve dans la direction demandee "
+.ti -1c
+.RI "bool \fBis_finish\fP (\fBliste_double\fP *map)"
+.br
+.RI "verifie si toute les cibles sont occupees et renvoie true si c'est le cas "
+.ti -1c
+.RI "void \fBmove_object\fP (\fBliste_double\fP *map, unsigned int from, unsigned int to)"
+.br
+.RI "deplace un objet vers la position demandee (donc adjacente) "
+.ti -1c
+.RI "bool \fBcheck_empty\fP (\fBliste_double\fP *map, unsigned int index)"
+.br
+.RI "fonction verifiant si un deplacement dans une direction est possible, en verifiant si la case suivante est bien vide "
+.ti -1c
+.RI "char \fBrandom_from_array\fP (bool array[4])"
+.br
+.RI "Fonction qui permet de choisir un indice aleatoire dans une liste de 4 elements (correspondant aux 4 mouvements idealement disponibles pour le joueur)et verifiant si le deplacement est faisable avec la fonction precedente avant de l'effectuer\&. "
+.ti -1c
+.RI "void \fBpossible_move\fP (\fBlevel_t\fP *level, bool *array)"
+.br
+.RI "verifie la nature des blocs adjacents pour determiner les mouvements possibles "
+.ti -1c
+.RI "void \fBgo_all_back\fP (\fBlevel_t\fP *level, \fBruntime_t\fP *runtime)"
+.br
+.RI "permet de depiler la pile des mouvements au maximum, et donc de revenir a la situation initiale "
+.ti -1c
+.RI "bool \fBgo_back\fP (\fBlevel_t\fP *level, \fBruntime_t\fP *runtime)"
+.br
+.RI "deplier la double pile d'un element pour connaitre le dernier deplacement effectue "
+.ti -1c
+.RI "bool \fBmove_human\fP (\fBlevel_t\fP *level, char direction, bool save, bool move_box, \fBruntime_t\fP *runtime)"
+.br
+.RI "gere les deplacements du joueur et de l'objet "
+.in -1c
+.SH "Documentation des macros"
+.PP 
+.SS "#define MOVEMENT_H"
+
+.SS "#define ANIMATION_H"
+
+.SH "Documentation des fonctions"
+.PP 
+.SS "void x2xy (unsigned int X, unsigned int LONG, unsigned int * x, unsigned int * y)"
+
+.PP
+transforme les donnees de la liste chainee (en 1 dimension) en un tableau (de 2 dimensions) pour l'affichage du niveau 
+.PP
+\fBParamètres\fP
+.RS 4
+\fIX\fP 
+.br
+\fILONG\fP 
+.br
+\fIx\fP 
+.br
+\fIy\fP 
+.RE
+.PP
+
+.PP
+.nf
+22                                                                              {
+23     *x=X%LONG;
+24     *y=X/LONG;
+25 }
+.fi
+.SS "bool is_on_map (\fBlevel_t\fP * level, unsigned int x, unsigned int y)"
+
+.PP
+fonction permettant de verifier si l'on a pas depasse les limites du niveau (utile aussi pour le pathfiding) 
+.PP
+\fBParamètres\fP
+.RS 4
+\fIlevel\fP 
+.br
+\fIx\fP 
+.br
+\fIy\fP 
+.RE
+.PP
+\fBRenvoie\fP
+.RS 4
+true 
+.PP
+false 
+.RE
+.PP
+
+.PP
+.nf
+37                                                              {
+38     if(level->hauteur>y && level->largeur>x){
+39         return true;
+40     }    
+41     return false;
+42 }
+.fi
+.PP
+Référencé par random_pathfinding()\&.
+.SS "bool is_on_map2 (unsigned largeur, unsigned int hauteur, unsigned int x, unsigned int y)"
+
+.PP
+permet aussi de verifier si l'on a pas depasse les limites du niveau 
+.PP
+\fBParamètres\fP
+.RS 4
+\fIlargeur\fP 
+.br
+\fIhauteur\fP 
+.br
+\fIx\fP 
+.br
+\fIy\fP 
+.RE
+.PP
+\fBRenvoie\fP
+.RS 4
+true 
+.PP
+false 
+.RE
+.PP
+
+.PP
+.nf
+54                                                                                      {
+55     if(hauteur>y && largeur>x){//? unsigned donc inutile && y>=0 && x>=0 
+56         return true;
+57     }    
+58     return false;
+59 }
+.fi
+.PP
+Références largeur()\&.
+.SS "unsigned int move_direction (char direction, unsigned int index, unsigned int largeur)"
+
+.PP
+permet de connaitre les coordonnees de la case qui se trouve dans la direction demandee 
+.PP
+\fBParamètres\fP
+.RS 4
+\fIdirection\fP 
+.br
+\fIindex\fP 
+.br
+\fIlargeur\fP 
+.RE
+.PP
+\fBRenvoie\fP
+.RS 4
+unsigned int 
+.RE
+.PP
+
+.PP
+.nf
+69                                                                                    {
+70     switch (direction)
+71     {
+72         case HAUT:
+73             return index-largeur;
+74             break;
+75         case BAS:
+76             return index+largeur;
+77             break;
+78         case DROITE:
+79             return index+1;
+80             break;
+81         case GAUCHE:
+82             return index-1;
+83             break;
+84         default:
+85             fprintf(stderr,"[ERROR] Direction %d\n",direction);
+86             exit(-1);
+87             break;
+88     }
+89     fprintf(stderr,"[ERROR] No Direction\n");
+90     exit(-1);
+91 }
+.fi
+.PP
+Références BAS, DROITE, GAUCHE, HAUT, et largeur()\&.
+.PP
+Référencé par move_human(), et working_pathfinding()\&.
+.SS "bool is_finish (\fBliste_double\fP * map)"
+
+.PP
+verifie si toute les cibles sont occupees et renvoie true si c'est le cas 
+.PP
+\fBParamètres\fP
+.RS 4
+\fImap\fP 
+.RE
+.PP
+\fBRenvoie\fP
+.RS 4
+true 
+.PP
+false peut etre opti en mettant une pile de cible 
+.RE
+.PP
+
+.PP
+.nf
+101 { 
+102     liste_double_node_t *current_node = map->first;
+103     bool cible;
+104     unsigned char bloc;
+105     while (current_node != NULL)
+106     {
+107         bloc=((case_t *)current_node->data)->bloc;
+108         cible=((case_t *)current_node->data)->cible;
+109         if((bloc==2 && !cible)||(cible && bloc!=2)){
+110             return false;
+111         }
+112         current_node = current_node->next;
+113     }
+114     return true;
+115 }
+.fi
+.PP
+Références node_t::data, liste_double::first, et node_t::next\&.
+.PP
+Référencé par move_human()\&.
+.SS "void move_object (\fBliste_double\fP * map, unsigned int from, unsigned int to)"
+
+.PP
+deplace un objet vers la position demandee (donc adjacente) 
+.PP
+\fBParamètres\fP
+.RS 4
+\fImap\fP 
+.br
+\fIfrom\fP 
+.br
+\fIto\fP 
+.RE
+.PP
+
+.PP
+.nf
+124                                                                      {//unsigned char object_value
+125     ((case_t *)liste_double_get(map,to))->bloc=((case_t *)liste_double_get(map,from))->bloc;
+126     ((case_t *)liste_double_get(map,from))->bloc=0;
+127 }
+.fi
+.PP
+Références liste_double_get()\&.
+.PP
+Référencé par go_back(), et move_human()\&.
+.SS "bool check_empty (\fBliste_double\fP * map, unsigned int index)"
+
+.PP
+fonction verifiant si un deplacement dans une direction est possible, en verifiant si la case suivante est bien vide 
+.PP
+\fBParamètres\fP
+.RS 4
+\fImap\fP 
+.br
+\fIindex\fP 
+.RE
+.PP
+\fBRenvoie\fP
+.RS 4
+true 
+.PP
+false 
+.RE
+.PP
+
+.PP
+.nf
+137                                                       {
+138     return ((case_t*)liste_double_get(map,index))->bloc == 0;
+139 }
+.fi
+.PP
+Références liste_double_get()\&.
+.PP
+Référencé par possible_move()\&.
+.SS "char random_from_array (bool array[4])"
+
+.PP
+Fonction qui permet de choisir un indice aleatoire dans une liste de 4 elements (correspondant aux 4 mouvements idealement disponibles pour le joueur)et verifiant si le deplacement est faisable avec la fonction precedente avant de l'effectuer\&. 
+.PP
+\fBParamètres\fP
+.RS 4
+\fIarray\fP 
+.RE
+.PP
+\fBRenvoie\fP
+.RS 4
+char 
+.RE
+.PP
+
+.PP
+.nf
+149                                      {
+150     //? le random est mieux sans
+151     char choice=rand() % (int)(array[0]+array[1]+array[2]+array[3]);
+152     for(unsigned char i=0;i<4;i++){
+153         if(array[i]){
+154             if(choice==0){
+155                 return i;
+156             }else{
+157                 choice--;
+158             }
+159         }
+160     }
+161     return -1;
+162 }
+.fi
+.PP
+Référencé par random_pathfinding()\&.
+.SS "void possible_move (\fBlevel_t\fP * level, bool * array)"
+
+.PP
+verifie la nature des blocs adjacents pour determiner les mouvements possibles 
+.PP
+\fBParamètres\fP
+.RS 4
+\fIlevel\fP 
+.br
+\fIarray\fP 
+.RE
+.PP
+
+.PP
+.nf
+170                                               {
+171     array[HAUT]=check_empty(level->map,level->index-level->largeur);// HAUT
+172     array[BAS]=check_empty(level->map,level->index+level->largeur);// BAS
+173     array[DROITE]=check_empty(level->map,level->index+1);// DROITE
+174     array[GAUCHE]=check_empty(level->map,level->index-1);// GAUCHE
+175 }
+.fi
+.PP
+Références BAS, check_empty(), DROITE, GAUCHE, et HAUT\&.
+.PP
+Référencé par random_pathfinding()\&.
+.SS "void go_all_back (\fBlevel_t\fP * level, \fBruntime_t\fP * runtime)"
+
+.PP
+permet de depiler la pile des mouvements au maximum, et donc de revenir a la situation initiale 
+.PP
+\fBParamètres\fP
+.RS 4
+\fIlevel\fP 
+.br
+\fIruntime\fP 
+.RE
+.PP
+
+.PP
+.nf
+184                                                    {
+185     while(go_back(level,runtime)){}
+186 }
+.fi
+.PP
+Références go_back()\&.
+.PP
+Référencé par event_handler()\&.
+.SS "bool go_back (\fBlevel_t\fP * level, \fBruntime_t\fP * runtime)"
+
+.PP
+deplier la double pile d'un element pour connaitre le dernier deplacement effectue 
+.PP
+\fBParamètres\fP
+.RS 4
+\fIlevel\fP 
+.br
+\fIruntime\fP 
+.RE
+.PP
+\fBRenvoie\fP
+.RS 4
+true 
+.PP
+false 
+.RE
+.PP
+identifie le coup deplile et 'l'inverse' afin d'annuler le deplacement effectue precedement
+.PP
+deplace le joueur et l'objet dans le sens contraire au dernier coup ( = reviens en arriere)
+.PP
+.nf
+197                                                {
+198     coup_t* coup=(coup_t*)liste_double_depiler_tete(level->coups);
+199     if(coup==NULL){
+200         return false;
+201     }
+202     unsigned int old_index=level->index;
+203     unsigned int old_index_box=old_index;
+204 
+205     /**
+206      * @brief identifie le coup deplile et "l'inverse" afin d'annuler le deplacement effectue precedement
+207      * 
+208      */
+209     switch (coup->direction)
+210     {
+211         case HAUT:
+212             coup->direction=BAS;
+213             old_index_box-=level->largeur;
+214             break;
+215         case BAS:
+216             coup->direction=HAUT;
+217             old_index_box+=level->largeur;
+218             break;
+219         case GAUCHE:
+220             coup->direction=DROITE;
+221             old_index_box--;
+222             break;
+223         case DROITE:
+224             coup->direction=GAUCHE;
+225             old_index_box++;
+226             break;
+227         
+228         default:
+229             break;
+230     }
+231 
+232     /**
+233      * @brief deplace le joueur et l'objet dans le sens contraire au dernier coup ( = reviens en arriere)
+234      * 
+235      */
+236     if(!move_human(level,coup->direction,false,false,runtime)){
+237         return false;
+238     }
+239     if(coup->pousse){
+240         move_object(level->map,old_index_box,old_index);
+241     }
+242     return true;
+243 }
+.fi
+.PP
+Références BAS, Coups::direction, DROITE, GAUCHE, HAUT, liste_double_depiler_tete(), move_human(), move_object(), et Coups::pousse\&.
+.PP
+Référencé par event_handler(), et go_all_back()\&.
+.SS "bool move_human (\fBlevel_t\fP * level, char direction, bool save, bool move_box, \fBruntime_t\fP * runtime)"
+
+.PP
+gere les deplacements du joueur et de l'objet 
+.PP
+\fBParamètres\fP
+.RS 4
+\fIlevel\fP 
+.br
+\fIdirection\fP 
+.br
+\fIsave\fP 
+.br
+\fImove_box\fP 
+.br
+\fIruntime\fP 
+.RE
+.PP
+\fBRenvoie\fP
+.RS 4
+booleen qui indique si l'on peut bouger (oui = true) 
+.RE
+.PP
+diferencie les differentes situations que l'on rencontre , cas 0: on es sur du vide, on peut bouger, et on modifie l'indice et la direction + gestion du chargement de la sauvegarde cas 2: on doit deplacer l'objet, il faut verifier si c'est possible, puis on deplace l'objet et le joueur, en modifiant son indices et sa direction cas 3: on se trouve dans un cas d'erreur, car on ne dois pas pouvoir rencontrer un autre joueur cas de base: on se trouve face a un mur, on ne peux pas bouger
+.PP
+.nf
+256                                                                                          {
+257     if(0==x2x(level->index,level->largeur)){return false;}
+258     unsigned int index_after = move_direction(direction,level->index,level->largeur);
+259     if(level->map->size>index_after){
+260         case_t* cell=(case_t*)liste_double_get(level->map,index_after);
+261        
+262         /**
+263          * @brief diferencie les differentes situations que l'on rencontre , 
+264          cas 0: on es sur du vide, on peut bouger, et on modifie l'indice et la direction + gestion du chargement de la sauvegarde
+265          cas 2: on doit deplacer l'objet, il faut verifier si c'est possible, puis on deplace l'objet et le joueur, en modifiant 
+266             son indices et sa direction
+267          cas 3: on se trouve dans un cas d'erreur, car on ne dois pas pouvoir rencontrer un autre joueur
+268          cas de base: on se trouve face a un mur, on ne peux pas bouger
+269          * 
+270          */
+271         switch (cell->bloc)
+272             {
+273                 case 0:// air=> peut bouger no problemo
+274                     move_object(level->map,level->index,index_after);
+275                     level->index=index_after;
+276                     runtime->direction=direction;
+277                     if(save){
+278                         liste_double_ajout_en_tete(level->coups,create_coup(direction,false));
+279                     }
+280                     return true;
+281                 case 2:
+282                     if(move_box){
+283                         unsigned int index_after2 = move_direction(direction,index_after,level->largeur);
+284                         case_t* next_cell=(case_t*)liste_double_get(level->map,index_after2);
+285                         if (next_cell->bloc==0){
+286                             move_object(level->map,index_after,index_after2);
+287                             move_object(level->map,level->index,index_after);
+288                             animate_box_moving(runtime,direction,index_after,index_after2);
+289                             level->index=index_after;
+290                             runtime->direction=direction;
+291                             if(save){
+292                                 liste_double_ajout_en_tete(level->coups,create_coup(direction,true));
+293                             }
+294                             if(next_cell->cible){
+295                                 level->solved=is_finish(level->map);
+296                             }
+297                             return true;
+298                         }
+299                     }
+300                     break;
+301                 case 3: //cas ou il y a 2 perso = problem
+302                     fprintf(stderr,"[ERROR]2 humans %d(%d-%d)->%d(%d-%d)\n",
+303                         level->index,x2x(level->index,level->largeur),x2y(level->index,level->largeur),
+304                         index_after,x2x(index_after,level->largeur),x2y(index_after,level->largeur)
+305                     );
+306                     exit(-1);
+307                 default:
+308                     break;
+309             }
+310     }
+311     return false;
+312 }
+.fi
+.PP
+Références animate_box_moving(), Case::bloc, Case::cible, create_coup(), runtime_s::direction, is_finish(), liste_double_ajout_en_tete(), liste_double_get(), move_direction(), move_object(), x2x, et x2y\&.
+.PP
+Référencé par event_handler(), go_back(), random_pathfinding(), et recurrence_pathfinding()\&.
+.SH "Auteur"
+.PP 
+Généré automatiquement par Doxygen pour Sokoban à partir du code source\&.
