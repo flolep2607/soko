@@ -1,7 +1,5 @@
 # SOKOBAN
-Thomas Boussit
-Alexis Lambert
-Leprat Florian
+
 
 # Table of Contents
 
